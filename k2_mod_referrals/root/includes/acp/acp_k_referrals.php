@@ -273,11 +273,11 @@ class acp_k_referrals
 			'L_NO_ITEMS_MARKED'     => $user->lang['NO_ITEMS_MARKED'],
 			'L_PLEASE_CONFIRM'	=> $user->lang['PLEASE_CONFIRM'],
 
-			'PAGINATION'	=> generate_pagination(append_sid($phpbb_admin_path."index.php?filter=$filter_flag&amp;sort=$sort_method&amp;order=$sort_order&amp;i=k_referrals"), $total_rows[$total_now], $rows_per_page, $start),
-			'PAGE_NUMBER'	=> sprintf($user->lang['PAGE_OF'], ( floor( $start / $rows_per_page ) + 1 ), ceil( $total_rows[$total_now] / $rows_per_page )),
-			'REFERRALS_COUNT'  => $k_config['k_referrals_to_display'],
-			'S_SORT_METHOD'    => $s_sort_method,
-			'S_ACTION'	   => $this->u_action . '&amp;action=k_referrals_to_display',
+			'PAGINATION'		=> generate_pagination(append_sid($phpbb_admin_path."index.php?filter=$filter_flag&amp;sort=$sort_method&amp;order=$sort_order&amp;i=k_referrals"), $total_rows[$total_now], $rows_per_page, $start),
+			'PAGE_NUMBER'		=> sprintf($user->lang['PAGE_OF'], ( floor( $start / $rows_per_page ) + 1 ), ceil( $total_rows[$total_now] / $rows_per_page )),
+			'REFERRALS_COUNT'	=> $k_config['k_referrals_to_display'],
+			'S_SORT_METHOD'		=> $s_sort_method,
+			'S_ACTION'		=> $this->u_action . '&amp;action=k_referrals_to_display',
 		));
 	}
 }
