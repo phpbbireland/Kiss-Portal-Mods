@@ -92,16 +92,15 @@ class acp_k_referrals
 		{
 			case 'update_k_referrals_to_display':
 
-			$config_k_referrals_to_display = request_var('k_referrals_to_display', 0);
+				$config_k_referrals_to_display = request_var('k_referrals_to_display', 0);
 
-			if ($action == 'update_k_referrals_to_display')
-			{
-				$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_k_referrals_to_display . ' WHERE config_name = "k_referrals_to_display"');
-				$message = $user->lang['CONFIG_UPDATED'];
-			}
-			$db->sql_query($sql);
-			trigger_error($message . adm_back_link($this->u_action));
-
+				if ($action == 'update_k_referrals_to_display')
+				{
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_k_referrals_to_display . ' WHERE config_name = "k_referrals_to_display"');
+					$message = $user->lang['CONFIG_UPDATED'];
+				}
+				$db->sql_query($sql);
+				trigger_error($message . adm_back_link($this->u_action));
 			break;
 
 			default:
@@ -228,13 +227,13 @@ class acp_k_referrals
 		{
 			for ($i = 0; $i < $rowset_count; $i++)
 			{
-			$template->assign_block_vars('datarow', array(
-				'ID'		=> $rowset[$i]['id'],
-				'HOST'	    => $rowset[$i]['host'],
-				'HITS'	    => $rowset[$i]['hits'],
-				'FIRST_VISIT'   => create_date('Y-m-d H:i:s', $rowset[$i]['firstvisit'], $config['board_timezone']),
-				'LAST_VISIT'    => create_date('Y-m-d H:i:s', $rowset[$i]['lastvisit'], $config['board_timezone']))
-			);
+				$template->assign_block_vars('datarow', array(
+					'ID'		=> $rowset[$i]['id'],
+					'HOST'	    => $rowset[$i]['host'],
+					'HITS'	    => $rowset[$i]['hits'],
+					'FIRST_VISIT'   => create_date('Y-m-d H:i:s', $rowset[$i]['firstvisit'], $config['board_timezone']),
+					'LAST_VISIT'    => create_date('Y-m-d H:i:s', $rowset[$i]['lastvisit'], $config['board_timezone'])
+				));
 			}
 			$template->assign_block_vars('ok_referrals_sw', array());
 		}
