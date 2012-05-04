@@ -37,14 +37,14 @@ if (empty($lang) || !is_array($lang))
 
 // k2 country flag_mod
 $lang = array_merge($lang, array(
-	'COUNTRY_FLAG_MOD'				=> 'Kiss II Country Flag Mod',
-	'K2_USER_COUNTRY_FLAG' 			=> 'User country flag mod',
+	'COUNTRY_FLAG_MOD'		=> 'Kiss II Country Flag Mod',
+	'K2_USER_COUNTRY_FLAG' 		=> 'User country flag mod',
 	'K2_USER_COUNTRY_FLAG_EXPLAIN' 	=> 'Provides country flags for you members...',
 
-	'SHOW_ON_MAP'				=> 'Click to show on google maps',
+	'SHOW_ON_MAP'			=> 'Click to show on google maps',
 
-	'UCF_MOD'					=> 'A valid location is required for this Mod',
-	'USER_COUNTRY_FLAG'			=> 'Country Flag',
+	'UCF_MOD'			=> 'A valid location is required for this Mod',
+	'USER_COUNTRY_FLAG'		=> 'Country Flag',
 	'UCF_MOD'					=> 'A valid location is required for this Mod',
 	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <b>Location</b> data above (Google Map).',
 
