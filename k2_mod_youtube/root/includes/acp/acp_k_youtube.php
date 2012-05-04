@@ -41,11 +41,9 @@ class acp_k_youtube
 		$form_key = 'acp_k_youtube';
 		add_form_key($form_key);
 
-		//$s_hidden_fields = '';
-
 		$mode = request_var('mode', '');
 		$video_id = request_var('video_id', '');
-		$action			= request_var('config', '');
+		$action = request_var('config', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
 
 		$action = (isset($_POST['add_video'])) ? 'add' : ((isset($_POST['save'])) ? 'save' : ((isset($_POST['config'])) ? 'config' : $action));
@@ -76,12 +74,12 @@ class acp_k_youtube
 		}
 
 		$template->assign_vars(array(
-			'U_BACK'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube",
-			'U_ADD'		=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=add",
-			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=edit" . '&amp;video_id=' . $video_id,
-			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=delete" . '&amp;video_id=' . $video_id,
-			'U_BROWSE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse",
-			'S_OPT'		=> 'browse',
+			'U_BACK'    => "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube",
+			'U_ADD'     => "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=add",
+			'U_EDIT'    => "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=edit" . '&amp;video_id=' . $video_id,
+			'U_DELETE'  => "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=delete" . '&amp;video_id=' . $video_id,
+			'U_BROWSE'  => "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse",
+			'S_OPT'     => 'browse',
 		));
 
 		switch ($mode)
@@ -90,24 +88,24 @@ class acp_k_youtube
 
 				if ($submit)
 				{
-					$video_id		 = request_var('video_id', 0);
-					$video_link		 = request_var('video_link', '');
-					$video_rating	 = request_var('video_rating', '');
+					$video_id        = request_var('video_id', 0);
+					$video_link      = request_var('video_link', '');
+					$video_rating    = request_var('video_rating', '');
 					$video_category  = utf8_normalize_nfc(request_var('video_category', '', true));
-					$video_who		 = utf8_normalize_nfc(request_var('video_who', '', true));
-					$video_title	 = utf8_normalize_nfc(request_var('video_title', '', true));
-					$video_comment	 = utf8_normalize_nfc(request_var('video_comment', ''));
+					$video_who       = utf8_normalize_nfc(request_var('video_who', '', true));
+					$video_title     = utf8_normalize_nfc(request_var('video_title', '', true));
+					$video_comment   = utf8_normalize_nfc(request_var('video_comment', ''));
 					$video_poster_id = request_var('video_poster_id', '');
 
 					$sql_ary = array(
 						//'video_id'	=> $video_id,
-						'video_link'		=> $video_link,
-						'video_category'	=> $video_category,
-						'video_who'			=> $video_who,
-						'video_rating'		=> $video_rating,
-						'video_title'		=> $video_title,
-						'video_comment'		=> $video_comment,
-						//'video_poster_id'	=> $video_poster_id,
+						'video_link'        => $video_link,
+						'video_category'    => $video_category,
+						'video_who'         => $video_who,
+						'video_rating'      => $video_rating,
+						'video_title'       => $video_title,
+						'video_comment'     => $video_comment,
+						//'video_poster_id' => $video_poster_id,
 					);
 
 					$sql = 'UPDATE ' . K_YOUTUBE_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE video_id = " . (int)$video_id;
@@ -118,8 +116,8 @@ class acp_k_youtube
 					}
 
 					$template->assign_vars(array(
-						'MESSAGE'	=> $user->lang['DATA_IS_BEING_SAVED'] . '</font><br />',
-						'S_OPT'		=> 'saving',
+						'MESSAGE' => $user->lang['SAVED'] . '</font><br />',
+						'S_OPT'   => 'saving',
 					));
 
 					meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
@@ -146,8 +144,8 @@ class acp_k_youtube
 					}
 
 					$template->assign_vars(array(
-						'MESSAGE'	=>  $user->lang['DELETING'] . $video_id . '<br />',
-						'S_OPT'		=> 'delete', //not a language var
+						'MESSAGE' =>  $user->lang['DELETING'] . $video_id . '<br />',
+						'S_OPT'   => 'delete', //not a language var
 					));
 
 					$cache->destroy('sql', K_YOUTUBE_TABLE);
@@ -158,9 +156,9 @@ class acp_k_youtube
 				else
 				{
 					confirm_box(false, sprintf($user->lang['CONFIRM_OPERATION_YOUTUBE'], $video_name), build_hidden_fields(array(
-						'id'		=> $video_id,
-						'mode'		=> $mode,
-						'action'	=> 'delete'))
+						'id'     => $video_id,
+						'mode'   => $mode,
+						'action' => 'delete'))
 					);
 				}
 
@@ -172,13 +170,13 @@ class acp_k_youtube
 
 				if ($submit)
 				{
-					//$video_id		 = request_var('video_id', '');
-					$video_link		 = request_var('video_link', '');
-					$video_rating	 = request_var('video_rating', '');
+					//$video_id      = request_var('video_id', '');
+					$video_link      = request_var('video_link', '');
+					$video_rating    = request_var('video_rating', '');
 					$video_category  = utf8_normalize_nfc(request_var('video_category', '', true));
-					$video_who		 = utf8_normalize_nfc(request_var('video_who', '', true));
-					$video_title	 = utf8_normalize_nfc(request_var('video_title', '', true));
-					$video_comment	 = utf8_normalize_nfc(request_var('video_comment', '', true));
+					$video_who       = utf8_normalize_nfc(request_var('video_who', '', true));
+					$video_title     = utf8_normalize_nfc(request_var('video_title', '', true));
+					$video_comment   = utf8_normalize_nfc(request_var('video_comment', '', true));
 					$video_poster_id = request_var('video_poster_id', '');
 
 					if (strstr($video_link, 'None'))
@@ -187,13 +185,13 @@ class acp_k_youtube
 					}
 
 	               $sql_array = array(
-					   'video_category'		=> $video_category,
-						'video_who'			=> $video_who,
-						'video_link'		=> $video_link,
-						'video_title'		=> $video_title,
-						'video_rating'		=> $video_rating,
-						'video_comment'		=> $video_comment,
-						'video_poster_id'	=> $user->data['user_id'],
+					   'video_category'     => $video_category,
+						'video_who'         => $video_who,
+						'video_link'        => $video_link,
+						'video_title'       => $video_title,
+						'video_rating'      => $video_rating,
+						'video_comment'     => $video_comment,
+						'video_poster_id'   => $user->data['user_id'],
                     );
 		           $db->sql_query('INSERT INTO ' . K_YOUTUBE_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
@@ -242,15 +240,15 @@ function get_youtube_data()
 	while ($row = $db->sql_fetchrow($result))
 	{
 		$template->assign_block_vars('youtubes', array(
-			'VIDEO_ID'			=> $row['video_id'],
-			'VIDEO_LINK'		=> $row['video_link'],
-			'VIDEO_CATEGORY'	=> $row['video_category'],
-			'VIDEO_WHO'			=> $row['video_who'],
-			'VIDEO_RATING'		=> $row['video_rating'],
-			'VIDEO_TITLE'		=> $row['video_title'],
-			'VIDEO_COMMENT'		=> $row['video_comment'],
-			'VIDEO_POSTER_ID'	=> $row['video_poster_id'],
-			'VIDEO_POSTER'		=> get_user_data('name', $row['video_poster_id']),
+			'VIDEO_ID'        => $row['video_id'],
+			'VIDEO_LINK'      => $row['video_link'],
+			'VIDEO_CATEGORY'  => $row['video_category'],
+			'VIDEO_WHO'       => $row['video_who'],
+			'VIDEO_RATING'    => $row['video_rating'],
+			'VIDEO_TITLE'     => $row['video_title'],
+			'VIDEO_COMMENT'   => $row['video_comment'],
+			'VIDEO_POSTER_ID' => $row['video_poster_id'],
+			'VIDEO_POSTER'    => get_user_data('name', $row['video_poster_id']),
 
 		));
 	}
@@ -285,15 +283,15 @@ function get_video_item($video_id)
 	}
 
 	$template->assign_vars(array(
-		'VIDEO_ID'			=> ($video_id == 0) ? '' : $row['video_id'],
-		'VIDEO_LINK'		=> $row['video_link'],
-		'VIDEO_CATEGORY'	=> $row['video_category'],
-		'VIDEO_WHO'			=> $row['video_who'],
-		'VIDEO_RATING'		=> $row['video_rating'],
-		'VIDEO_TITLE'		=> $row['video_title'],
-		'VIDEO_COMMENT'		=> $row['video_comment'],
-		'VIDEO_POSTER_ID'	=> $row['video_poster_id'],
-		'VIDEO_POSTER'		=> get_user_data('name', $row['video_poster_id']),
+		'VIDEO_ID'         => ($video_id == 0) ? '' : $row['video_id'],
+		'VIDEO_LINK'       => $row['video_link'],
+		'VIDEO_CATEGORY'   => $row['video_category'],
+		'VIDEO_WHO'        => $row['video_who'],
+		'VIDEO_RATING'     => $row['video_rating'],
+		'VIDEO_TITLE'      => $row['video_title'],
+		'VIDEO_COMMENT'    => $row['video_comment'],
+		'VIDEO_POSTER_ID'  => $row['video_poster_id'],
+		'VIDEO_POSTER'     => get_user_data('name', $row['video_poster_id']),
 	));
 
 	$db->sql_freeresult($result);

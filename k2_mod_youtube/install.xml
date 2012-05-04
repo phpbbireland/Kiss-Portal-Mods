@@ -21,15 +21,22 @@
 			</author>
 		</author-group>
 
-		<mod-version>1.0.0b (beta)</mod-version>
+		<mod-version>1.0.0C (beta)</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>100</time>
-			<target-version>3.0.8</target-version>
+			<target-version>3.0.10</target-version>
 		</installation>
 
 		<history>
+			<entry>
+				<date>2012-04-30</date>
+				<rev-version>1.0.0c</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to phpBB 3.0.10]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2011-07-03</date>
 				<rev-version>1.0.0b</rev-version>
@@ -128,7 +135,7 @@
 
 <open src="styles/_portal_common/template/portal_scripts.html">
 <edit>
-<find><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-1.6.2.min.js"></script>]]></find>
+<find><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-1.7.1.min.js"></script>]]></find>
 <action type="after-add"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.hoverIntent.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}js/jquery/imgbubbles.js"></script>]]></action>
 </edit>
