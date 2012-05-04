@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http ://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		<title lang="en-gb">Country Flags Mod for phpBB3 and Kiss Portal Engine</title>
+		<description lang="en-gb">Provides a country flag for your members</description>
+		<author-notes lang="en-gb">This mod will install in the Mod Tab for non portal versions, and in the Kiss Portal Engine Tab for portal version</author-notes>
+
+		<author-group>
+			<author>
+				<realname>Michael O'Toole</realname>
+				<email>o2l@eircom.net</email>
+				<username>Michaelo</username>
+				<homepage>http://www.stargate-portal.com</homepage>
+				<contributions />
+			</author>
+		</author-group>
+
+		<mod-version>1.0.0 (beta)</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>100</time>
+			<target-version>3.0.8</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2011-03-26</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First Kiss Portal Engine version, rewrite if Stargate Portal Country Flag Mod]]></change>
+				</changelog>
+			</entry>
+		</history>
+
+
+		<link-group>
+			<link type="template" href="sgp_country_flags_mod_subsilver.xml" lang="en">subsilver2</link>
+			<link type="contrib" lang="en" href="contrib/kiss_engine.xml">Kiss Portal Engine edits</link>
+		</link-group>
+
+		<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+	</header>
+
+	<action-group>
+		<copy>
+			<file from="flags/*.*" to="images/flags/*.*" />
+		</copy>
+
+<open src="includes/sgp_portal_blocks.php">
+<edit>
+<find>	$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks</find>
+<action type="replace-with">$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks, user_country_flag</action>
+</edit>
+<edit>
+<find>		$groupid = $row['group_id'];</find>
+<action type="after-add"><![CDATA[
+	$user_country_flag	= $row['user_country_flag']]]>;</action>
+</edit>
+</open>
+
+<open src="blocks/block_the_teams.php">
+<edit>
+<find><![CDATA[		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),]]></find>
+<action type="after-add"><![CDATA[		'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',]]></action>
+</edit>
+</open>
+
+<open src="blocks/block_top_posters.php">
+<edit>
+<find><![CDATA[
+$sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, user_avatar, user_avatar_type, user_avatar_width , user_avatar_height, user_website]]></find>
+<action type="replace-with"><![CDATA[$sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, user_avatar, user_avatar_type, user_avatar_width , user_avatar_height, user_website, user_country_flag]]></action>
+</edit>
+<edit>
+<find><![CDATA[        'URL'				=> $row['user_website'],]]></find>
+<action type="after-add"><![CDATA[		'COUNTRY_FLAG_IMG' =>  $row['user_country_flag'], 
+		'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',]]></action>
+</edit>
+</open>
+
+
+
+<diy-instructions lang="en-gb">
+Will move sql to UMIL later...
+
+Run this sql (mysqli):
+ALTER TABLE `phpbb_users` ADD `user_country_flag` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '--.gif';
+Run this sql (mysql):
+ALTER TABLE `phpbb_users` ADD `user_country_flag` VARCHAR( 255 ) NOT NULL DEFAULT '--.gif';
+
+Purge the cache...</diy-instructions>
+</action-group>
+</mod>

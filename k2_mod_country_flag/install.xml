@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http ://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		<title lang="en-gb"><![CDATA[Kiss II Country Flags Mod (Kiss Portal Engine must be installed!).]]></title>
+		<description lang="en-gb"><![CDATA[Provides a country flag for your members]]></description>
+		<author-notes lang="en-gb"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.
+		(the download also include a stand-alone version for installation into the default phpBB3 forum)...
+
+		------------------------------------------------------------------------------------
+		The portal must be DISABLED (NOT ACTIVE) before installing this mod!!!
+		------------------------------------------------------------------------------------
+		Country flag must be selected on registration...
+
+		Mike &amp; dravekx 2011]]></author-notes>
+
+		<author-group>
+			<author>
+				<realname>Michael O'Toole</realname>
+				<email>o2l@eircom.net</email>
+				<username>Michaelo</username>
+				<homepage>http://www.stargate-portal.com</homepage>
+				<contributions />
+			</author>
+		</author-group>
+
+		<mod-version>1.0.0 (beta)</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>100</time>
+			<target-version>3.0.8</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2011-03-26</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[New version based on the SGP Country Flag Mod]]></change>
+					<change><![CDATA[Installs for phpBB and phpBB with Kiss Engine]]></change>
+				</changelog>
+			</entry>
+		</history>
+
+		<link-group>
+			<link type="template"	href="template/mod_subsilver.xml"	lang="en">subsilver2</link>
+		</link-group>
+		<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+	</header>
+
+	<action-group>
+		<copy>
+			<file from="root/images/flags/*.*" to="images/flags/*.*" />
+			<file from="root/portal/k2_mods/k2_country_flags/*.*" to="portal/k2_mods/k2_country_flags/*.*" />
+			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+		</copy>
+<open src="memberlist.php">
+	<edit>
+		<find><![CDATA[			'SELECT'	=> 'u.user_id, u.group_id as default_group, u.username, u.username_clean, u.user_colour, u.user_rank, u.user_posts, u.user_allow_pm, g.group_id, g.group_name, g.group_colour, g.group_type, ug.user_id as ug_user_id',
+
+]]></find>
+<inline-edit>
+<inline-find>ug.user_id as ug_user_id',</inline-find>
+<inline-action type="replace-with">ug.user_id as ug_user_id, u.user_country_flag',</inline-action>
+
+        </inline-edit>
+</edit>
+<edit>
+<find><![CDATA[				'U_VIEW_PROFILE'	=> get_username_string('profile', $row['user_id'], $row['username'], $row['user_colour']),]]></find>
+<action type="after-add"><![CDATA[				'COUNTRY_FLAG_IMG'	=> '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[		$sort_key_text = array('a' => $user->lang['SORT_USERNAME'], 'b' => $user->lang['SORT_LOCATION'], 'c' => $user->lang['SORT_JOINED'], 'd' => $user->lang['SORT_POST_COUNT'], 'f' => $user->lang['WEBSITE'], 'g' => $user->lang['ICQ'], 'h' => $user->lang['AIM'], 'i' => $user->lang['MSNM'], 'j' => $user->lang['YIM'], 'k' => $user->lang['JABBER']);
+]]></find>
+<inline-edit>
+<inline-find><![CDATA['k' => $user->lang['JABBER']);]]></inline-find>
+<inline-action type="replace-with"><![CDATA['k' => $user->lang['JABBER'], 'p' => $user->lang['USER_COUNTRY_FLAG']);]]></inline-action>
+</inline-edit>
+</edit>
+<edit>
+<find><![CDATA[		$sort_key_sql = array('a' => 'u.username_clean', 'b' => 'u.user_from', 'c' => 'u.user_regdate', 'd' => 'u.user_posts', 'f' => 'u.user_website', 'g' => 'u.user_icq', 'h' => 'u.user_aim', 'i' => 'u.user_msnm', 'j' => 'u.user_yim', 'k' => 'u.user_jabber');
+
+]]></find>
+<inline-edit>
+<inline-find><![CDATA['k' => 'u.user_jabber');]]></inline-find>
+<inline-action type="replace-with"><![CDATA['k' => 'u.user_jabber', 'p' => 'u.user_country_flag' );]]></inline-action>
+</inline-edit>
+</edit>
+
+<edit>
+<find><![CDATA[			'U_LIST_CHAR'			=> $sort_url . '&amp;sk=a&amp;sd=' . (($sort_key == 'l' && $sort_dir == 'a') ? 'd' : 'a'),
+]]></find>
+<action type="after-add"><![CDATA[			'U_SORT_FLAGS'			=> $sort_url . '&amp;sk=p&amp;sd=' . (($sort_key == 'p' && $sort_dir == 'a') ? 'd' : 'a'),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[		'LOCATION'		=> ($data['user_from']) ? $data['user_from'] : '',
+]]></find>
+<action type="after-add"><![CDATA[		'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($user_id)). '" alt="" />',
+]]></action>
+</edit>
+</open>
+
+<open src="viewtopic.php">
+<edit>
+<find><![CDATA[		'L_IGNORE_POST'		=> ($row['hide_post']) ? sprintf($user->lang['POST_BY_FOE'], get_username_string('full', $poster_id, $row['username'], $row['user_colour'], $row['post_username']), '<a href="' . $viewtopic_url . "&amp;p={$row['post_id']}&amp;view=show#p{$row['post_id']}" . '">', '</a>') : '',
+]]></find>
+<action type="after-add"><![CDATA[		'POSTER_FLAG'		=> '<img src="' . (sgp_get_user_country_flag($topic_data['topic_poster'])). '" alt="L_FLAG" />',
+		'POSTER_FLAG'		=> '<img src="' . (sgp_get_user_country_flag($poster_id)). '" alt="Flag" />',
+]]></action>
+</edit>
+</open>
+
+<open src="ucp.php">
+<edit>
+<find><![CDATA[$user->setup('ucp');]]></find>
+<action type="after-add"><![CDATA[$user->add_lang('mods/info_ucp_kiss');]]></action>
+</edit>
+</open>
+
+<open src="includes/session.php">
+<edit>
+<find><![CDATA[		$this->add_lang($lang_set);
+		unset($lang_set);]]></find>
+<action type="after-add"><![CDATA[
+		$this->add_lang('mods/info_k2_mods');
+]]></action>
+</edit>
+</open>
+
+<open src="includes/ucp/ucp_register.php">
+<edit>
+<find><![CDATA[		global $config, $db, $user, $auth, $template, $phpbb_root_path, $phpEx;
+]]></find>
+<action type="after-add">		global $user_country_flag;
+</action>
+</edit>
+<edit>
+<find><![CDATA[			'tz'				=> request_var('tz', (float) $timezone),
+]]></find>
+<action type="after-add"><![CDATA[			'user_country_flag'	=> request_var('user_country_flag', '', true),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[				'lang'				=> array('language_iso_name'),]]></find>
+<action type="after-add"><![CDATA[				'user_country_flag'	=> array('string', false, 2, 100),
+]]></action>
+</edit>
+
+<edit>
+<find><![CDATA[			if ($config['check_dnsbl'])
+			{
+				if (($dnsbl = $user->check_dnsbl('register')) !== false)
+				{
+					$error[] = sprintf($user->lang['IP_BLACKLISTED'], $user->ip, $dnsbl[1]);
+				}
+			}]]></find>
+<action type="after-add"><![CDATA[			if($data['user_country_flag'] == '--.gif')
+			{
+				$error[] = $user->lang['NO_FLAG_SELECTED'];
+			}]]></action>
+</edit>
+
+<edit>
+<find><![CDATA[					'user_inactive_time'	=> $user_inactive_time,
+]]></find>
+<action type="after-add"><![CDATA[					'user_country_flag'		=> $data['user_country_flag'],
+]]></action>
+</edit>
+
+<edit>
+<find><![CDATA[		//
+		$user->profile_fields = array();]]></find>
+        <action type="before-add"><![CDATA[		if(STARGATE)
+		{
+			$template->assign_vars(array(
+				'USER_COUNTRY_FLAG'		=> (isset($user_country_flag)) ? $user_country_flag : '',
+				'S_USER_COUNTRY_FALG_IMG'	=> (isset($data['user_country_flag'])) ? $data['user_country_flag'] : '--.gif',
+				'S_USER_COUNTRY_FLAG_OPTIONS'	=> (isset($data['user_country_flag'])) ? sgp_user_country_flag_select($data['user_country_flag']) : sgp_user_country_flag_select(''))
+			);
+		}]]></action>
+</edit>
+</open>
+
+<open src="includes/ucp/ucp_profile.php">
+<edit>
+<find><![CDATA[					'password_confirm'	=> request_var('password_confirm', '', true),
+]]></find>
+<action type="after-add"><![CDATA[					'user_country_flag'	=> request_var('user_country_flag', $user->data['user_country_flag'], true),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[					'S_CHANGE_PASSWORD'	=> ($auth->acl_get('u_chgpasswd')) ? true : false)
+				);]]></find>
+<action type="after-add"><![CDATA[
+				if(STARGATE)
+				{
+					$template->assign_vars(array(
+						'USER_COUNTRY_FLAG' => $data['user_country_flag'])
+					);
+				}
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[					'interests'		=> utf8_normalize_nfc(request_var('interests', $user->data['user_interests'], true)),
+]]></find>
+<action type="after-add"><![CDATA[					'user_country_flag'	=> utf8_normalize_nfc(request_var('user_country_flag', $user->data['user_country_flag'], true)),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[						'interests'		=> array('string', true, 2, 500),
+]]></find>
+<action type="after-add"><![CDATA[						'user_country_flag'	=> array('string', true, 2, 100),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[							'user_interests'=> $data['interests'],
+]]></find>
+<action type="before-add"><![CDATA[							'user_country_flag'	=> $data['user_country_flag'],
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[						'S_BIRTHDAYS_ENABLED'		=> true,
+					));]]></find>
+<action type="after-add"><![CDATA[					if(STARGATE)
+					{
+						$template->assign_vars(array(
+							'USER_COUNTRY_FLAG_IMG' => (isset($user->data['user_country_flag'])) ? $user->data['user_country_flag'] : '--.gif',
+							'S_USER_COUNTRY_FLAG_OPTIONS'	=> sgp_user_country_flag_select($user->data['user_id']))
+						);
+					}]]></action>
+</edit>
+</open>
+
+<open src="adm/style/acp_users_profile.html">
+<edit>
+<find><![CDATA[	<form id="user_profile" method="post" action="{U_ACTION}">
+]]></find>
+<action type="before-add"><![CDATA[	<script>
+	function DisplayFlag(myForm)
+	{
+		var flagname = myForm.user_country_flag;
+		document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./../images/flags/" + flagname.value + "' />"
+	}
+	</script>
+	]]></action>
+</edit>
+<edit>
+<find><![CDATA[	<dl>
+		<dt><label for="location">{L_LOCATION}:</label></dt>
+		<dd><input type="text" id="location" name="location" value="{LOCATION}" /></dd>
+	</dl>]]></find>
+        <action type="after-add"><![CDATA[	<!-- IF STARGATE -->
+	<dl> 
+		<dt><label for="user_country_flag">{L_USER_COUNTRY_FLAG}:</label>{L_UCF_MOD}</dt>
+		<dd>
+			<select name="user_country_flag" id="user_country_flag" onchange="DisplayFlag(this.form); return false;" /> {S_USER_COUNTRY_FLAG_OPTIONS}</select>
+			<span  name='UserFlag' id='UserFlag'><img src="./../images/flags/{USER_COUNTRY_FLAG_IMG}" align="absmiddle" /></span>
+		</dd>
+	</dl>
+	<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+<open src="includes/acp/acp_users.php">
+<edit>
+<find><![CDATA[						'password_confirm'	=> request_var('password_confirm', '', true),
+]]></find>
+<action type="after-add"><![CDATA[						'user_country_flag'	=> request_var('user_country_flag', '', true),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[					'bday_year'		=> 0,
+]]></find>
+        <action type="after-add"><![CDATA[					'user_country_flag'	=> request_var('user_country_flag', '', true),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[						'bday_year'		=> array('num', true, 1901, gmdate('Y', time())),
+]]></find>
+<action type="after-add"><![CDATA[						'user_country_flag'	=> array('string', true, 2, 100),
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[							'user_birthday'	=> $data['user_birthday'],
+]]></find>
+<action type="after-add"><![CDATA[							'user_country_flag'	=> $data['user_country_flag'],
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[					'S_BIRTHDAY_YEAR_OPTIONS'	=> $s_birthday_year_options,]]></find>
+<action type="after-add"><![CDATA[					'USER_COUNTRY_FLAG_IMG' 	=> $user_row['user_country_flag'],
+					'S_USER_COUNTRY_FLAG_OPTIONS'	=> sgp_get_country_flag_admin($user_id),]]></action>
+</edit>
+</open>
+
+<open src="includes/functions_admin.php">
+<edit>
+<find><![CDATA[?>]]></find>
+<action type="before-add"><![CDATA[// Stargate Portal function //
+function sgp_get_country_flag_admin($passed)
+{
+	global $db, $flag_options, $user_id;
+	$flag = '';
+	$imglist = '';
+
+	if($passed != '')
+	{
+		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
+		
+		if( $result = $db->sql_query($sql) )
+		{
+			$flag = $db->sql_fetchrow($result);
+			$passed = $flag['user_country_flag'];
+		}
+	}	
+
+	$imgs = dir('./../images/flags');
+	
+	while ($file = $imgs->read()) 
+	{
+		if(stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
+			$imglist .= "$file ";
+	}
+	
+	closedir($imgs->handle);
+	
+	$imglist = explode(" ", $imglist);
+	sort($imglist);
+	
+	for ( $i=0; $i < sizeof($imglist); $i++ ) 
+	{	
+		if( $imglist[$i]!= "" ) 
+		{
+			$selected = ($imglist[$i] == $passed) ? ' selected="selected"' : '';
+			$flag_options .= '<option value="' . $imglist[$i] . '"' . $selected . '>' . $imglist[$i] . '</option>';
+		}
+	}
+	$flag_options .= '</select>';
+	
+	return $flag_options;
+}
+]]></action>
+      </edit>
+    </open>
+
+<open src="includes/functions.php">
+
+<edit>
+<find><![CDATA[function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum')
+{
+	global $config, $db, $user, $auth;]]></find>
+<inline-edit>
+<inline-find>$auth</inline-find>
+<inline-action type="after-add">, $phpbb_root_path</inline-action>
+</inline-edit>
+</edit>
+<edit>
+<find><![CDATA[		$sql = 'SELECT username, username_clean, user_id, user_type, user_allow_viewonline, user_colour]]></find>
+<inline-edit>
+<inline-find>user_colour</inline-find>
+<inline-action type="after-add">, user_country_flag</inline-action>
+</inline-edit>
+</edit>
+<edit>
+<find><![CDATA[					$user_online_link = get_username_string(($row['user_type'] <> USER_IGNORE) ? 'full' : 'no_profile', $row['user_id'], $row['username'], $row['user_colour']);]]></find>
+<action type="after-add"><![CDATA[					// choice? flag or flag with link to google maps for member location //
+					//$user_online_link .= ' <img src="./images/flags/' . $row['user_country_flag'] . '">';
+					$user_online_link .=  ' <a target="_blank" href= "http://maps.google.com/maps?q=' . $user->data['user_from'] . '"><img src="' . $phpbb_root_path . '/images/flags/' . $user->data['user_country_flag'] . '" width="20" height="13" alt="" /> </a>';]]></action>
+</edit>
+
+
+
+<edit>
+<find><![CDATA[/* Stargate functions ends */]]></find>
+<action type="before-add"><![CDATA[
+
+function sgp_get_user_country_flag($user_or_poster_id)
+{
+	global $db;
+
+	if(empty($user_or_poster_id))
+	{
+		return;
+	}
+
+	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $user_or_poster_id";
+
+	if($result = $db->sql_query($sql))
+	{
+		$row = $db->sql_fetchrow($result);
+		return("images/flags/". $row['user_country_flag']);
+	}
+	// No result! so we return the a blank flag image
+	//return("images/flags/--.gif");
+	return('');
+}
+
+function sgp_user_country_flag_select($passed)
+{
+	global $db, $flag_options, $user_id;
+	$flag = '';
+	$imglist = '';
+
+	if ($passed != '' && !strpos('$passed', '.gif'))
+	{
+		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
+
+		if ($result = $db->sql_query($sql) )
+		{
+			$flag = $db->sql_fetchrow($result);
+			$passed = $flag['user_country_flag'];
+		}
+	}
+
+	$imgs = dir('images/flags');
+	//$imglist= '.. ';
+
+	while ($file = $imgs->read())
+	{
+		if (stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
+		{
+			$imglist .= "$file ";
+		}
+	}
+
+	closedir($imgs->handle);
+
+	$imglist = explode(" ", $imglist);
+	sort($imglist);
+
+	for ($i=0; $i < sizeof($imglist); $i++)
+	{
+		if ($imglist[$i] != "")
+		{
+			$selected = ($imglist[$i] == $passed) ? ' selected="selected"' : '';
+			$flag_options .= '<option value="' . $imglist[$i] . '"' . $selected . '>' . $imglist[$i] . '</option>';
+		}
+	}
+	$flag_options .= '</select>';
+
+	return $flag_options;
+}
+]]></action>
+</edit>
+</open>
+
+<open src="includes/sgp_portal_blocks.php">
+<edit>
+<find>	$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks</find>
+<action type="replace-with">$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks, user_country_flag</action>
+</edit>
+<edit>
+<find>		$groupid = $row['group_id'];</find>
+<action type="after-add"><![CDATA[
+		$user_country_flag	= $row['user_country_flag']]]>;</action>
+</edit>
+</open>
+
+<open src="blocks/block_the_teams.php">
+<edit>
+<find><![CDATA[		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),]]></find>
+<action type="after-add"><![CDATA[		'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',]]></action>
+</edit>
+</open>
+
+<open src="blocks/block_top_posters.php">
+<edit>
+<find><![CDATA[
+$sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, user_avatar, user_avatar_type, user_avatar_width , user_avatar_height, user_website]]></find>
+<action type="replace-with"><![CDATA[$sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, user_avatar, user_avatar_type, user_avatar_width , user_avatar_height, user_website, user_country_flag]]></action>
+</edit>
+<edit>
+<find><![CDATA[        'URL'				=> $row['user_website'],]]></find>
+<action type="after-add"><![CDATA[		'COUNTRY_FLAG_IMG' =>  $row['user_country_flag'], 
+		'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',]]></action>
+</edit>
+</open>
+
+
+
+<open src="blocks/block_user_information.php">
+<edit>
+<find>// initialise local variables //</find>
+<action type="after-add">$flag = "images/flags/--.gif";
+</action>
+</edit>
+<edit>
+<find><![CDATA[	'USR_RANK_IMG'			=> $rank_img,]]></find>
+	<action type="after-add"><![CDATA[	'P_USER_FLAG'			=> '<a target="_blank" href= "http://maps.google.com/maps?q=' . $user->data['user_from'] . '"><img src="' . $phpbb_root_path . '/images/flags/' . $user->data['user_country_flag'] . '" width="20" height="13" alt="" /> </a>',]]></action>
+</edit>
+</open>
+
+<open src="styles/prosilver/template/ucp_profile_profile_info.html">
+<edit>
+<find><![CDATA[<!-- INCLUDE ucp_header.html -->
+]]></find>
+<action type="after-add"><![CDATA[
+<script>
+function DisplayFlag(myForm)
+{
+	var flagname = myForm.user_country_flag;
+	document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./images/flags/" + flagname.value + "' />"
+}
+</script>]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<dd><input type="text" name="location" id="location" maxlength="255" value="{LOCATION}" class="inputbox" /></dd>
+	</dl>]]></find>
+<action type="after-add"><![CDATA[	<!-- IF STARGATE -->
+	<dl> 
+		<dt><label for="user_country_flag">{L_USER_COUNTRY_FLAG}:</label></dt>
+		<dd>
+			<select name="user_country_flag" id="user_country_flag" onchange="DisplayFlag(this.form); return false;" /> {S_USER_COUNTRY_FLAG_OPTIONS}</select>
+			<span  name='UserFlag' id='UserFlag'><img src="./images/flags/{USER_COUNTRY_FLAG_IMG}" align="absmiddle" /></span>
+		</dd>
+	</dl>
+	<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+<open src="styles/prosilver/template/ucp_register.html">
+<edit>
+<find><![CDATA[<form method="post" action="{S_UCP_ACTION}" id="register">]]></find>
+<action type="before-add"><![CDATA[<script>
+function DisplayFlag(myForm)
+{
+    var flagname = myForm.user_country_flag;
+    document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./images/flags/" + flagname.value + "' />"
+}
+</script>]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA[	<!-- IF .profile_fields -->]]></find>
+        <action type="before-add"><![CDATA[	<!-- IF STARGATE -->
+	<dl>
+		<dt><label for="user_country_flag">{L_USER_COUNTRY_FLAG}:</label></dt>
+		<dd>
+		<select name="user_country_flag" id="user_country_flag" onchange="DisplayFlag(this.form); return false;" /> {S_USER_COUNTRY_FLAG_OPTIONS}</select>
+		<span  name='UserFlag' id='UserFlag'><img src="./images/flags/{USER_COUNTRY_FLAG_IMG}" align="absmiddle" /></span>
+		</dd>
+	</dl>
+	<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+<open src="styles/prosilver/template/memberlist_body.html">
+<edit>
+<find><![CDATA[			<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>
+]]></find>
+<action type="after-add"><![CDATA[			<th class="flag"><a href="{U_SORT_FLAGS}#memberlist">{L_FLAG}</a></th>
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<th class="name">{L_GROUP_MEMBERS}</th>
+		<th class="posts">&nbsp;</th>]]></find>
+<action type="after-add"><![CDATA[		<th class="flag">&nbsp;</th>
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<td class="posts"><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}">{memberrow.POSTS}</a><!-- ELSE -->{memberrow.POSTS}<!-- ENDIF --></td>]]></find>
+<action type="after-add"><![CDATA[		<td class="flag">{memberrow.COUNTRY_FLAG_IMG}</td>
+]]></action>
+</edit>
+</open>
+
+<open src="styles/prosilver/template/memberlist_leaders.html">
+<edit>
+<find><![CDATA[		<th class="name"><span class="rank-img">{L_RANK}&nbsp;</span>{L_ADMINISTRATORS}</th>
+]]></find>
+<action type="after-add"><![CDATA[		<th class="flag">{L_FLAG}</th>
+]]></action>
+</edit>
+<edit>
+
+<find><![CDATA[		<td><!-- IF admin.RANK_IMG --><span class="rank-img">{admin.RANK_IMG}</span><!-- ELSE --><span class="rank-img">{admin.RANK_TITLE}</span><!-- ENDIF -->{admin.USERNAME_FULL}</td>
+]]></find>
+<action type="after-add"><![CDATA[		<td class="flag">{admin.COUNTRY_FLAG_IMG}</td>
+]]></action>
+</edit>
+
+<edit>
+<find><![CDATA[		<th class="name">{L_MODERATORS}</th>
+]]></find>
+<action type="after-add"><![CDATA[		<th class="flag">{L_FLAG}</th>
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<td><!-- IF mod.RANK_IMG --><span class="rank-img">{mod.RANK_IMG}</span><!-- ELSE --><span class="rank-img">{mod.RANK_TITLE}</span><!-- ENDIF -->{mod.USERNAME_FULL}</td>
+]]></find>
+<action type="after-add"><![CDATA[		<td class="flag">{mod.COUNTRY_FLAG_IMG}</td>
+]]></action>
+</edit>
+
+<edit>
+<find><![CDATA[		<td colspan="3"><strong>{L_NO_MODERATORS}</strong></td>]]></find>
+<action type="replace-with"><![CDATA[		<td colspan="4"><strong>{L_NO_MODERATORS}</strong></td>]]></action>
+</edit>
+</open>
+
+<open src="styles/prosilver/template/viewtopic_body.html">
+<edit>
+<find><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->]]></find>
+<action type="replace-with"><![CDATA[		<!-- IF postrow.POSTER_FROM -->
+			<dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM} <!-- IF postrow.POSTER_FLAG --><a rel="external" href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" title="{L_SHOW_ON_MAP}" target="_blank" >{postrow.POSTER_FLAG}</a></dd><!-- ENDIF -->
+		<!-- ELSE -->
+			<!-- IF postrow.POSTER_FLAG -->
+				<dd>{postrow.POSTER_FLAG}</dd>
+			<!-- ENDIF -->
+		<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+
+
+<php-installer><![CDATA[portal/k2_mods/k2_country_flags/index.php]]></php-installer>
+<diy-instructions lang="en-gb">
+Please disable the portal before continuing... you an re-enable it after you complete this process...
+Purge the cache...</diy-instructions>
+</action-group>
+</mod>

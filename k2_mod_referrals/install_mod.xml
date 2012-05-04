@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Referrals for Kiss II Portal.  (Kiss Portal Engine must be installed!)]]></title>
+		<description lang="en"><![CDATA[Referrals block for Kiss II Portal.]]></description>
+
+		<author-notes lang="en"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed. (For a stand-alone version please check phpbbireland.com]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Martin Larsson]]></realname>
+				<username><![CDATA[NeXur]]></username>
+			</author>
+			<author>
+			<username>michaelo</username>
+			<realname>Michael O'Toole</realname>
+			<homepage>http://www.stargate-portal.com/</homepage>
+			<email>o2l@eircom.net</email>
+			</author>
+			<author>
+				<realname><![CDATA[Tyler]]></realname>
+				<username><![CDATA[bprsk8r4272]]></username>
+				<homepage><![CDATA[http://gotskillslounge.com]]></homepage>
+				<email><![CDATA[prosk8er@gotskillslounge.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>1.0.0</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.10</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2011-11-30</date>
+				<rev-version>1.0.0a</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Removed extra /]]></change>
+					<change><![CDATA[Language update and minor cleanup /]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2011-11-30</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[first release]]></change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/adm/style/k_block_vars/k_top_referrals_vars.html" to="adm/style/k_block_vars/k_top_referrals_vars.html"/>
+			<file from="root/adm/style/acp_k_referrals.html" to="adm/style/acp_k_referrals.html"/>
+			<file from="root/blocks/block_top_referrals.php" to="blocks/block_top_referrals.php"/>
+			<file from="root/includes/acp/acp_k_referrals.php" to="includes/acp/acp_k_referrals.php"/>
+			<file from="root/includes/acp/info/acp_k_referrals.php" to="includes/acp/info/acp_k_referrals.php"/>
+			<file from="root/language/en/acp/k_referrals.php" to="language/en/acp/k_referrals.php"/>
+			<file from="root/portal/*.*" to="portal/*.*"/>
+			<file from="root/styles/_portal_common/template/blocks/block_top_referrals.html" to="styles/_portal_common/template/blocks/block_top_referrals.html"/>
+			<file from="root/umil/*.*" to="umil/*.*"/>
+		</copy>
+		<open src="adm/style/acp_k_vars.html">
+			<edit>
+				<find><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_the_teams_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_the_teams_vars.html --></div>]]></find>
+				<action type="after-add"><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_top_referrals_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_referrals_vars.html --></div>]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[define('K_BLOCKS_CONFIG_VAR_TABLE',	$table_prefix . 'k_blocks_config_vars');]]></find>
+				<action type="after-add"><![CDATA[define('K_REFERRALS_TABLE',			$table_prefix . 'k_referrals');]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_k_vars.php">
+			<edit>
+				<find><![CDATA[				$k_top_posters_to_display			= request_var('k_top_posters_to_display', 5);]]></find>
+				<action type="after-add"><![CDATA[				$k_referrals_to_display		= request_var('k_referrals_to_display', '');]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				sgp_acp_set_config('k_top_topics_days', $k_top_topics_days);]]></find>
+				<action type="after-add"><![CDATA[				sgp_acp_set_config('k_referrals_to_display', $k_referrals_to_display);]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[portal/k2_mods/referrals/index.php]]></php-installer>
+		<diy-instructions lang="en"><![CDATA[Notes (installation): Rename or delete the k2_mods/referrals folder...
+Notes (Removal): After removing the Referrals mod, please delete the Referrals block (if added) from: ACP > PORTAL > BLOCKS...
+]]></diy-instructions>
+	</action-group>
+</mod>

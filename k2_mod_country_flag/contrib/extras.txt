@@ -1,0 +1,12 @@
+Add country flag to user_information blocks.
+
+Find:
+
+			{P_USERNAME_FULL}
+After, Add:
+
+			<!-- IF P_USER_FLAG != '' --> {P_USER_FLAG}<!-- ENDIF -->
+
+Resulting code:
+
+			{P_USERNAME_FULL}<!-- IF P_USER_FLAG != '' --> {P_USER_FLAG}<!-- ENDIF -->
