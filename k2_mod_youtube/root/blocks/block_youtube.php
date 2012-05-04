@@ -76,8 +76,8 @@ while($row = $db->sql_fetchrow($result))
 	if ($video == $row['video_link'])
 	{
 		$template->assign_vars(array(
-			'L_POSTERS_COMMENT'		=> ($usr_name_full) ? sprintf($user->lang['POSTERS_COMMENT'], $usr_name_full, htmlspecialchars_decode($row['video_comment'])) : '',
-			'READY'				=> ($video) ? true : false,
+			'L_POSTERS_COMMENT'	=> ($usr_name_full) ? sprintf($user->lang['POSTERS_COMMENT'], $usr_name_full, htmlspecialchars_decode($row['video_comment'])) : '',
+			'READY'			=> ($video) ? true : false,
 		));
 	}
 
