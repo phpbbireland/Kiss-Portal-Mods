@@ -219,7 +219,6 @@ function parse($rss_content)
 	$imagetags = array('title', 'url', 'link', 'width', 'height');
 	$textinputtags = array('title', 'description', 'name', 'link');
 
-
 	$default_cp = 'UTF-8';
 	$CDATA = 'strip';
 	$cp = 'UTF-8';
@@ -228,7 +227,6 @@ function parse($rss_content)
 	$stripHTML = true;
 
 	$rss_type = $k_config['rss_feeds_type'];
-
 
 	//if download was succesfull
 	if (isset($rss_content) && (sizeof($rss_content) > 0))
@@ -371,8 +369,6 @@ function parse($rss_content)
 		return ($result);
 	}
 }
-
-
 
 function my_preg_match($pattern, $subject)
 {
