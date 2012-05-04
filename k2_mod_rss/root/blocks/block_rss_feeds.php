@@ -32,6 +32,9 @@ if (!defined('IN_PHPBB'))
 
 $queries = $cached_queries = 0;
 
+define('LEFT_SIDE', 1);
+define('RIGHT_SIDE', 2);
+
 global $k_config, $phpbb_root_path;
 
 if ($k_config['rss_feeds_enabled'])
@@ -58,7 +61,7 @@ $result = $db->sql_query($sql);
 
 while ($row = $db->sql_fetchrow($result))
 {
-	if($row['feed_position'] == 1)
+	if($row['feed_position'] == LEFT_SIDE)
 	{
 		$rsleft = get_contents(1, $row['feed_url']);
 
@@ -96,9 +99,9 @@ while ($row = $db->sql_fetchrow($result))
 		));
 	}
 
-	if($row['feed_position'] == 2)
+	if($row['feed_position'] == RIGHT_SIDE)
 	{
-		$rsright = get_contents(2, $row['feed_url']);
+		$rsright = get_contents(RIGHT_SIDE, $row['feed_url']);
 
 		$msg= '<span class="gensmall"><strong>' . $rsright['description'] . "</strong></span><br />";
 
