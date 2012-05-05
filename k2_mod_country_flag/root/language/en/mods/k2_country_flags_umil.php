@@ -57,7 +57,6 @@ $lang = array_merge($lang, array(
 	'LATEST_VERSION'			=> 'Latest version',
 
 	'COUNTRY_FLAG_MOD'			=> 'Kiss II Country Flag Mod',
-
 ));
 
 ?>
