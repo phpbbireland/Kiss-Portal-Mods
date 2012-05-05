@@ -649,7 +649,6 @@ function DisplayFlag(myForm)
 
 <php-installer><![CDATA[portal/k2_mods/k2_country_flags/index.php]]></php-installer>
 <diy-instructions lang="en-gb">
-Please disable the portal before continuing... you an re-enable it after you complete this process...
 Purge the cache...</diy-instructions>
 </action-group>
 </mod>
