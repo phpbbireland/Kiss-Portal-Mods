@@ -37,13 +37,13 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 
-	'INSTALL_IMAGE' 			=> '<img src="./../k2_mods/mod_install.png" alt="" border="none">',
-	'K2_USER_COUNTRY_FLAG' 		=> 'User country flag mod',
-	'K2_USER_COUNTRY_FLAG_EXPLAIN' 	=> 'Provides country flags for you members...',
+	'INSTALL_IMAGE'			=> '<img src="./../k2_mods/mod_install.png" alt="" border="none">',
+	'K2_USER_COUNTRY_FLAG'		=> 'User country flag mod',
+	'K2_USER_COUNTRY_FLAG_EXPLAIN'	=> 'Provides country flags for you members...',
 
-	'NONE'				=> 'Not Installed',
+	'NONE'			=> 'Not Installed',
 	'INSTALL_PANEL'		=> 'User country flag installation Panel',
-	'SUB_INTRO'			=> 'Introduction',
+	'SUB_INTRO'		=> 'Introduction',
 	'SELECT_LANG'		=> 'Select language',
 	'SUB_SUPPORT'		=> 'Support',
 	'REPORT_INSTALLED'	=> 'The mod in already installed',
@@ -51,13 +51,12 @@ $lang = array_merge($lang, array(
 
 	'VERSION_NOT_UP_TO_DATE'	=> 'Your version of the mod is not up to date. Please continue the update process.',
 	'VERSION_NOT_UP_TO_DATE'	=> 'Cannot retrieve version info... code not yet written.',
-	'VERSION_CHECK'				=> 'Version check',
+	'VERSION_CHECK'			=> 'Version check',
 	'VERSION_CHECK_EXPLAIN'		=> 'Checks to see if the mod version you are currently running is up to date.',
-	'CURRENT_VERSION'			=> 'Current version',
-	'LATEST_VERSION'			=> 'Latest version',
+	'CURRENT_VERSION'		=> 'Current version',
+	'LATEST_VERSION'		=> 'Latest version',
 
-	'COUNTRY_FLAG_MOD'			=> 'Kiss II Country Flag Mod',
-
+	'COUNTRY_FLAG_MOD'		=> 'Kiss II Country Flag Mod',
 ));
 
 ?>
