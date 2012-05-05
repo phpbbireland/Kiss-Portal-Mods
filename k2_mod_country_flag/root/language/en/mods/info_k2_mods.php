@@ -39,7 +39,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'COUNTRY_FLAG_MOD'		=> 'Kiss Country Flag Mod',
 
-	'FLAG'							=> 'Flag',
+	'FLAG'				=> 'Flag',
 	'NO_FLAG_SELECTED'		=> 'A country flag must be selected',
 
 	'K2_USER_COUNTRY_FLAG' 		=> 'User country flag mod',
