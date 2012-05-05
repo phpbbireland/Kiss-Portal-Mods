@@ -9,12 +9,15 @@
 		<author-notes lang="en-gb"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.
 		(the download also include a stand-alone version for installation into the default phpBB3 forum)...
 
-		------------------------------------------------------------------------------------
-		The portal must be DISABLED (NOT ACTIVE) before installing this mod!!!
-		------------------------------------------------------------------------------------
-		Country flag must be selected on registration...
+		NOTICE!
+		----------------------------------------------------------------------------------------
+		Existing users can add/edit a country flag via the UCP, new users must select a country 
+		flag during registration... Note this option also prevents auto bot registration...
 
-		Mike &amp; dravekx 2011]]></author-notes>
+		Please complete any additional style edits manually, Automod updating of other styles
+		generates duplicate code and will result in errors...
+		----------------------------------------------------------------------------------------
+		Mike, dravekx 2011]]></author-notes>
 
 		<author-group>
 			<author>
@@ -240,14 +243,17 @@
 <edit>
 <find><![CDATA[	<form id="user_profile" method="post" action="{U_ACTION}">
 ]]></find>
-<action type="before-add"><![CDATA[	<script>
+<action type="before-add"><![CDATA[
+<script type="text/javascript">
+// <![CDATA[
 	function DisplayFlag(myForm)
 	{
 		var flagname = myForm.user_country_flag;
 		document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./../images/flags/" + flagname.value + "' />"
 	}
-	</script>
-	]]></action>
+// ]]&gt;
+</script> 
+]]></action>
 </edit>
 <edit>
 <find><![CDATA[	<dl>
@@ -450,21 +456,39 @@ function sgp_user_country_flag_select($passed)
 </open>
 
 <open src="includes/sgp_portal_blocks.php">
+
 <edit>
-<find>	$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks</find>
-<action type="replace-with">$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks, user_country_flag</action>
+<find><![CDATA[// Grab data for this user //]]></find>
+<action type="after-add"><![CDATA[// Prevent CF install error //
+if(empty($user->data['user_country_flag']))
+{
+	$cf = '';
+}
+else
+{
+	$cf = ', user_country_flag';
+}]]></action>
 </edit>
+
+<edit>
+<find><![CDATA[$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks]]></find>
+<inline-edit>
+<inline-find>user_right_blocks</inline-find>
+<inline-action type="after-add">" . $cf . "</inline-action>
+</inline-edit>
+</edit>
+
 <edit>
 <find>		$groupid = $row['group_id'];</find>
 <action type="after-add"><![CDATA[
-		$user_country_flag	= $row['user_country_flag']]]>;</action>
+	$user_country_flag	= $row['user_country_flag'];]]></action>
 </edit>
 </open>
 
 <open src="blocks/block_the_teams.php">
 <edit>
 <find><![CDATA[		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),]]></find>
-<action type="after-add"><![CDATA[		'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',]]></action>
+<action type="after-add"><![CDATA[			'COUNTRY_FLAG_IMG' => '<img src="' .(sgp_get_user_country_flag($row['user_id'])). '" alt="" />',]]></action>
 </edit>
 </open>
 
@@ -500,12 +524,14 @@ $sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, 
 <find><![CDATA[<!-- INCLUDE ucp_header.html -->
 ]]></find>
 <action type="after-add"><![CDATA[
-<script>
+<script type="text/javascript">
+// <![CDATA[
 function DisplayFlag(myForm)
 {
 	var flagname = myForm.user_country_flag;
 	document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./images/flags/" + flagname.value + "' />"
 }
+// ]]&gt;
 </script>]]></action>
 </edit>
 <edit>
@@ -526,13 +552,17 @@ function DisplayFlag(myForm)
 <open src="styles/prosilver/template/ucp_register.html">
 <edit>
 <find><![CDATA[<form method="post" action="{S_UCP_ACTION}" id="register">]]></find>
-<action type="before-add"><![CDATA[<script>
+<action type="before-add"><![CDATA[
+<script type="text/javascript">
+// <![CDATA[
 function DisplayFlag(myForm)
 {
     var flagname = myForm.user_country_flag;
     document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./images/flags/" + flagname.value + "' />"
 }
-</script>]]></action>
+// ]]&gt;
+</script>
+]]></action>
       </edit>
       <edit>
         <find><![CDATA[	<!-- IF .profile_fields -->]]></find>
