@@ -384,7 +384,6 @@ function sgp_get_country_flag_admin($passed)
 <edit>
 <find><![CDATA[/* Stargate functions ends */]]></find>
 <action type="before-add"><![CDATA[
-
 function sgp_get_user_country_flag($user_or_poster_id)
 {
 	global $db;
@@ -394,15 +393,14 @@ function sgp_get_user_country_flag($user_or_poster_id)
 		return;
 	}
 
-	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $user_or_poster_id";
+	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = " . (int)$user_or_poster_id;
 
 	if($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);
 		return("images/flags/". $row['user_country_flag']);
 	}
-	// No result! so we return the a blank flag image
-	//return("images/flags/--.gif");
+
 	return('');
 }
 
@@ -412,11 +410,11 @@ function sgp_user_country_flag_select($passed)
 	$flag = '';
 	$imglist = '';
 
-	if ($passed != '' && !strpos('$passed', '.gif'))
+	if ($passed != '' && !strpos($passed, '.gif'))
 	{
-		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
+		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id =  " .(int)$passed;
 
-		if ($result = $db->sql_query($sql) )
+		if ($result = $db->sql_query($sql))
 		{
 			$flag = $db->sql_fetchrow($result);
 			$passed = $flag['user_country_flag'];
@@ -424,7 +422,6 @@ function sgp_user_country_flag_select($passed)
 	}
 
 	$imgs = dir('images/flags');
-	//$imglist= '.. ';
 
 	while ($file = $imgs->read())
 	{
@@ -451,6 +448,8 @@ function sgp_user_country_flag_select($passed)
 
 	return $flag_options;
 }
+/* Stargate functions ends */
+
 ]]></action>
 </edit>
 </open>

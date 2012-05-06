@@ -17,7 +17,7 @@
 *
 * @version $Id$
 *
-* @updated: March 2010 Mike & prosk8er
+* @updated: 06 May 2012 Mike & prosk8er
 *
 */
 
@@ -32,8 +32,8 @@ if (!defined('IN_PHPBB'))
 
 $queries = $cached_queries = 0;
 
-define('LEFT_SIDE', 1);
-define('RIGHT_SIDE', 2);
+define('LEFT_SIDE', 0);
+define('RIGHT_SIDE', 1);
 
 global $k_config, $phpbb_root_path;
 
@@ -53,6 +53,7 @@ $rss_type       = $k_config['rss_feeds_type'];
 $cache_time     = $k_config['rss_feeds_cache_time'];
 $items_limit    = $k_config['rss_feeds_items_limit'];
 $con = '';
+$rsleft = $rsright = array();
 
 $sql = 'SELECT *
 	FROM ' . K_NEWSFEEDS_TABLE . '
@@ -65,7 +66,9 @@ while ($row = $db->sql_fetchrow($result))
 	{
 		$rsleft = get_contents(1, $row['feed_url']);
 
-		$msg= '<span class="gensmall"><strong>' . sgp_checksize($rsleft['description'], 58) . "</strong></span><br />";
+		$dis = ($row['feed_description'] == 1) ? sgp_checksize($rsleft['description'], 58) : '';
+
+		$msg = '<span class="gensmall"><strong>' . $dis . "</strong></span><br />";
 
 		if (function_exists('curl_init') == false && $rss_type == 'curl')
 		{
@@ -101,9 +104,11 @@ while ($row = $db->sql_fetchrow($result))
 
 	if($row['feed_position'] == RIGHT_SIDE)
 	{
-		$rsright = get_contents(RIGHT_SIDE, $row['feed_url']);
+		$rsright = get_contents(2, $row['feed_url']);
 
-		$msg= '<span class="gensmall"><strong>' . $rsright['description'] . "</strong></span><br />";
+		$dis = ($row['feed_description'] == 1) ? sgp_checksize($rsright['description'], 58) : '';
+
+		$msg= '<span class="gensmall"><strong>' . $dis . "</strong></span><br />";
 
 		if (function_exists('curl_init') == false && $rss_type == 'curl')
 		{

@@ -97,22 +97,22 @@
 		<td class="row2" style="font-size:11px; text-align:left;" width="60%"><input name="feed_url" type="text" id="feed_url" value="{FEED_URL}" maxlength="250" size="60" /></td>
 	</tr>
 	<tr>
-	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_DESCRIPTION}:</strong></td>
+	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_DESCRIPTION}:</strong>[{FEED_DESCRIPTION_SHOW}]</td>
 		<td class="row2" style="font-size:11px; text-align:left;" width="60%">
-		<input type="radio" class="radio" name="feed_description" value="1" <!-- IF FEED_DESCRIPTION_SHOW_1 == "1" -->	checked="checked" <!-- ENDIF -->{FEED_DESCRIPTION_SHOW_1} /> {L_YES}&nbsp;
-		<input type="radio" class="radio" name="feed_description" value="2" {FEED_DESCRIPTION_SHOW_2} /> {L_NO}&nbsp;</td>
+		<input type="radio" class="radio" name="feed_description" value="1" <!-- IF FEED_DESCRIPTION_SHOW == "1" -->	checked="checked" <!-- ENDIF -->{FEED_DESCRIPTION_SHOW} /> {L_YES}&nbsp;
+		<input type="radio" class="radio" name="feed_description" value="0" <!-- IF FEED_DESCRIPTION_SHOW == "0" -->	checked="checked" <!-- ENDIF -->{FEED_DESCRIPTION_SHOW} /> {L_NO}&nbsp;</td>
 	</tr>
 	<tr>
 	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_SHOW}:</strong></td>
 		<td class="row2" style="font-size:11px; text-align:left;" width="60%">
-		<input type="radio" class="radio" name="feed_show" value="1" <!-- IF FEED_SHOW_1 == "1" -->	checked="checked" <!-- ENDIF -->{FEED_SHOW_1} /> {L_YES}&nbsp;
-		<input type="radio" class="radio" name="feed_show" value="2" {FEED_SHOW_2} /> {L_NO}&nbsp;</td>
+		<input type="radio" class="radio" name="feed_show" value="1" <!-- IF FEED_SHOW == "1" -->	checked="checked" <!-- ENDIF -->{FEED_SHOW} /> {L_YES}&nbsp;
+		<input type="radio" class="radio" name="feed_show" value="0" <!-- IF FEED_SHOW == "0" -->	checked="checked" <!-- ENDIF -->{FEED_SHOW} /> {L_NO}&nbsp;</td>
 	</tr>
 	<tr>
 	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_POSITION}:</strong><br /><span>{L_FEED_POSITION_EXPLAIN}</span></td>
 		<td class="row2" style="font-size:11px; text-align:left;" width="60%">
-		<input type="radio" class="radio" name="feed_position" value="1" <!-- IF FEED_POSITION_1 == "1" -->	checked="checked" <!-- ENDIF -->{FEED_POSITION_1} /> {L_LEFT}&nbsp;
-		<input type="radio" class="radio" name="feed_position" value="2" {FEED_POSITION_2} /> {L_RIGHT}&nbsp;</td>
+		<input type="radio" class="radio" name="feed_position" value="0" <!-- IF FEED_POSITION == "0" -->	checked="checked" <!-- ENDIF -->{FEED_POSITION} /> {L_LEFT}&nbsp;
+		<input type="radio" class="radio" name="feed_position" value="1" <!-- IF FEED_POSITION == "1" -->	checked="checked" <!-- ENDIF -->{FEED_POSITION} /> {L_RIGHT}&nbsp;</td>
 	</tr>
 	</table>
 
@@ -137,16 +137,16 @@
 		<th>{L_FEED_POSITIONS}</th>
 		<th>{L_ACTION}</th>
 	</tr>
-	<!-- BEGIN feed_title -->
-		<!-- IF feed_title.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
-		<td style="text-align: left; width: 20%;">{feed_title.FEED_TITLE}</td>
-		<td style="text-align: left; width: 45%;"><a href="{feed_title.FEED_URL}" title="{L_VISIT_FEED}: {feed_title.FEED_URL}" target="_blank"><span>{feed_title.FEED_URL}</span></a></td>
-		<td style="text-align: left; width: 5%;">{feed_title.FEED_SHOW_DESCRIPTION}</td>
-		<td style="text-align: left; width: 15%;">{feed_title.FEED_SHOW}</td>
-		<td style="text-align: left; width: 15%;">{feed_title.FEED_SHOW_POSITION}</td>
-		<td style="text-align:center;"><a href="{feed_title.U_EDIT}">{ICON_EDIT}</a> <a href="{feed_title.U_DELETE}">{ICON_DELETE}</a></td>
+	<!-- BEGIN feeds -->
+		<!-- IF feeds.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: left; width: 20%;">{feeds.FEED_TITLE}</td>
+		<td style="text-align: left; width: 45%;"><a href="{feeds.FEED_URL}" title="{L_VISIT_FEED}: {feeds.FEED_URL}" target="_blank"><span>{feeds.FEED_URL}</span></a></td>
+		<td style="text-align: left; width: 5%;">{feeds.FEED_SHOW_DESCRIPTION}</td>
+		<td style="text-align: left; width: 15%;">{feeds.FEED_SHOW}</td>
+		<td style="text-align: left; width: 15%;">{feeds.FEED_SHOW_POSITION}</td>
+		<td style="text-align:center;"><a href="{feeds.U_EDIT}">{ICON_EDIT}</a> <a href="{feeds.U_DELETE}">{ICON_DELETE}</a></td>
 	</tr>
-	<!-- END feed_title -->
+	<!-- END feeds -->
 	</table>
 	<p align="right"><br /><input class="button2" name="add" type="submit" value="{L_ADD_FEED}" /></p>
 	</fieldset>
