@@ -68,7 +68,13 @@ while ($row = $db->sql_fetchrow($result))
 
 		$dis = ($row['feed_description'] == 1) ? sgp_checksize($rsleft['description'], 58) : '';
 
-		$msg = '<span class="gensmall"><strong>' . $dis . "</strong></span><br />";
+		$msg = '<span class="gensmall">' . $dis . "</span>";
+
+		if($row['feed_description'] == 1)
+		{
+			$msg .= "<br />";
+		}
+
 
 		if (function_exists('curl_init') == false && $rss_type == 'curl')
 		{
@@ -97,7 +103,7 @@ while ($row = $db->sql_fetchrow($result))
 		}
 
 		$template->assign_block_vars('rss_left_column', array(
-			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a>",
+			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a><br />",
 			'LEFT_SYNDICATION' => $msg,
 		));
 	}
@@ -108,7 +114,12 @@ while ($row = $db->sql_fetchrow($result))
 
 		$dis = ($row['feed_description'] == 1) ? sgp_checksize($rsright['description'], 58) : '';
 
-		$msg= '<span class="gensmall"><strong>' . $dis . "</strong></span><br />";
+		$msg = '<span class="gensmall">' . $dis . "</span>";
+
+		if($row['feed_description'] == 1)
+		{
+			$msg .= "<br />";
+		}
 
 		if (function_exists('curl_init') == false && $rss_type == 'curl')
 		{
@@ -137,7 +148,7 @@ while ($row = $db->sql_fetchrow($result))
 
 		$template->assign_block_vars('rss_right_column', array(
 
-			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a>",
+			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a><br />",
 			'RIGHT_SYNDICATION' => $msg,
 		));
 	}
