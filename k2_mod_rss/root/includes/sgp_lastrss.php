@@ -52,16 +52,13 @@ class lastRSS
 	/**
 	* Get RSS (URL) with curl
 	*/
-	function curl_get_rss($url)
+	function curl_get_rss($lr, $url)
 	{
-		global $rss, $user;
+		global $rss, $user, $k_config;
+
+		$rss_type = $k_config['rss_feeds_type'];
 
 		// initiate and set options
-		if (isset($url))
-		{
-			$ch = curl_init($url);
-		}
-
 		if (isset($ch))
 		{
 			@curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
@@ -71,11 +68,14 @@ class lastRSS
 			@curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
 			@curl_setopt( $ch, CURLOPT_ENCODING, '');
 			@curl_setopt( $ch, CURLOPT_USERAGENT, 'lastRSS');
+
 			// initial connection timeout
 			@curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
+
 			// setting this to higher means longer time for loading the page for user!
 			@curl_setopt( $ch, CURLOPT_TIMEOUT, 60);
 			@curl_setopt( $ch, CURLOPT_MAXREDIRS, 0);
+
 			// get content
 			$content = @curl_exec($ch);
 			$err = @curl_errno($ch);
@@ -97,6 +97,16 @@ class lastRSS
 
 	function Get ($rss_url)
 	{
+		global $k_config;
+
+		if (!isset($this->cache_dir))
+		{
+			$this->cache_dir = 'cache';
+		}
+		$this->cache_dir = $rss->cache_dir = './cache';
+		$rss->cache_time = $k_config['rss_feeds_cache_time'];
+		$this->cache_time = $rss->cache_time = $k_config['rss_feeds_cache_time'];
+
 		// If CACHE ENABLED
 		if ($this->cache_dir != '')
 		{
@@ -155,7 +165,7 @@ class lastRSS
 			$out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
   			if ((isset($this->rsscp))&&($this->rsscp != 'UTF-8'))
 			{
-				// recode with phpBB´s functions
+				// recode with phpBBÂ´s functions
 				$out[1] = utf8_recode($out[1],$this->rsscp);
 			}
 
@@ -189,15 +199,17 @@ class lastRSS
 	// -------------------------------------------------------------------
 	function parse($rss_url)
 	{
-		global $rss, $user;
+		global $rss, $user, $k_config;
+
+		$rss_type = $k_config['rss_feeds_type'];
 
 		// open and load RSS file
 		// use curl if enabled
-		if (function_exists('curl_init') && $rss->type == 'curl')
+		if (function_exists('curl_init') && $rss_type == 'curl')
 		{
 			$rss_content = $this->curl_get_rss($rss_url);
 		}
-		else if (ini_get('allow_url_fopen') == '1' && $rss->type == 'fopen')
+		else if (ini_get('allow_url_fopen') == '1' && $rss_type == 'fopen')
 		{
 			// else use fopen if possible
 			if ($f = @fopen($rss_url, 'r'))
