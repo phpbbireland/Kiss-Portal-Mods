@@ -49,7 +49,6 @@ $lang = array_merge($lang, array(
 
 	'UCF_MOD'			=> 'A valid location is required for this Mod',
 	'USER_COUNTRY_FLAG'		=> 'Country Flag',
-	'UCF_MOD'			=> 'A valid location is required for this Mod',
 	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <b>Location</b> data above (Google Map).',
 
 ));
