@@ -6,7 +6,7 @@
 * @copyright (c) 2008 Martin Larsson - aka NeXur
 * @maintained by phpbbireland.com - Mike & prosk8er
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
+* Last modified: 06 May 2012 Mike
 */
 
 /**
@@ -104,8 +104,7 @@ class acp_k_newsfeeds
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_items_limit . ' WHERE config_name = "rss_feeds_items_limit"');
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_random_limit . ' WHERE config_name = "rss_feeds_random_limit"');
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_rss_enabled . ' WHERE config_name = "rss_feeds_enabled"');
-
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $db->sql_escape($config_feeds_type) . '" WHERE config_name = "rss_feeds_type"');
+ 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $db->sql_escape($config_feeds_type) . '" WHERE config_name = "rss_feeds_type"');
 
 					//clear cache - not working
 					@unlink( $phpbb_root_path . 'cache/rsscache_*.dat' );
@@ -217,17 +216,14 @@ class acp_k_newsfeeds
 				}
 
 				$template->assign_vars(array(
-					'S_EDIT'            => true,
-					'U_BACK'            => $this->u_action,
-					'U_ACTION'          => $this->u_action . '&amp;id=' . $feed_id,
-					'FEED_TITLE'        => (isset($feed_title['feed_title'])) ? $feed_title['feed_title'] : '',
-					'FEED_URL'          => (isset($feed_url['feed_url'])) ? $feed_url['feed_url'] : '',
-					'FEED_POSITION_1'   => (($feed_position['feed_position'] == '1') ? 'checked' : '' ),
-					'FEED_POSITION_2'   => (($feed_position['feed_position'] == '2') ? 'checked' : '' ),
-					'FEED_SHOW_1'       => (($feed_show['feed_show'] == '1') ? 'checked' : '' ),
-					'FEED_SHOW_2'       => (($feed_show['feed_show'] == '2') ? 'checked' : '' ),
-					'FEED_DESCRIPTION_SHOW_1' => (($feed_description['feed_description'] == '1') ? 'checked' : '' ),
-					'FEED_DESCRIPTION_SHOW_2' => (($feed_description['feed_description'] == '2') ? 'checked' : '' ),
+					'S_EDIT'				=> true,
+					'U_BACK'				=> $this->u_action,
+					'U_ACTION'				=> $this->u_action . '&amp;id=' . $feed_id,
+					'FEED_TITLE'			=> (isset($feed_title['feed_title'])) ? $feed_title['feed_title'] : '',
+					'FEED_URL'				=> (isset($feed_url['feed_url'])) ? $feed_url['feed_url'] : '',
+					'FEED_POSITION'			=> $feed_position['feed_position'],
+					'FEED_SHOW'				=> $feed_show['feed_show'],
+					'FEED_DESCRIPTION_SHOW' => $feed_description['feed_description'],
 				));
 				return;
 
@@ -248,11 +244,11 @@ class acp_k_newsfeeds
 
 		while ($row = $db->sql_fetchrow($result))
 		{
-			$active = ($row['feed_show'] == '1') ? $user->lang['YES'] : (($row['feed_show'] == '2') ? $user->lang['NO'] : $user->lang['GUEST']);
-			$description = ($row['feed_description'] == '1') ? $user->lang['YES'] : (($row['feed_description'] == '2') ? $user->lang['NO'] : $user->lang['GUEST']);
-			$position = ($row['feed_position'] == '1') ? $user->lang['LEFT'] : (($row['feed_position'] == '2') ? $user->lang['RIGHT'] : $user->lang['NOT_SET']);
+			$active = ($row['feed_show'] == '1') ? $user->lang['YES'] : (($row['feed_show'] == '0') ? $user->lang['NO'] : $user->lang['GUEST']);
+			$description = ($row['feed_description'] == '1') ? $user->lang['YES'] : (($row['feed_description'] == '0') ? $user->lang['NO'] : $user->lang['GUEST']);
+			$position = ($row['feed_position'] == '0') ? $user->lang['LEFT'] : (($row['feed_position'] == '1') ? $user->lang['RIGHT'] : $user->lang['NOT_SET']);
 
-			$template->assign_block_vars('feed_title', array(
+			$template->assign_block_vars('feeds', array(
 				'FEED_ID'               => $row['feed_id'],
 				'FEED_TITLE'            => $row['feed_title'],
 				'FEED_URL'              => $row['feed_url'],
