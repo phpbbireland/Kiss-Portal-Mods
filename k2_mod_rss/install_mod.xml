@@ -6,9 +6,8 @@
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
-		<title lang="en"><![CDATA[Rss for Kiss II Portal]]></title>
-		<description lang="en"><![CDATA[Rss block for Kiss II Portal.]]></description>
-
+		<title lang="en"><![CDATA[Rss for Kiss Portal. (Kiss Portal Engine must be installed!)]]></title>
+		<description lang="en"><![CDATA[Rss block for Kiss Portal.]]></description>
 		<author-notes lang="en"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed. (for a stand-alone version please check phpbbireland.com) Mike]]></author-notes>
 		<author-group>
 			<author>
@@ -16,10 +15,10 @@
 				<username><![CDATA[NeXur]]></username>
 			</author>
 			<author>
-			<username>michaelo</username>
-			<realname>Michael O'Toole</realname>
-			<homepage>http://www.stargate-portal.com/</homepage>
-			<email>o2l@eircom.net</email>
+				<realname><![CDATA[Michael O'Toole]]></realname>
+				<username><![CDATA[michaelo]]></username>
+				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
+				<email><![CDATA[o2l@eircom.net]]></email>
 			</author>
 			<author>
 				<realname><![CDATA[Tyler]]></realname>

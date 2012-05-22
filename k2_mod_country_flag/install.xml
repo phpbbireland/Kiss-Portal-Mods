@@ -161,7 +161,7 @@
 					$error[] = sprintf($user->lang['IP_BLACKLISTED'], $user->ip, $dnsbl[1]);
 				}
 			}]]></find>
-<action type="after-add"><![CDATA[			if($data['user_country_flag'] == '--.gif')
+<action type="after-add"><![CDATA[			if ($data['user_country_flag'] == '--.gif')
 			{
 				$error[] = $user->lang['NO_FLAG_SELECTED'];
 			}]]></action>
@@ -177,7 +177,7 @@
 <edit>
 <find><![CDATA[		//
 		$user->profile_fields = array();]]></find>
-        <action type="before-add"><![CDATA[		if(STARGATE)
+        <action type="before-add"><![CDATA[		if (STARGATE)
 		{
 			$template->assign_vars(array(
 				'USER_COUNTRY_FLAG'		=> (isset($user_country_flag)) ? $user_country_flag : '',
@@ -199,7 +199,7 @@
 <find><![CDATA[					'S_CHANGE_PASSWORD'	=> ($auth->acl_get('u_chgpasswd')) ? true : false)
 				);]]></find>
 <action type="after-add"><![CDATA[
-				if(STARGATE)
+				if (STARGATE)
 				{
 					$template->assign_vars(array(
 						'USER_COUNTRY_FLAG' => $data['user_country_flag'])
@@ -228,7 +228,7 @@
 <edit>
 <find><![CDATA[						'S_BIRTHDAYS_ENABLED'		=> true,
 					));]]></find>
-<action type="after-add"><![CDATA[					if(STARGATE)
+<action type="after-add"><![CDATA[					if (STARGATE)
 					{
 						$template->assign_vars(array(
 							'USER_COUNTRY_FLAG_IMG' => (isset($user->data['user_country_flag'])) ? $user->data['user_country_flag'] : '--.gif',
@@ -313,11 +313,11 @@ function sgp_get_country_flag_admin($passed)
 	$flag = '';
 	$imglist = '';
 
-	if($passed != '')
+	if ($passed != '')
 	{
 		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
 		
-		if( $result = $db->sql_query($sql) )
+		if ($result = $db->sql_query($sql))
 		{
 			$flag = $db->sql_fetchrow($result);
 			$passed = $flag['user_country_flag'];
@@ -328,7 +328,7 @@ function sgp_get_country_flag_admin($passed)
 	
 	while ($file = $imgs->read()) 
 	{
-		if(stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
+		if (stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
 			$imglist .= "$file ";
 	}
 	
@@ -339,7 +339,7 @@ function sgp_get_country_flag_admin($passed)
 	
 	for ( $i=0; $i < sizeof($imglist); $i++ ) 
 	{	
-		if( $imglist[$i]!= "" ) 
+		if ($imglist[$i]!= "") 
 		{
 			$selected = ($imglist[$i] == $passed) ? ' selected="selected"' : '';
 			$flag_options .= '<option value="' . $imglist[$i] . '"' . $selected . '>' . $imglist[$i] . '</option>';
@@ -387,14 +387,14 @@ function sgp_get_user_country_flag($user_or_poster_id)
 {
 	global $db;
 
-	if(empty($user_or_poster_id))
+	if (empty($user_or_poster_id))
 	{
 		return;
 	}
 
 	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = " . (int)$user_or_poster_id;
 
-	if($result = $db->sql_query($sql))
+	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);
 		return("images/flags/". $row['user_country_flag']);
@@ -458,7 +458,7 @@ function sgp_user_country_flag_select($passed)
 <edit>
 <find><![CDATA[// Grab data for this user //]]></find>
 <action type="after-add"><![CDATA[// Prevent CF install error //
-if(empty($user->data['user_country_flag']))
+if (empty($user->data['user_country_flag']))
 {
 	$cf = '';
 }

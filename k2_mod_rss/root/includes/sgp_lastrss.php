@@ -82,7 +82,7 @@ class lastRSS
 			$errmsg = @curl_error($ch);
 			$header = @curl_getinfo($ch);
 
-			if(curl_errno($ch))
+			if (curl_errno($ch))
 			{
 				// error in getting content
 				return $items = array();
