@@ -78,7 +78,7 @@ if ($http_referrals)
 			{
 				$sql2 = 'UPDATE ' . K_REFERRALS_TABLE .
 				' SET hits = ' . ($row['hits']+1) . ' , '.
-					' lastvisit = ' . $http_time .
+				' lastvisit = ' . $http_time .
 				" WHERE host = '" . $db->sql_escape($http_host) . "'";
 				$db->sql_query($sql2);
 			}
@@ -111,7 +111,7 @@ if (!$result)
 	trigger_error('ERROR_PORTAL_HTTP');
 }
 
-while($row = $db->sql_fetchrow($result))
+while ($row = $db->sql_fetchrow($result))
 {
 	$host_name = $row['host'];
 	if (strlen($row['host']) > 17)
@@ -123,7 +123,7 @@ while($row = $db->sql_fetchrow($result))
 		'S_HTTP_HOST'		=> $host_name,
 		'S_HHTP_HOST_FULL'	=> $row['host'],
 		'U_HTTP_HOST'		=> 'http://'.$row['host'],
-		'S_HITS'			=> $row['hits']
+		'S_HITS'		=> $row['hits']
 	));
 }
 $db->sql_freeresult($result);

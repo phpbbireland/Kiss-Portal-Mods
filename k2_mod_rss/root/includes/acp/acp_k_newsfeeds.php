@@ -216,14 +216,14 @@ class acp_k_newsfeeds
 				}
 
 				$template->assign_vars(array(
-					'S_EDIT'				=> true,
-					'U_BACK'				=> $this->u_action,
-					'U_ACTION'				=> $this->u_action . '&amp;id=' . $feed_id,
-					'FEED_TITLE'			=> (isset($feed_title['feed_title'])) ? $feed_title['feed_title'] : '',
-					'FEED_URL'				=> (isset($feed_url['feed_url'])) ? $feed_url['feed_url'] : '',
-					'FEED_POSITION'			=> $feed_position['feed_position'],
-					'FEED_SHOW'				=> $feed_show['feed_show'],
-					'FEED_DESCRIPTION_SHOW' => $feed_description['feed_description'],
+					'S_EDIT'		=> true,
+					'U_BACK'		=> $this->u_action,
+					'U_ACTION'		=> $this->u_action . '&amp;id=' . $feed_id,
+					'FEED_TITLE'		=> (isset($feed_title['feed_title'])) ? $feed_title['feed_title'] : '',
+					'FEED_URL'		=> (isset($feed_url['feed_url'])) ? $feed_url['feed_url'] : '',
+					'FEED_POSITION'		=> $feed_position['feed_position'],
+					'FEED_SHOW'		=> $feed_show['feed_show'],
+					'FEED_DESCRIPTION_SHOW'	=> $feed_description['feed_description'],
 				));
 				return;
 

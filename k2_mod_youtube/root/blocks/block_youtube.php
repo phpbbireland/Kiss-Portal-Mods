@@ -28,7 +28,7 @@ if (!$result = $db->sql_query($sql))
 
 $result = $db->sql_query_limit($sql, $k_video_max, 0, $block_cache_time);
 
-while($row = $db->sql_fetchrow($result))
+while ($row = $db->sql_fetchrow($result))
 {
 	$unique = ($row['video_category'] == $last_cat) ? false : true;
 
@@ -37,7 +37,7 @@ while($row = $db->sql_fetchrow($result))
 		$row['video_rating'] = 0;
 	}
 
-	switch($row['video_rating'])
+	switch ($row['video_rating'])
 	{
 		case 0: $rating = '';
 		break;
@@ -58,8 +58,8 @@ while($row = $db->sql_fetchrow($result))
 	$usr_name_full = get_user_data('full', $row['video_poster_id']);
 
 	$template->assign_block_vars('video_loop_row', array(
-		'VIDEO_CAT'			=> $row['video_category'],
-		'VIDEO_WHO'			=> $row['video_who'],
+		'VIDEO_CAT'		=> $row['video_category'],
+		'VIDEO_WHO'		=> $row['video_who'],
 		'VIDEO_TITLE'		=> $row['video_title'],
 		'VIDEO_LINK'		=> $row['video_link'],
 		'VIDEO_COMMENT'		=> htmlspecialchars_decode($row['video_comment']),
@@ -76,14 +76,14 @@ while($row = $db->sql_fetchrow($result))
 	if ($video == $row['video_link'])
 	{
 		$template->assign_vars(array(
-			'L_POSTERS_COMMENT'		=> ($usr_name_full) ? sprintf($user->lang['POSTERS_COMMENT'], $usr_name_full, htmlspecialchars_decode($row['video_comment'])) : '',
-			'READY'					=> ($video) ? true : false,
+			'L_POSTERS_COMMENT'	=> ($usr_name_full) ? sprintf($user->lang['POSTERS_COMMENT'], $usr_name_full, htmlspecialchars_decode($row['video_comment'])) : '',
+			'READY'			=> ($video) ? true : false,
 		));
 	}
 
 	$template->assign_vars(array(
-		'VIDEO_PATH'			=> $k_config['k_yourtube_link'],
-		'S_AUTOPLAY'			=> ($k_config['k_yourtube_auto']) ? '&amp;autoplay=1' : '',
+		'VIDEO_PATH'	=> $k_config['k_yourtube_link'],
+		'S_AUTOPLAY'	=> ($k_config['k_yourtube_auto']) ? '&amp;autoplay=1' : '',
 	));
 
 

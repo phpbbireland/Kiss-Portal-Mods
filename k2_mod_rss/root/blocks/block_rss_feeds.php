@@ -62,13 +62,19 @@ $result = $db->sql_query($sql);
 
 while ($row = $db->sql_fetchrow($result))
 {
-	if($row['feed_position'] == LEFT_SIDE)
+	if ($row['feed_position'] == LEFT_SIDE)
 	{
 		$rsleft = get_contents(1, $row['feed_url']);
 
 		$dis = ($row['feed_description'] == 1) ? sgp_checksize($rsleft['description'], 58) : '';
 
-		$msg = '<span class="gensmall"><strong>' . $dis . "</strong></span><br />";
+		$msg = '<span class="gensmall">' . $dis . "</span>";
+
+		if ($row['feed_description'] == 1)
+		{
+			$msg .= "<br />";
+		}
+
 
 		if (function_exists('curl_init') == false && $rss_type == 'curl')
 		{
@@ -97,18 +103,23 @@ while ($row = $db->sql_fetchrow($result))
 		}
 
 		$template->assign_block_vars('rss_left_column', array(
-			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a>",
+			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a><br />",
 			'LEFT_SYNDICATION' => $msg,
 		));
 	}
 
-	if($row['feed_position'] == RIGHT_SIDE)
+	if ($row['feed_position'] == RIGHT_SIDE)
 	{
 		$rsright = get_contents(2, $row['feed_url']);
 
 		$dis = ($row['feed_description'] == 1) ? sgp_checksize($rsright['description'], 58) : '';
 
-		$msg= '<span class="gensmall"><strong>' . $dis . "</strong></span><br />";
+		$msg = '<span class="gensmall">' . $dis . "</span>";
+
+		if ($row['feed_description'] == 1)
+		{
+			$msg .= "<br />";
+		}
 
 		if (function_exists('curl_init') == false && $rss_type == 'curl')
 		{
@@ -137,7 +148,7 @@ while ($row = $db->sql_fetchrow($result))
 
 		$template->assign_block_vars('rss_right_column', array(
 
-			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a>",
+			'FEEDS_TITLE' => '<a href="' . $row['feed_url'] . '" rel="external">' . $row['feed_title'] . "</a><br />",
 			'RIGHT_SYNDICATION' => $msg,
 		));
 	}
@@ -153,7 +164,7 @@ function get_contents($position, $url)
 {
 	$data = '';
 
-	switch($position)
+	switch ($position)
 	{
 		case 1:
 			$data = curl_get_rss($url);
@@ -203,7 +214,7 @@ function curl_get_rss($url)
 		$errmsg = @curl_error($ch);
 		$header = @curl_getinfo($ch);
 
-		if(curl_errno($ch))
+		if (curl_errno($ch))
 		{
 			return $items = array();
 		}
@@ -390,7 +401,7 @@ function my_preg_match($pattern, $subject)
 		$out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
 		if ((isset($rsscp))&&($rsscp != 'UTF-8'))
 		{
-			// recode with phpBB´s functions
+			// recode with phpBBÂ´s functions
 			$out[1] = utf8_recode($out[1],$rsscp);
 		}
 

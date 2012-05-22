@@ -65,9 +65,9 @@ $versions = array(
 		'table_add' => array(
 			array('phpbb_k_youtube', array(
 				'COLUMNS'	=> array(
-					'video_id'			=> array('UINT', NULL, 'auto_increment'),
+					'video_id'		=> array('UINT', NULL, 'auto_increment'),
 					'video_category'	=> array('XSTEXT_UNI', ''),
-					'video_who'			=> array('XSTEXT_UNI', ''),
+					'video_who'		=> array('XSTEXT_UNI', ''),
 					'video_link'		=> array('VCHAR', '12'),
 					'video_title'		=> array('XSTEXT_UNI', ''),
 					'video_rating'		=> array('UINT', '4'),
@@ -75,7 +75,7 @@ $versions = array(
 					'video_poster_id'	=> array('UINT', '0'),
 					),
 						'PRIMARY_KEY'	=> 'video_id',
-						'KEYS'			=> array('video_category'	=> array('INDEX', 'video_category'),
+						'KEYS'		=> array('video_category'	=> array('INDEX', 'video_category'),
 					),
 				),
 			),

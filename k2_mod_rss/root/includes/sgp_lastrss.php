@@ -82,7 +82,7 @@ class lastRSS
 			$errmsg = @curl_error($ch);
 			$header = @curl_getinfo($ch);
 
-			if(curl_errno($ch))
+			if (curl_errno($ch))
 			{
 				// error in getting content
 				return $items = array();
@@ -165,7 +165,7 @@ class lastRSS
 			$out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
   			if ((isset($this->rsscp))&&($this->rsscp != 'UTF-8'))
 			{
-				// recode with phpBB´s functions
+				// recode with phpBBÂ´s functions
 				$out[1] = utf8_recode($out[1],$this->rsscp);
 			}
 

@@ -5,8 +5,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 		<title lang="en-gb">Kiss II Youtube Mod (Kiss Portal Engine must be installed!).</title>
-		<description lang="en-gb">Allow you to integrate youtube vodeos into yo site.</description>
-		<author-notes lang="en-gb">This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.
+		<description lang="en">Allow you to integrate youtube vodeos into yo site.</description>
+		<author-notes lang="en">This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.
 		(the download also include a stand-alone version for installation into the default phpBB3 forum)...
 
 		Mike</author-notes>
