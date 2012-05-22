@@ -42,8 +42,8 @@ $lang = array_merge($lang, array(
 	'FLAG'							=> 'Flag',
 	'NO_FLAG_SELECTED'				=> 'A country flag must be selected',
 
-	'K2_USER_COUNTRY_FLAG' 			=> 'User country flag mod',
-	'K2_USER_COUNTRY_FLAG_EXPLAIN' 	=> 'Provides country flags for you members...',
+	'K2_USER_COUNTRY_FLAG'			=> 'User country flag mod',
+	'K2_USER_COUNTRY_FLAG_EXPLAIN'	=> 'Provides country flags for you members...',
 
 	'SHOW_ON_MAP'					=> 'Click to show on google maps',
 
