@@ -111,7 +111,7 @@ if (!$result)
 	trigger_error('ERROR_PORTAL_HTTP');
 }
 
-while($row = $db->sql_fetchrow($result))
+while ($row = $db->sql_fetchrow($result))
 {
 	$host_name = $row['host'];
 	if (strlen($row['host']) > 17)

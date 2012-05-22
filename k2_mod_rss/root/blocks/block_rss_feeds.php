@@ -62,7 +62,7 @@ $result = $db->sql_query($sql);
 
 while ($row = $db->sql_fetchrow($result))
 {
-	if($row['feed_position'] == LEFT_SIDE)
+	if ($row['feed_position'] == LEFT_SIDE)
 	{
 		$rsleft = get_contents(1, $row['feed_url']);
 
@@ -70,7 +70,7 @@ while ($row = $db->sql_fetchrow($result))
 
 		$msg = '<span class="gensmall">' . $dis . "</span>";
 
-		if($row['feed_description'] == 1)
+		if ($row['feed_description'] == 1)
 		{
 			$msg .= "<br />";
 		}
@@ -108,7 +108,7 @@ while ($row = $db->sql_fetchrow($result))
 		));
 	}
 
-	if($row['feed_position'] == RIGHT_SIDE)
+	if ($row['feed_position'] == RIGHT_SIDE)
 	{
 		$rsright = get_contents(2, $row['feed_url']);
 
@@ -116,7 +116,7 @@ while ($row = $db->sql_fetchrow($result))
 
 		$msg = '<span class="gensmall">' . $dis . "</span>";
 
-		if($row['feed_description'] == 1)
+		if ($row['feed_description'] == 1)
 		{
 			$msg .= "<br />";
 		}
@@ -164,7 +164,7 @@ function get_contents($position, $url)
 {
 	$data = '';
 
-	switch($position)
+	switch ($position)
 	{
 		case 1:
 			$data = curl_get_rss($url);
@@ -214,7 +214,7 @@ function curl_get_rss($url)
 		$errmsg = @curl_error($ch);
 		$header = @curl_getinfo($ch);
 
-		if(curl_errno($ch))
+		if (curl_errno($ch))
 		{
 			return $items = array();
 		}

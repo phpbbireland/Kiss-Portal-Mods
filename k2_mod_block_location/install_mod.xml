@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Block Location for Kiss Portal. (Kiss Portal Engine must be installed!)]]></title>
+		<description lang="en"><![CDATA[Block Location for Kiss Portal. Allows you to choose where you want the center blocks on the index page]]></description>
+		<author-notes lang="en"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed. (For a stand-alone version please check phpbbireland.com) Mike]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Michael O'Toole]]></realname>
+				<username><![CDATA[michaelo]]></username>
+				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
+				<email><![CDATA[o2l@eircom.net]]></email>
+			</author>
+			<author>
+				<realname><![CDATA[Tyler]]></realname>
+				<username><![CDATA[bprsk8r4272]]></username>
+				<homepage><![CDATA[http://gotskillslounge.com]]></homepage>
+				<email><![CDATA[prosk8er@gotskillslounge.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>1.0.0</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>120</time>
+			<target-version>3.0.10</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2012-05-04</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[first release]]></change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+	<action-group>
+		<sql><![CDATA[INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('block_location', '1', '0');]]></sql>
+		<open src="index.php">
+			<edit>
+				<find><![CDATA[	'S_DISPLAY_BIRTHDAY_LIST'	=> ($config['load_birthdays']) ? true : false,]]></find>
+				<action type="after-add"><![CDATA[	'S_BLOCK_LOCATION'		=> $config['block_location'],]]></action>
+			</edit>
+		</open>
+		<open src="adm/style/acp_k_config.html">
+			<edit>
+				<find><![CDATA[	<dl>
+		<dt><label for="blocks_enabled">{L_PORTAL_BLOCKS_ENABLED}:</label><br /><span>{L_PORTAL_BLOCKS_ENABLED_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="blocks_enabled" value="1" <!-- IF S_BLOCKS_ENABLED --> checked="checked" id="blocks_enabled" <!-- ENDIF --> />{L_YES}</label>
+			<label><input type="radio" class="radio" name="blocks_enabled" value="0" <!-- IF not S_BLOCKS_ENABLED --> checked="checked" id="blocks_enabled" <!-- ENDIF --> />{L_NO}</label>
+		</dd>
+	</dl>]]></find>
+				<action type="after-add"><![CDATA[	<dl>
+		<dt><label for="block_location">{L_BLOCK_LOCATION}:</label><br /><span>{L_BLOCK_LOCATION_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="block_location" value="1"<!-- IF BLOCK_LOCATION --> id="block_location" checked="checked"<!-- ENDIF --> /> {L_BLOCK_TOP_OF_FORUM}</label>
+			<label><input type="radio" class="radio" name="block_location" value="0"<!-- IF not BLOCK_LOCATION --> id="block_location" checked="checked"<!-- ENDIF --> /> {L_BLOCK_BOTTOM_OF_FORUM}</label>
+		</dd>
+	</dl>]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_k_config.php">
+			<edit>
+				<find><![CDATA[		$portal_build	= $config['portal_build'];]]></find>
+				<action type="after-add"><![CDATA[		$block_location	= $config['block_location'];]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			'S_PORTAL_BUILD'    => $portal_build,]]></find>
+				<action type="after-add"><![CDATA[			'BLOCK_LOCATION'    => $block_location,]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				$portal_build    = request_var('portal_build', '');]]></find>
+				<action type="after-add"><![CDATA[				$block_location    = request_var('block_location', 0);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				set_config('portal_build', $portal_build);]]></find>
+				<action type="after-add"><![CDATA[				set_config('block_location', $block_location);]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/k_config.php">
+			<edit>
+				<find><![CDATA[	'TITLE_EXPLAIN'	=> 'Here you can set the portal block default. Items marked with <strong>*</strong> are under construction or for future development.',]]></find>
+				<action type="after-add"><![CDATA[	'BLOCK_LOCATION'		=> 'Block Location on Forum',
+	'BLOCK_LOCATION_EXPLAIN'	=> 'Choose the location of the block on the index page.',
+	'BLOCK_TOP_OF_FORUM'		=> 'Top of Forum',
+	'BLOCK_BOTTOM_OF_FORUM'		=> 'Bottom of Forum',]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/index_body.html">
+			<edit>
+				<find><![CDATA[
+<!-- IF STARGATE -->
+	<!-- INCLUDE portal_center.html -->
+<!-- ENDIF -->
+]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF STARGATE -->
+	<!-- IF S_BLOCK_LOCATION --><!-- INCLUDE portal_center.html --><!-- ENDIF -->
+<!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- INCLUDE forumlist_body.html -->]]></find>
+				<action type="after-add"><![CDATA[<!-- IF STARGATE -->
+	<!-- IF not S_BLOCK_LOCATION --><!-- INCLUDE portal_center.html --><!-- ENDIF -->
+<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[Refresh your styles template and purge the cache.]]></diy-instructions>
+	</action-group>
+</mod>

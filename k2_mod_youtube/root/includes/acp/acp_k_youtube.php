@@ -50,7 +50,7 @@ class acp_k_youtube
 
 		$action = (isset($_POST['add_video'])) ? 'add' : ((isset($_POST['save'])) ? 'save' : ((isset($_POST['config'])) ? 'config' : $action));
 
-		switch($action)
+		switch ($action)
 		{
 			case 'config':
 				$template->assign_var('MESSAGE', $user->lang['SWITCHING']);

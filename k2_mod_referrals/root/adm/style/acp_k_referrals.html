@@ -11,12 +11,12 @@
 <!--
 function switchMarks(status)
 {
-	for( var i=0; i < document.acp_k_referrals.length; i++ )
+	for (var i=0; i < document.acp_k_referrals.length; i++)
 		if (document.acp_k_referrals.elements[i].type == 'checkbox' ) document.acp_k_referrals.elements[i].checked = status;
 }
 function IsMarked()
 {
-	for( var i=0; i < document.acp_k_referrals.length; i++ )
+	for (var i=0; i < document.acp_k_referrals.length; i++)
 		if( document.acp_k_referrals.elements[i].type == 'checkbox' && document.acp_k_referrals.elements[i].checked )
 			return true;
 	alert("{L_NO_ITEMS_MARKED}");
@@ -24,11 +24,11 @@ function IsMarked()
 }
 function confirmOperation()
 {
-	return( IsMarked() && confirm("{L_PLEASE_CONFIRM}") );
+	return (IsMarked() && confirm("{L_PLEASE_CONFIRM}"));
 }
 function confirmDeleteAll()
 {
-	return( confirm("{L_PLEASE_CONFIRM}") );
+	return (confirm("{L_PLEASE_CONFIRM}"));
 }
 // -->
 </script>
