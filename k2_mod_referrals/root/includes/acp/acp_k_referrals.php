@@ -304,7 +304,7 @@ if (!function_exists('create_date'))
 				$translate[$match] = $replace;
 			}
 		}
-		return ( !empty($translate) ) ? strtr(@gmdate($format, $gmepoch + (3600 * $tz)), $translate) : @gmdate($format, $gmepoch + (3600 * $tz));
+		return (!empty($translate)) ? strtr(@gmdate($format, $gmepoch + (3600 * $tz)), $translate) : @gmdate($format, $gmepoch + (3600 * $tz));
 	}
 }
 
