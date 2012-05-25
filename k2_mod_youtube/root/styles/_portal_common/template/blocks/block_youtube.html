@@ -14,7 +14,7 @@ height: 22px;
 
 	<!-- BEGIN video_loop_row -->
 	<div id="_{video_loop_row.VIDEO_LINK}" class="mini-panel sections" style="width: 420px; text-align:center; margin: 0 auto; padding-top:1px;">
-		<span class="tleft bg2" style="display:none; width:auto; text-align:center" id="{video_loop_row.VIDEO_LINK}">
+		<span class="tleft bg2" style="display:none; width:auto; text-align:center;" id="{video_loop_row.VIDEO_LINK}">
 			<div id="vid" style="margin: 0 auto; padding:8px;">
 				<object width="416" height="337">
 					<param name="movie" value="{VIDEO_PATH}{video_loop_row.VIDEO_LINK}"></param>
@@ -58,7 +58,7 @@ height: 22px;
 			<span class="tleft bg2" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_CAT}</span>
 			<span class="tleft bg2" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_POSTER}</span>
 			<span class="tleft bg2" style="width: 6%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_RATING}</span>
-			<span class="tleft bg2 ximg" style="width: auto; height: 15px; padding:1px; text-align:right">
+			<span class="tleft bg2 ximg" style="width: auto; height: 15px; padding:1px; text-align:right;">
 				<a href="javascript: ShowHide('{video_loop_row.VIDEO_LINK}'); ShowHide('image_hide');" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
 					<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
 				</a>
@@ -86,7 +86,7 @@ height: 22px;
 			<span class="tleft bg1" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_CAT}</span>
 			<span class="tleft bg1" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_POSTER}</span>
 			<span class="tleft bg1" style="width: 6%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_RATING} </span>
-			<span class="tleft bg1 ximg" style="width: auto; height: 15px; padding:1px; text-align:right"">
+			<span class="tleft bg1 ximg" style="width: auto; height: 15px; padding:1px; text-align:right;">
 				<a href="javascript: ShowHide('{video_loop_row.VIDEO_LINK}'); ShowHide('image_hide');" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
 					<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
 				</a>
@@ -121,7 +121,7 @@ height: 22px;
 -->
 	</div>
 
-	<div style="text-align:center"><!-- IF S_AUTOPLAY -->{L_AUTOPLAY_ON}<!-- ELSE -->{L_AUTOPLAY_OFF}<!-- ENDIF --> {video_loop_row.L_YOUTUBE_LIMIT}</div>
+	<div style="text-align:center;"><!-- IF S_AUTOPLAY -->{L_AUTOPLAY_ON}<!-- ELSE -->{L_AUTOPLAY_OFF}<!-- ENDIF --> {video_loop_row.L_YOUTUBE_LIMIT}</div>
 <!--
 	<div style="text-align:center;"><strong>The new YouTube Video Mod</strong><br />Hover over the thumbnail to enlarge it... Click thumbnail (or title) to play the video... Mike</div>
 -->
