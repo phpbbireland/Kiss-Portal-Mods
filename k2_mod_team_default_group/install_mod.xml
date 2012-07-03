@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Team block default group. (Kiss Portal Engine must be installed!)]]></title>
+		<description lang="en"><![CDATA[Allows you to choose if you want a member to be displayed in all groups or there default group in the team block.]]></description>
+		<author-notes lang="en"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Michael O'Toole]]></realname>
+				<username><![CDATA[michaelo]]></username>
+				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
+				<email><![CDATA[o2l@eircom.net]]></email>
+			</author>
+			<author>
+				<realname><![CDATA[Tyler]]></realname>
+				<username><![CDATA[bprsk8r4272]]></username>
+				<homepage><![CDATA[http://gotskillslounge.com]]></homepage>
+				<email><![CDATA[prosk8er@gotskillslounge.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>1.0.0</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>120</time>
+			<target-version>3.0.10</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2012-07-03</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[first release]]></change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+	<action-group>
+		<sql><![CDATA[INSERT INTO phpbb_k_blocks_config_vars (config_name, config_value, is_dynamic) VALUES
+('k_teampage_memberships', '1', 0);]]></sql>
+		<open src="adm/style/k_block_vars/k_the_teams_vars.html">
+			<edit>
+				<find><![CDATA[	<legend>{L_THE_TEAM_SETTINGS_2}</legend>]]></find>
+				<action type="after-add"><![CDATA[	<dl>
+		<dt><label for="k_teampage_memberships">{L_TEAMPAGE_MEMBERSHIPS}:</label></dt>
+		<dd>
+			<label><input type="radio" name="k_teampage_memberships" class="radio" value="0"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 0 --> checked="checked"<!-- ENDIF --> id="k_teampage_memberships" /> {L_TEAMPAGE_DISP_DEFAULT}</label><br />
+			<label><input type="radio" name="k_teampage_memberships" class="radio" value="1"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 1 --> checked="checked"<!-- ENDIF --> id="k_teampage_memberships" /> {L_TEAMPAGE_DISP_ALL}</label>
+			<!--<label><input type="radio" name="k_teampage_memberships" class="radio" value="2"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 2 --> checked="checked"<!-- ENDIF --> id="k_teampage_memberships" /> {L_TEAMPAGE_DISP_FIRST}</label><br />-->
+		</dd>
+	</dl>]]></action>
+			</edit>
+		</open>
+		<open src="blocks/block_the_teams.php">
+			<edit>
+				<find><![CDATA[$sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.username_clean, g.group_id, g.group_name, g.group_colour, g.group_type, ug.group_id
+		FROM ' . USERS_TABLE . ' u, ' . GROUPS_TABLE . ' g, ' . USER_GROUP_TABLE . ' ug
+			WHERE ug.group_id = g.group_id and u.user_id = ug.user_id
+				AND ' . $db->sql_in_set('g.group_id', $sql_in) . '
+				ORDER BY g.group_name ASC, u.group_id ASC, u.username_clean ASC';]]></find>
+				<action type="replace-with"><![CDATA[if ($k_config['k_teampage_memberships'] == 0)
+{
+	$sql_refine = 'and u.group_id = g.group_id';
+}
+else
+{
+	$sql_refine = '';
+}
+
+$sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.username_clean, g.group_id, g.group_name, g.group_colour, g.group_type, ug.group_id
+		FROM ' . USERS_TABLE . ' u, ' . GROUPS_TABLE . ' g, ' . USER_GROUP_TABLE . ' ug
+			WHERE ug.group_id = g.group_id and u.user_id = ug.user_id ' . $sql_refine . '
+				AND ' . $db->sql_in_set('g.group_id', $sql_in) . '
+				ORDER BY g.group_name ASC, u.group_id ASC, u.username_clean ASC';]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_k_vars.php">
+			<edit>
+				<find><![CDATA[				$k_teams_display_this_many       = request_var('k_teams_display_this_many', 1);]]></find>
+				<action type="after-add"><![CDATA[				$k_teampage_memberships          = request_var('k_teampage_memberships', 0);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				sgp_acp_set_config('k_teams_display_this_many', $k_teams_display_this_many);]]></find>
+				<action type="after-add"><![CDATA[				sgp_acp_set_config('k_teampage_memberships', $k_teampage_memberships);]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/k_vars.php">
+			<edit>
+				<find><![CDATA[	'THE_TEAM_SETTINGS_2'   => 'Limit to members']]></find>
+				<action type="replace-with"><![CDATA[	'THE_TEAM_SETTINGS_2'   => 'Limit to members',
+	'TEAMPAGE_DISP_ALL'     => 'Show users in all groups where they are a member.',
+	'TEAMPAGE_DISP_DEFAULT' => 'Show users in their default group only.',
+	//'TEAMPAGE_DISP_FIRST' => 'Display members in first group',
+	'TEAMPAGE_MEMBERSHIPS'  => 'Group membership display options',]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[Purge the cache.]]></diy-instructions>
+	</action-group>
+</mod>
