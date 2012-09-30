@@ -168,13 +168,14 @@
 //]]&gt;
 </script>]]></action>
 </edit>
-
-
 </open>
 
 
 <php-installer><![CDATA[portal/k2_mods/k2_youtube/index.php]]></php-installer>
 <diy-instructions lang="en-gb">
+If installing via automod, a link is provided to complete the database install section... 
+If installing manually, point your browser to: your_site/portal/k2_mods/k2_youtube/index.php and complete the database installation...
+
 Purge the cache...</diy-instructions>
 </action-group>
 </mod>

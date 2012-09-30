@@ -51,7 +51,6 @@ $lang = array_merge($lang, array(
 	'CONFIRM_OPERATION_VIDEO'	=> 'Delete this video?',
 	'CONFIRM_OPERATION_YOUTUBE'	=> 'Delete: %s',
 	'EDIT_VIDEO'			 	=> 'Editing video',
-	'ID'				 		=> 'ID',
 	'SAVED'				 		=> 'Saved',
 	'SWITCHING'			 		=> 'Switching to k_config',
 	'VIDEO_CATEGORY'		 	=> 'Category',
