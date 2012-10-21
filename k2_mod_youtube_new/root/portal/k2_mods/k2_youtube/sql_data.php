@@ -16,10 +16,10 @@ $k_blocks_config_vars_array[] = array(
 
 $k_youtube_table = 'phpbb_k_youtube';
 $k_youtube_array[] = array(
-	'video_category'	=> 'Gregorian',
-	'video_who'			=> 'Gregorian',
-	'video_link'		=> 'xVItRQLsrII',
-	'video_title'		=> 'Moment Of Peace',
+	'video_category'	=> 'Guitar Magic',
+	'video_who'			=> 'Andy McKee',
+	'video_link'		=> 'JsD6uEZsIsU',
+	'video_title'		=> 'Rylynn',
 	'video_rating'		=> '5',
 	'video_comment'		=> '',
 	'video_poster_id'	=> '2',
