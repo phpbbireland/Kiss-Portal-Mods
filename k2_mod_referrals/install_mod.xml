@@ -65,8 +65,8 @@
 		</copy>
 		<open src="adm/style/acp_k_vars.html">
 			<edit>
-				<find><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_the_teams_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_the_teams_vars.html --></div>]]></find>
-				<action type="after-add"><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_top_referrals_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_referrals_vars.html --></div>]]></action>
+				<find><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_the_teams_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->;"><!-- INCLUDE /k_block_vars/k_the_teams_vars.html --></div>]]></find>
+				<action type="after-add"><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_top_referrals_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->;"><!-- INCLUDE /k_block_vars/k_top_referrals_vars.html --></div>]]></action>
 			</edit>
 		</open>
 		<open src="includes/constants.php">
