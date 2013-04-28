@@ -52,7 +52,7 @@ class lastRSS
 	/**
 	* Get RSS (URL) with curl
 	*/
-	function curl_get_rss($lr, $url)
+	function curl_get_rss($url)
 	{
 		global $rss, $user, $k_config;
 

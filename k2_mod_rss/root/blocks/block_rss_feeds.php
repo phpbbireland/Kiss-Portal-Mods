@@ -52,6 +52,7 @@ $rsscp          = 'UTF-8';
 $rss_type       = $k_config['rss_feeds_type'];
 $cache_time     = $k_config['rss_feeds_cache_time'];
 $items_limit    = $k_config['rss_feeds_items_limit'];
+
 $con = '';
 $rsleft = $rsright = array();
 

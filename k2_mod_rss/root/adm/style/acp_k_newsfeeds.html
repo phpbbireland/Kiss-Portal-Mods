@@ -3,17 +3,17 @@
 <a name="maincontent"></a>
 <div><a href="{U_BACK}" style="float: right;">&laquo; {L_BACK}</a></div>
 
-<h1>{L_TITLE}</h1>
-<p>{L_TITLE_EXPLAIN}</p>
+<h1>{L_FEED_TITLE}</h1>
+<p>{L_FEED_TITLE_EXPLAIN}</p>
 
 <!-- IF S_EDIT_FEED -->
 <form id="acp_k_newsfeeds" method="post" action="{U_ACTION_COLUMN}">
 <fieldset>
-	<legend>{L_BLOCK_FEED_SETTINGS}</legend>
+	<legend>{L_FEED_SETTINGS}</legend>
 
 	<table cellspacing="1">
 	<tr>
-		<th colspan="2">{L_BLOCK_FEED_SETTINGS}</th>
+		<th colspan="2">{L_FEED_SETTINGS_EXPLAIN}</th>
 	</tr>
 	<tr>
 		<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_CACHE_TIME}:</strong><br /><span>{L_FEED_CACHE_TIME_EXPLAIN}</span></td>
@@ -33,10 +33,10 @@
 		<input name="rss_feeds_type" type="radio" id="rss_feeds_type" value="fopen" <!-- IF S_FOPEN -->checked<!-- ENDIF --> />{L_FEED_FOPEN}</td>
 	</tr>
 	<tr>
-		<td class="row1" style="font-size:11px;" valign="top"><strong>{L_RSS_ENABLED}:</strong><br /><span>{L_RSS_ENABLED_EXPLAIN}</span></td>
+		<td class="row1" style="font-size:11px;" valign="top"><strong>{L_ENABLED}:</strong><br /><span>{L_FEED_ENABLED_EXPLAIN}</span></td>
 	 	<td class="row2" style="font-size:11px;" valign="top" width="50%">
-		<input name="rss_feeds_enabled" type="radio" id="rss_feeds_enabled" value="1" <!-- IF S_RSS_FEEDS_ENABLED --> checked="checked" <!-- ENDIF --> /> {L_RSS_ENABLE}
-	 	<input name="rss_feeds_enabled" type="radio" id="rss_feeds_enabled" value="0" <!-- IF not S_RSS_FEEDS_ENABLED --> checked="checked" <!-- ENDIF --> /> {L_RSS_DISABLE}
+		<input name="rss_feeds_enabled" type="radio" id="rss_feeds_enabled" value="1" <!-- IF S_RSS_FEEDS_ENABLED --> checked="checked" <!-- ENDIF --> /> {L_ENABLE}
+	 	<input name="rss_feeds_enabled" type="radio" id="rss_feeds_enabled" value="0" <!-- IF not S_RSS_FEEDS_ENABLED --> checked="checked" <!-- ENDIF --> /> {L_DISABLE}
 		</td>
 	</tr>
 	<tr>
@@ -55,23 +55,23 @@
 
 <!-- IF not S_EDIT_FEED	-->
 <fieldset>
-	<legend>{L_BLOCK_FEED_SETTINGS}</legend>
+	<legend>{L_FEED_SETTINGS}</legend>
 	<table cellspacing="1">
 	<tr>
-		<th><span style="text-align:center;">{L_FEED_CACHE_TIME}</span></th>
-		<th><span style="text-align:center;">{L_FEED_ITEMS_LIMIT}</span></th>
-		<th><span style="text-align:center;">{L_FEED_RANDOM_LIMIT}</span></th>
-		<th><span style="text-align:center;">{L_FEED_TYPE}</span></th>
-		<th><span style="text-align:center;">{L_FEED_ENDIS}</span></th>
-		<th><span style="text-align:center;">{L_ACTION}</span></th>
+		<th style="text-align: center;">{L_FEED_CACHE_TIME}</th>
+		<th style="text-align: center;">{L_FEED_ITEMS_LIMIT}</th>
+		<th style="text-align: center;">{L_FEED_RANDOM_LIMIT}</th>
+		<th style="text-align: center;">{L_FEED_TYPE}</th>
+		<th style="text-align: center;">{L_FEED_STATE}</th>
+		<th style="text-align: center;">{L_ACTION} </th>
 	</tr>
 	<!-- BEGIN rss_column -->
 	<tr>
-		<td style="text-align: center;">{rss_column.FEED_CACHE_TIME} {L_CACHE_TIME}</td>
-		<td style="text-align: center;">{rss_column.FEED_ITEMS_LIMIT} {L_ITEMS_LIMIT}</td>
-		<td style="text-align: center;">{rss_column.FEED_RANDOM_LIMIT} {L_RANDOM_LIMIT}</td>
+		<td style="text-align: center;">{rss_column.FEED_CACHE_TIME}</td>
+		<td style="text-align: center;">{rss_column.FEED_ITEMS_LIMIT}</td>
+		<td style="text-align: center;">{rss_column.FEED_RANDOM_LIMIT}</td>
 		<td style="text-align: center;">{rss_column.FEED_TYPE}</td>
-		<td style="text-align: center;"><!-- IF rss_column.S_RSS_FEEDS_ENABLED == '1' -->{L_RSS_ENABLE}<!-- ELSE -->{L_RSS_DISABLE}<!-- ENDIF --></td>
+		<td style="text-align: center;"><!-- IF rss_column.S_RSS_FEEDS_ENABLED == '1' -->{L_ENABLED}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></td>
 		<td style="text-align: center;"><a href="{rss_column.U_EDIT_FEEDS}">{ICON_EDIT}</a></td>
 	</tr>
 	<!-- END rss_column -->
@@ -82,11 +82,11 @@
 
 <!-- IF S_EDIT -->
 <fieldset>
-	<legend>{L_K_FEED_EDIT_HEADER}</legend>
+	<legend>{L_FEED_EDIT_HEADER}</legend>
 	<form id="acp_k_newsfeeds" method="post" action="{U_ACTION}">
 	<table cellspacing="1">
 	<tr>
-		<th colspan="2">{L_K_FEED_EDIT_HEADER}</th>
+		<th colspan="2">{L_FEED_EDIT_HEADER_EXPLAIN}</th>
 	</tr>
 	<tr>
 	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_TITLE}:</strong><br /><span>{L_FEED_TITLE_EXPLAIN}</span></td>
