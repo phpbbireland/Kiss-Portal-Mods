@@ -6,25 +6,22 @@
 *
 * Ported and rewritten for PhpBB3 and Kiss Portal Engine & Stargate Portal by: NeXur
 *
-* @package Kiss Portal Engine
+* @package Kiss Portal
 * @author  Martin Larsson - aka NeXur
 * @begin   Mars 2008
 * @copyright (c) 2008 Martin Larsson - aka NeXur
 * @home    http://www.phpbbireland.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @note: Do not remove this copyright. Just append yours if you have modified it,
-*        this is part of the Stargate Portal copyright agreement...
+* @note:   Do not remove this copyright. Just append yours if you have modified it,
+*          this is part of the Stargate Portal copyright agreement...
 *
 * @version $Id$
-*
 * @updated: 06 May 2012 Mike & prosk8er
-*
 */
 
 /**
 * @ignore
 */
-
 if (!defined('IN_PHPBB'))
 {
 	exit;

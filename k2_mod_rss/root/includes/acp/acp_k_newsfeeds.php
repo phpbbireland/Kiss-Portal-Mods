@@ -87,7 +87,7 @@ class acp_k_newsfeeds
 					'FEED_RANDOM_LIMIT'     => $k_config['rss_feeds_random_limit'],
 					'S_RSS_FEEDS_ENABLED'   => $k_config['rss_feeds_enabled'],
 				));
-            break;
+			break;
 
 			case 'savefeeds':
 

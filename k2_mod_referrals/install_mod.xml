@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
@@ -31,7 +31,7 @@
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.10</target-version>
+			<target-version>3.0.11</target-version>
 		</installation>
 		<history>
 			<entry>
@@ -59,7 +59,7 @@
 			<file from="root/includes/acp/acp_k_referrals.php" to="includes/acp/acp_k_referrals.php"/>
 			<file from="root/includes/acp/info/acp_k_referrals.php" to="includes/acp/info/acp_k_referrals.php"/>
 			<file from="root/language/en/acp/k_referrals.php" to="language/en/acp/k_referrals.php"/>
-			<file from="root/portal/*.*" to="portal/*.*"/>
+			<file from="root/portal_install/*.*" to="portal_install/*.*"/>
 			<file from="root/styles/_portal_common/template/blocks/block_top_referrals.html" to="styles/_portal_common/template/blocks/block_top_referrals.html"/>
 			<file from="root/umil/*.*" to="umil/*.*"/>
 		</copy>
@@ -85,7 +85,7 @@
 				<action type="after-add"><![CDATA[				sgp_acp_set_config('k_referrals_to_display', $k_referrals_to_display);]]></action>
 			</edit>
 		</open>
-		<php-installer><![CDATA[portal/k2_mods/referrals/index.php]]></php-installer>
+		<php-installer><![CDATA[portal_install/k2_mods/referrals/index.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Notes (installation): Rename or delete the k2_mods/referrals folder...
 Notes (Removal): After removing the Referrals mod, please delete the Referrals block (if added) from: ACP > PORTAL > BLOCKS...
 ]]></diy-instructions>

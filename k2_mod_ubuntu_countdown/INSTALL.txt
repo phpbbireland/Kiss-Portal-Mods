@@ -15,7 +15,7 @@ you can update the countdown for the next release by doing the following.
 open:
 block_ubuntu.php
 find:
-<a href="http://www.ubuntu.com/"><img src="http://www.ubuntu.com/countdown/banner3.png" border="0" width="180" height="150" alt="The next version of Ubuntu is coming soon" /></a>
+<iframe src="http://djazz.mine.nu/files/ubuntucountdown/" width="180" height="150" scrolling="no" frameborder="0">Ubuntu countdown</iframe>
 replace:
 to whatever the new code is which you will find on http://www.ubuntu.com/community/countdown
 
