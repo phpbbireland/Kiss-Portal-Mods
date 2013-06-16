@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
@@ -27,7 +27,7 @@
 		<installation>
 			<level>easy</level>
 			<time>120</time>
-			<target-version>3.0.10</target-version>
+			<target-version>3.0.11</target-version>
 		</installation>
 		<history>
 			<entry>
@@ -48,9 +48,9 @@
 				<action type="after-add"><![CDATA[	<dl>
 		<dt><label for="k_teampage_memberships">{L_TEAMPAGE_MEMBERSHIPS}:</label></dt>
 		<dd>
-			<label><input type="radio" name="k_teampage_memberships" class="radio" value="0"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 0 --> checked="checked"<!-- ENDIF --> id="k_teampage_memberships" /> {L_TEAMPAGE_DISP_DEFAULT}</label><br />
-			<label><input type="radio" name="k_teampage_memberships" class="radio" value="1"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 1 --> checked="checked"<!-- ENDIF --> id="k_teampage_memberships" /> {L_TEAMPAGE_DISP_ALL}</label>
-			<!--<label><input type="radio" name="k_teampage_memberships" class="radio" value="2"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 2 --> checked="checked"<!-- ENDIF --> id="k_teampage_memberships" /> {L_TEAMPAGE_DISP_FIRST}</label><br />-->
+			<label><input type="radio" name="k_teampage_memberships" class="radio" value="0"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 0 --> checked="checked" id="k_teampage_memberships"<!-- ENDIF --> /> {L_TEAMPAGE_DISP_DEFAULT}</label><br />
+			<label><input type="radio" name="k_teampage_memberships" class="radio" value="1"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 1 --> checked="checked" id="k_teampage_memberships"<!-- ENDIF --> /> {L_TEAMPAGE_DISP_ALL}</label>
+			<!--<label><input type="radio" name="k_teampage_memberships" class="radio" value="2"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 2 --> checked="checked" id="k_teampage_memberships"<!-- ENDIF --> /> {L_TEAMPAGE_DISP_FIRST}</label><br />-->
 		</dd>
 	</dl>]]></action>
 			</edit>

@@ -35,11 +35,10 @@
 		</installation>
 		<history>
 			<entry>
-				<date>2011-11-30</date>
+				<date>2013-06-13</date>
 				<rev-version>1.0.0a</rev-version>
 				<changelog lang="en">
-					<change><![CDATA[Removed extra /]]></change>
-					<change><![CDATA[Language update and minor cleanup /]]></change>
+					<change><![CDATA[Language update and minor cleanup]]></change>
 				</changelog>
 			</entry>
 			<entry>

@@ -35,8 +35,8 @@
 		</installation>
 		<history>
 			<entry>
-				<date>2013-06-05</date>
-				<rev-version>1.0.0c</rev-version>
+				<date>2013-06-13</date>
+				<rev-version>1.0.0b</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[cleanup & updates]]></change>
 				</changelog>
