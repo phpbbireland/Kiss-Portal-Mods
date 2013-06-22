@@ -3,8 +3,8 @@
 <a name="maincontent"></a>
 <div><a href="{U_BACK}" style="float: right;">&laquo; {L_BACK}</a></div>
 
-<h1>{L_TITLE_FEED}</h1>
-<p>{L_TITLE_EXPLAIN_FEED}</p>
+<h1>{L_FEED_TITLE}</h1>
+<p>{L_FEED_TITLE_EXPLAIN}</p>
 
 <!-- IF S_EDIT_FEED -->
 <form id="acp_k_newsfeeds" method="post" action="{U_ACTION_COLUMN}">
@@ -13,7 +13,7 @@
 
 	<table cellspacing="1">
 	<tr>
-		<th colspan="2">{L_FEED_SETTINGS}</th>
+		<th colspan="2">{L_FEED_SETTINGS_EXPLAIN}</th>
 	</tr>
 	<tr>
 		<td class="row1" style="font-size: 11px;" valign="top"><strong>{L_FEED_CACHE_TIME}:</strong><br /><span>{L_FEED_CACHE_TIME_EXPLAIN}</span></td>
@@ -64,13 +64,13 @@
 		<th style="text-align: center;">{L_FEED_RANDOM_LIMIT}</th>
 		<th style="text-align: center;">{L_FEED_TYPE}</th>
 		<th style="text-align: center;">{L_FEED_STATE}</th>
-		<th style="text-align: center;">{L_ACTION} </th>
+		<th style="text-align: center;">{L_ACTION}</th>
 	</tr>
 	<!-- BEGIN rss_column -->
 	<tr>
-		<td style="text-align: center;">{rss_column.FEED_CACHE_TIME} {L_CACHE_TIME}</td>
-		<td style="text-align: center;">{rss_column.FEED_ITEMS_LIMIT} {L_ITEMS_LIMIT}</td>
-		<td style="text-align: center;">{rss_column.FEED_RANDOM_LIMIT} {L_RANDOM_LIMIT}</td>
+		<td style="text-align: center;">{rss_column.FEED_CACHE_TIME}</td>
+		<td style="text-align: center;">{rss_column.FEED_ITEMS_LIMIT}</td>
+		<td style="text-align: center;">{rss_column.FEED_RANDOM_LIMIT}</td>
 		<td style="text-align: center;">{rss_column.FEED_TYPE}</td>
 		<td style="text-align: center;"><!-- IF rss_column.S_RSS_FEEDS_ENABLED == '1' -->{L_ENABLED}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></td>
 		<td style="text-align: center;"><a href="{rss_column.U_EDIT_FEEDS}">{ICON_EDIT}</a></td>
@@ -87,7 +87,7 @@
 	<form id="acp_k_newsfeeds" method="post" action="{U_ACTION}">
 	<table cellspacing="1">
 	<tr>
-		<th colspan="2">{L_FEED_EDIT_HEADER}</th>
+		<th colspan="2">{L_FEED_EDIT_HEADER_EXPLAIN}</th>
 	</tr>
 	<tr>
 	 	<td class="row1" style="font-size: 11px;" valign="top"><strong>{L_FEED_TITLE}:</strong><br /><span>{L_FEED_TITLE_EXPLAIN}</span></td>
@@ -150,7 +150,7 @@
 		<td style="text-align: left; width: 5%;">{feeds.FEED_SHOW_DESCRIPTION}</td>
 		<td style="text-align: left; width: 15%;">{feeds.FEED_SHOW}</td>
 		<td style="text-align: left; width: 15%;">{feeds.FEED_SHOW_POSITION}</td>
-		<td style="text-align:center;"><a href="{feeds.U_EDIT}">{ICON_EDIT}</a> <a href="{feeds.U_DELETE}">{ICON_DELETE}</a></td>
+		<td style="text-align: center;"><a href="{feeds.U_EDIT}">{ICON_EDIT}</a> <a href="{feeds.U_DELETE}">{ICON_DELETE}</a></td>
 	</tr>
 	<!-- END feeds -->
 	</table>

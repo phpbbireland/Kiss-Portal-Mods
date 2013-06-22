@@ -67,7 +67,6 @@
 			<file from="root/language/en/acp/k_newsfeeds.php" to="language/en/acp/k_newsfeeds.php"/>
 			<file from="root/portal_install/*.*" to="portal_install/*.*"/>
 			<file from="root/styles/_portal_common/template/blocks/block_rss_feeds.html" to="styles/_portal_common/template/blocks/block_rss_feeds.html"/>
-			<file from="root/styles/_portal_common/template/blocks/block_rss_feeds_lr.html" to="styles/_portal_common/template/blocks/block_rss_feeds_lr.html"/>
 			<file from="root/umil/*.*" to="umil/*.*"/>
 		</copy>
 		<open src="includes/constants.php">

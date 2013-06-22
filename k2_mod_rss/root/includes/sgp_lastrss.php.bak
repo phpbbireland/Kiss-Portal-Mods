@@ -54,14 +54,11 @@ class lastRSS
 	*/
 	function curl_get_rss($url)
 	{
-		global $rss, $user;
+		global $rss, $user, $k_config;
+
+		$rss_type = $k_config['rss_feeds_type'];
 
 		// initiate and set options
-		if (isset($url))
-		{
-			$ch = curl_init($url);
-		}
-
 		if (isset($ch))
 		{
 			@curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
@@ -100,6 +97,16 @@ class lastRSS
 
 	function Get ($rss_url)
 	{
+		global $k_config;
+
+		if (!isset($this->cache_dir))
+		{
+			$this->cache_dir = 'cache';
+		}
+		$this->cache_dir = $rss->cache_dir = './cache';
+		$rss->cache_time = $k_config['rss_feeds_cache_time'];
+		$this->cache_time = $rss->cache_time = $k_config['rss_feeds_cache_time'];
+
 		// If CACHE ENABLED
 		if ($this->cache_dir != '')
 		{
@@ -174,7 +181,7 @@ class lastRSS
 	// -------------------------------------------------------------------
 	// Replace HTML entities &something; by real characters
 	// -------------------------------------------------------------------
-	function unhtmlentities ($string)
+    function unhtmlentities ($string)
 	{
 		// Get HTML entities table
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES, ENT_QUOTES);
@@ -192,15 +199,17 @@ class lastRSS
 	// -------------------------------------------------------------------
 	function parse($rss_url)
 	{
-		global $rss, $user;
-		
+		global $rss, $user, $k_config;
+
+		$rss_type = $k_config['rss_feeds_type'];
+
 		// open and load RSS file
 		// use curl if enabled
-		if (function_exists('curl_init') && $rss->type == 'curl')
+		if (function_exists('curl_init') && $rss_type == 'curl')
 		{
 			$rss_content = $this->curl_get_rss($rss_url);
 		}
-		else if (ini_get('allow_url_fopen') == '1' && $rss->type == 'fopen')
+		else if (ini_get('allow_url_fopen') == '1' && $rss_type == 'fopen')
 		{
 			// else use fopen if possible
 			if ($f = @fopen($rss_url, 'r'))
@@ -281,10 +290,10 @@ class lastRSS
 			preg_match_all("'<item(| .*?)>(.*?)</item>'si", $rss_content, $items);
 
 			//Added to read entry if format changed Ref: http://www.phpbbireland.com/phpBB3/viewtopic.php?p=16993#p16993
-			if (empty($items[2]))
-			{
-				preg_match_all("'<entry(| .*?)>(.*?)</entry>'si", $rss_content, $items);
-			}
+	         if (empty($items[2]))
+		     {
+			    preg_match_all("'<entry(| .*?)>(.*?)</entry>'si", $rss_content, $items);
+	         }
 
 
 			$rss_items = $items[2];
@@ -318,7 +327,7 @@ class lastRSS
 
 					// If pubDate exists
 					if ((isset($result['items'][$i]['pubDate']) && ($result['items'][$i]['pubDate'] != '') ))
-					{
+          			{
 						// ... and is valid
 						if ((($timestamp = strtotime($result['items'][$i]['pubDate'])) !== -1) && (($timestamp = strtotime($result['items'][$i]['pubDate'])) === false))
 						{
