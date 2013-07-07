@@ -1,28 +1,17 @@
 <?php
-/*************************************************************************************
- *                            sgp_lastrss.php
- *                            -------------------
- *			Simple yet powerfull PHP class to parse RSS files.
- *			copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
- *			(c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
- *
- *   Ported and rewritten for PhpBB3 and Kiss Portal Engine by: NeXur Updates
- *   begin					: March 2008
- *   copyright				: (C) 2008 Martin Larsson - aka NeXur
- *   website				: http://www.phpbbireland.com
- *   email					: martinl@bredband.net
- *   code updated			: 01 December 2011 Mike (michaelo)
- *   maintained				: Mike (michaelo) & Prosk8er (bprsk8r4272)
- *
- *   note: Do not remove this copyright. Just append yours if you have modified it.
- ************************************************************************************/
-/************************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify it under
- *   the terms of the GNU General Public License as published by the Free Software
- *   Foundation; either version 2 of the License, or any later version.
- *
- ************************************************************************************/
+/**
+* Simple yet powerfull PHP class to parse RSS files.
+* copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
+* (c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
+*
+* Ported and rewritten for PhpBB3 and Kiss Portal & Stargate Portal by: NeXur
+*
+* @package Kiss Portal
+* @version $Id: sgp_lastrss.php 1022 2013-07-01 05:32:10Z michealo $
+* @copyright (c) 2008 Martin Larsson - aka NeXur
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* Do not remove copyright from any file.
+*/
 
 //define('IN_PHPBB', true); // mvp?
 
@@ -38,6 +27,8 @@ class lastRSS
 	var $items_limit = 0;
 	var $stripHTML = true;
 	var $date_format = 'U';
+	var $cache_dir = '';
+	var $type = '';
 
 	// -------------------------------------------------------------------
 	// Private variables
@@ -193,7 +184,7 @@ class lastRSS
 	function parse($rss_url)
 	{
 		global $rss, $user;
-		
+
 		// open and load RSS file
 		// use curl if enabled
 		if (function_exists('curl_init') && $rss->type == 'curl')

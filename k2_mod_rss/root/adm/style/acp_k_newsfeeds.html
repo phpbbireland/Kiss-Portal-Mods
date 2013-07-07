@@ -3,8 +3,8 @@
 <a name="maincontent"></a>
 <div><a href="{U_BACK}" style="float: right;">&laquo; {L_BACK}</a></div>
 
-<h1>{L_FEED_TITLE}</h1>
-<p>{L_FEED_TITLE_EXPLAIN}</p>
+<h1>{L_FEED_MOD_TITLE}</h1>
+<p>{L_FEED_MOD_TITLE_EXPLAIN}</p>
 
 <!-- IF S_EDIT_FEED -->
 <form id="acp_k_newsfeeds" method="post" action="{U_ACTION_COLUMN}">
@@ -90,7 +90,7 @@
 		<th colspan="2">{L_FEED_EDIT_HEADER_EXPLAIN}</th>
 	</tr>
 	<tr>
-	 	<td class="row1" style="font-size: 11px;" valign="top"><strong>{L_FEED_TITLE}:</strong><br /><span>{L_FEED_TITLE_EXPLAIN}</span></td>
+	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_DESCRIPTION}:</strong></td>
 		<td class="row2" style="font-size: 11px; text-align: left; width: 60%;"><input name="feed_title" type="text" id="feed_title" value="{FEED_TITLE}" maxlength="150" size="60"	/></td>
 	</tr>
 	<tr>
@@ -98,7 +98,7 @@
 		<td class="row2" style="font-size: 11px; text-align: left; width: 60%;"><input name="feed_url" type="text" id="feed_url" value="{FEED_URL}" maxlength="250" size="60" /></td>
 	</tr>
 	<tr>
-	 	<td class="row1" style="font-size: 11px;" valign="top"><strong>{L_FEED_DESCRIPTION}:</strong></td>
+	 	<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_DESCRIPTION_SHOW}:</strong></td>
 		<td class="row2" style="font-size: 11px; text-align: left; width: 60%;">
 			<input type="radio" class="radio" name="feed_description" value="1"<!-- IF FEED_DESCRIPTION_SHOW == "1" --> checked="checked"<!-- ENDIF --> /> {L_YES}&nbsp;
 			<input type="radio" class="radio" name="feed_description" value="0"<!-- IF FEED_DESCRIPTION_SHOW == "0" --> checked="checked"<!-- ENDIF --> /> {L_NO}&nbsp;
@@ -112,10 +112,11 @@
 		</td>
 	</tr>
 	<tr>
-	 	<td class="row1" style="font-size: 11px;" valign="top"><strong>{L_FEED_POSITION}:</strong><br /><span>{L_FEED_POSITION_EXPLAIN}</span></td>
+	 	<td class="row1" style="font-size: 11px;" valign="top"><strong>{L_FEED_POSITION}:</strong><br /><span>{L_FEED_POSITION_WIDE}</span></td>
 		<td class="row2" style="font-size: 11px; text-align: left; width: 60%;">
 			<input type="radio" class="radio" name="feed_position" value="0"<!-- IF FEED_POSITION == "0" --> checked="checked"<!-- ENDIF --> /> {L_LEFT}&nbsp;
 			<input type="radio" class="radio" name="feed_position" value="1"<!-- IF FEED_POSITION == "1" --> checked="checked"<!-- ENDIF --> /> {L_RIGHT}&nbsp;
+			<input type="radio" class="radio" name="feed_position" value="2"<!-- IF FEED_POSITION == "2" --> checked="checked"<!-- ENDIF --> /> {L_CENTRED}&nbsp;
 		</td>
 	</tr>
 	</table>

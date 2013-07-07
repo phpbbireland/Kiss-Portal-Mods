@@ -37,7 +37,7 @@ $mod_name = 'Rss for Kiss Portal';
 
 $version_config_name = 'kiss_rss_version';
 $language_file = 'portal_install_umil';
-$logo_img = $phpbb_root_path . 'portal_install/k2_mods/rss/portal_install.png';
+$logo_img = 'portal_install/k2_mods/rss/portal_install.png';
 
 include($phpbb_root_path . 'portal_install/k2_mods/rss/sql_data.' . $phpEx);
 

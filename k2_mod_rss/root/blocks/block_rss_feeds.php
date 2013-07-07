@@ -4,7 +4,7 @@
 * copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
 * (c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
 *
-* Ported and rewritten for PhpBB3 and Kiss Portal Engine & Stargate Portal by: NeXur
+* Ported and rewritten for PhpBB3 and Kiss Portal & Stargate Portal by: NeXur
 *
 * @package Kiss Portal
 * @author  Martin Larsson - aka NeXur
@@ -13,10 +13,10 @@
 * @home    http://www.phpbbireland.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 * @note:   Do not remove this copyright. Just append yours if you have modified it,
-*          this is part of the Stargate Portal copyright agreement...
+*          this is part of the Kiss Portal copyright agreement...
 *
-* @version $Id$
-* @updated: 06 May 2012 Mike & prosk8er
+* @version $Id: block_rss_feeds.php 1022 2013-07-01 05:31:22Z michealo $
+*
 */
 
 /**
@@ -27,7 +27,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-// Disabled while I find a bug... possibly php version related...
+$queries = $cached_queries = 0;
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
@@ -63,7 +63,7 @@ function ShowRSSdesc($url)
 
 	if ($rs = $rss->get($url))
 	{
-		$msg= '<span class="gensmall"><strong>' . $rs['description'] . "</strong></span><br />";
+		$msg= '<span class="gensmall"><strong>' . $rs['description'] . "</strong></span><hr />";
 		$msg.= "";
 		// check if fopen or curl is installed
 		if (function_exists('curl_init') == false && $rss->type == 'curl')
@@ -105,9 +105,17 @@ function ShowRSSnodesc($url)
 	// Create lastRSS object
 	$rss = new lastRSS;
 
+	// Set cache dir, cache interval and character encoding
+	$rss->cache_dir = './cache';
+	$rss->cache_time = $k_config['rss_feeds_cache_time']; // Maximum age of the cache file for feed before it is updated, in seconds.
+	$rss->cp = 'UTF-8';  // character encoding of your page ! phpBB default is UTF8 so you don´t need to edit it
+	$rss->rsscp = 'UTF-8'; // default encoding of RSS if encoding tag is not available
+	$rss->items_limit = $k_config['rss_feeds_items_limit']; //number of news
+	$rss->type = $k_config['rss_feeds_type']; // connection type (fopen / curl)
+
 	if ($rs = $rss->get($url))
 	{
-		$msg= "<br />";
+		$msg= "<hr />";
 		// check if fopen or curl is installed
 		if (function_exists('curl_init') == false && $rss->type == 'curl')
 		{
@@ -192,20 +200,20 @@ for ($i = 0; isset($feeds[$i]['id']); $i++)
 	if ($feeds[$i]['position'] == 0) // left side
 	{
 		// Get left RSS content
-		$feed_left_url[$feeds[$i]['position'] == 1] = $feeds[$i]['url'];
+		$feed_left_url[$feeds[$i]['position']] = $feeds[$i]['url'];
 		$rss_left_column = '';
 		if ($feeds[$i]['description'] == 1)
 		{
 			foreach ($feed_left_url as $url) $rss_left_column .= ShowRSSdesc($url);
 		}
-		if ($feeds[$i]['description'] == 2)
+		if ($feeds[$i]['description'] == 0)
 		{
 			foreach ($feed_left_url as $url) $rss_left_column .= ShowRSSnodesc($url);
 		}
 
 		$rss_left_column = str_replace($find, $replace, $rss_left_column);
 
-		$template->assign_block_vars('rss_left_column', array(
+		$template->assign_block_vars('maincat.rss_left_column', array(
 			'LEFT_SYNDICATION' => $rss_left_column,
 			'LEFT_FEEDS_TITLE' => '<a href="' . $feeds[$i]['url'] . '" rel="external" style="text-align:center;">' . $feeds[$i]['title'] . "</a><br />",
 		));
@@ -214,22 +222,44 @@ for ($i = 0; isset($feeds[$i]['id']); $i++)
 	if ($feeds[$i]['position'] == 1) // right side
 	{
 		// Get right RSS content
-		$feed_right_url[$feeds[$i]['position'] == 2] = $feeds[$i]['url'];
+		$feed_right_url[$feeds[$i]['position']] = $feeds[$i]['url'];
 		$rss_right_column ='';
 		if ($feeds[$i]['description'] == 1)
 		{
 			foreach ($feed_right_url as $url) $rss_right_column .= ShowRSSdesc($url);
 		}
-		if ($feeds[$i]['description'] == 2)
+		if ($feeds[$i]['description'] == 0)
 		{
 			foreach ($feed_right_url as $url) $rss_right_column .= ShowRSSnodesc($url);
 		}
 
 		$rss_right_column = str_replace($find, $replace, $rss_right_column);
 
-		$template->assign_block_vars('rss_right_column', array(
+		$template->assign_block_vars('maincat.rss_right_column', array(
 			'RIGHT_SYNDICATION'	=> $rss_right_column,
 			'RIGHT_FEEDS_TITLE' => '<a href="' . $feeds[$i]['url'] . '" rel="external" style="text-align:center;">' . $feeds[$i]['title'] . "</a><br />",
+		));
+	}
+
+	if ($feeds[$i]['position'] == 2) // right side
+	{
+		// Get centred RSS content
+		$feed_centred_url[$feeds[$i]['position']] = $feeds[$i]['url'];
+		$rss_centred_column ='';
+		if ($feeds[$i]['description'] == 1)
+		{
+			foreach ($feed_centred_url as $url) $rss_centred_column .= ShowRSSdesc($url);
+		}
+		if ($feeds[$i]['description'] == 0)
+		{
+			foreach ($feed_centred_url as $url) $rss_centred_column .= ShowRSSnodesc($url);
+		}
+
+		$rss_centred_column = str_replace($find, $replace, $rss_centred_column);
+
+		$template->assign_block_vars('maincat.rss_centred_column', array(
+			'CENTRED_SYNDICATION'  => $rss_centred_column,
+			'CENTRED_FEEDS_TITLE'  => '<a href="' . $feeds[$i]['url'] . '" rel="external" style="text-align:center;">' . $feeds[$i]['title'] . "</a><br />",
 		));
 	}
 

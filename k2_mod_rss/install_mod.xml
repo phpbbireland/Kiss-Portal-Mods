@@ -13,6 +13,7 @@
 			<author>
 				<realname><![CDATA[Martin Larsson]]></realname>
 				<username><![CDATA[NeXur]]></username>
+				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
 			</author>
 			<author>
 				<realname><![CDATA[Michael O'Toole]]></realname>
@@ -36,7 +37,7 @@
 		<history>
 			<entry>
 				<date>2013-06-13</date>
-				<rev-version>1.0.0b</rev-version>
+				<rev-version>1.0.02</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[cleanup & updates]]></change>
 				</changelog>
