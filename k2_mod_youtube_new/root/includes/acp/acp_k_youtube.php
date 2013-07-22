@@ -184,16 +184,16 @@ class acp_k_youtube
 						$video_link = '';
 					}
 
-	               $sql_array = array(
-					   'video_category'     => $video_category,
+					$sql_array = array(
+						'video_category'     => $video_category,
 						'video_who'         => $video_who,
 						'video_link'        => $video_link,
 						'video_title'       => $video_title,
 						'video_rating'      => $video_rating,
 						'video_comment'     => $video_comment,
 						'video_poster_id'   => $user->data['user_id'],
-                    );
-		           $db->sql_query('INSERT INTO ' . K_YOUTUBE_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
+					);
+					$db->sql_query('INSERT INTO ' . K_YOUTUBE_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
 					meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
 

@@ -16,7 +16,7 @@
 define('UMIL_AUTO', true);
 define('IN_PHPBB', true);
 
-// correct root for poral as we install using root/portal/index.php //
+// correct root for poral as we install using root/portal_install/index.php //
 
 $phpbb_root_path = './../../../';
 
@@ -37,9 +37,9 @@ $mod_name = 'YOUTUBE_MOD';
 
 $version_config_name = 'k2_youtube_version';
 $language_file = 'mods/k2_youtube_umil';
-$logo_img = 'portal/k2_mods/k2_youtube/mod_install.png';
+$logo_img = 'portal_install/k2_mods/k2_youtube/mod_install.png';
 
-include($phpbb_root_path . '/portal/k2_mods/k2_youtube/sql_data.' . $phpEx);
+include($phpbb_root_path . '/portal_install/k2_mods/k2_youtube/sql_data.' . $phpEx);
 
 $versions = array(
 
@@ -97,10 +97,6 @@ $versions = array(
 	),
 
 );//version
-
-
-
-
 
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 

@@ -1,35 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
-<!--For security purposes, please check: http ://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/ -->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 	<header>
-		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-		<title lang="en">Kiss II Youtube Mod (Kiss Portal Engine must be installed!).</title>
-		<description lang="en">Allow you to integrate youtube vodeos into yo site.</description>
-		<author-notes lang="en">This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.
+		<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Kiss II Youtube Mod (Kiss Portal Engine must be installed!).]]></title>
+		<description lang="en"><![CDATA[Allow you to integrate youtube vodeos into yo site.]]></description>
+		<author-notes lang="en"><![CDATA[This mod is intended for phpBB3 with the Kiss II Portal Engine already installed.
 		(the download also include a stand-alone version for installation into the default phpBB3 forum)...
 
-		Mike</author-notes>
-
+		Mike]]></author-notes>
 		<author-group>
 			<author>
-				<realname>Michael O'Toole</realname>
-				<email>o2l@eircom.net</email>
-				<username>Michaelo</username>
-				<homepage>http://www.stargate-portal.com</homepage>
-				<contributions />
+				<realname><![CDATA[Michael O'Toole]]></realname>
+				<username><![CDATA[Michaelo]]></username>
+				<homepage><![CDATA[http://www.stargate-portal.com]]></homepage>
+				<email><![CDATA[o2l@eircom.net]]></email>
 			</author>
 		</author-group>
-
-		<mod-version>1.0.0C (beta)</mod-version>
-
+		<mod-version>1.0.0D (beta)</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>100</time>
 			<target-version>3.0.11</target-version>
 		</installation>
-
 		<history>
+			<entry>
+				<date>2013-07-21</date>
+				<rev-version>1.0.0d</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to phpBB 3.0.11]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2012-04-30</date>
 				<rev-version>1.0.0c</rev-version>
@@ -61,89 +65,78 @@
 				</changelog>
 			</entry>
 		</history>
-
 		<link-group>
 		</link-group>
-		<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
 	</header>
-
 	<action-group>
-	<copy>
-		  <file from="root/*.*" to="*.*" />
-	</copy>
-
-<open src="includes/constants.php">
-<edit>
-<find><![CDATA[define('K_PAGES_TABLE',				$table_prefix . 'k_pages');]]></find>
-<action type="after-add"><![CDATA[define('K_YOUTUBE_TABLE',			$table_prefix . 'k_youtube');]]></action>
-</edit>
-</open>
-
-<open src="language/en/mods/permissions_kiss.php">
-<edit>
-<find><![CDATA[	'acl_a_k_tools'		=> array('lang' => 'Can manage portal tools', 'cat' => 'portal'),]]></find>
-<action type="after-add"><![CDATA[	'acl_a_k_youtube'	=> array('lang' => 'Can manage youtube settings', 'cat' => 'portal'),]]></action>
-</edit>
-</open>
-
-<open src="language/en/portal/kiss_common.php">
-<edit>
-<find><![CDATA[	'CLICK_TO_ENLARGE'		=> 'Click to enlarge',]]></find>
-<action type="after-add"><![CDATA[	'CLOSE_VIDEO'			=> 'Close video',]]></action>
-</edit>
-<edit>
-<find><![CDATA[	'YOUTUBE_PAGE'			=> 'Youtube Page',]]></find>
-<action type="after-add"><![CDATA[	'COMMENT'				=> 'Comment',
+		<copy>
+			<file from="root/*.*" to="*.*" />
+		</copy>
+		<open src="adm/style/acp_k_vars.html">
+			<edit>
+				<find><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_link_convert_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->;"><!-- INCLUDE /k_block_vars/k_link_convert_vars.html --></div>]]></find>
+				<action type="after-add"><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_youtube_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->;"><!-- INCLUDE /k_block_vars/k_youtube_vars.html --></div>]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[define('K_PAGES_TABLE',				$table_prefix . 'k_pages');]]></find>
+				<action type="after-add"><![CDATA[define('K_YOUTUBE_TABLE',			$table_prefix . 'k_youtube');]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_k_vars.php">
+			<edit>
+				<find><![CDATA[				$k_top_posters_to_display        = request_var('k_top_posters_to_display', 5);]]></find>
+				<action type="after-add"><![CDATA[				$k_yourtube_link                 = request_var('k_yourtube_link', '');
+				$k_yourtube_auto                 = request_var('k_yourtube_auto', 1);
+				$k_yourtube_link_limit           = request_var('k_yourtube_link_limit', 5);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				sgp_acp_set_config('k_block_cache_time_fast', $k_block_cache_time_fast);]]></find>
+				<action type="after-add"><![CDATA[				sgp_acp_set_config('k_yourtube_link', $k_yourtube_link);
+				sgp_acp_set_config('k_yourtube_auto', $k_yourtube_auto);
+				sgp_acp_set_config('k_yourtube_link_limit', $k_yourtube_link_limit);]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/k_vars.php">
+			<edit>
+				<find><![CDATA[	'YOUTUBE_LINK'             => 'Actual YouTube link (URL)',
+	'YOUTUBE_LINK_EXPLAIN'     => 'Just in case YouTube ever change we best provide an alternate',]]></find>
+				<action type="after-add"><![CDATA[	'YOUTUBE_AUTO'				=> 'Autoplay video',
+	'YOUTUBE_AUTO_EXPLAIN'		=> 'When a video is selected, it will play automatically.',]]></action>
+			</edit>
+		</open>
+		<open src="language/en/mods/permissions_kiss.php">
+			<edit>
+				<find><![CDATA[	'acl_a_k_tools'		=> array('lang' => 'Can manage portal tools', 'cat' => 'portal'),]]></find>
+				<action type="after-add"><![CDATA[	'acl_a_k_youtube'	=> array('lang' => 'Can manage youtube settings', 'cat' => 'portal'),]]></action>
+			</edit>
+		</open>
+		<open src="language/en/portal/kiss_common.php">
+			<edit>
+				<find><![CDATA[	'CLICK_TO_ENLARGE'		=> 'Click to enlarge',]]></find>
+				<action type="after-add"><![CDATA[	'CLOSE_VIDEO'			=> 'Close video',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	'YOUTUBE_PAGE'			=> 'Youtube Page',]]></find>
+				<action type="after-add"><![CDATA[	'COMMENT'				=> 'Comment',
 	'VIDEO_WHO'				=> 'Artist',
 	'YOUTUBE_LINK_LIMIT'	=> 'Number of video to display (0 = no limit)',
 	'YOUTUBE_LIMIT'			=> 'limited to %d videos',
 	'AUTOPLAY_ON'			=> 'Autoplay is on...',
 	'AUTOPLAY_OFF'			=> 'Autoplay is off...',]]></action>
-</edit>
-</open>
-
-<open src="language/en/acp/k_vars.php">
-<edit>
-<find><![CDATA[	'YOUTUBE_LINK'             => 'Actual YouTube link (URL)',
-	'YOUTUBE_LINK_EXPLAIN'     => 'Just in case YouTube ever change we best provide an alternate',]]></find>
-<action type="after-add"><![CDATA[	'YOUTUBE_AUTO'				=> 'Autoplay video',
-	'YOUTUBE_AUTO_EXPLAIN'		=> 'When a video is selected, it will play automatically.',]]></action>
-</edit>
-</open>
-
-
-<open src="adm/style/acp_k_vars.html">
-<edit>
-<find><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_link_convert_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->;"><!-- INCLUDE /k_block_vars/k_link_convert_vars.html --></div>]]></find>
-<action type="after-add"><![CDATA[<div style="display:<!-- IF S_SWITCH == 'k_youtube_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_youtube_vars.html --></div>]]></action>
-</edit>
-</open>
-
-<open src="includes/acp/acp_k_vars.php">
-<edit>
-<find><![CDATA[				$k_top_posters_to_display        = request_var('k_top_posters_to_display', 5);]]></find>
-<action type="after-add"><![CDATA[				$k_yourtube_link                 = request_var('k_yourtube_link', '');
-				$k_yourtube_auto                 = request_var('k_yourtube_auto', 1);
-				$k_yourtube_link_limit           = request_var('k_yourtube_link_limit', 5);]]></action>
-</edit>
-<edit>
-<find><![CDATA[				sgp_acp_set_config('k_block_cache_time_fast', $k_block_cache_time_fast);]]></find>
-<action type="after-add"><![CDATA[				sgp_acp_set_config('k_yourtube_link', $k_yourtube_link);
-				sgp_acp_set_config('k_yourtube_auto', $k_yourtube_auto);
-				sgp_acp_set_config('k_yourtube_link_limit', $k_yourtube_link_limit);]]></action>
-</edit>
-</open>
-
-<open src="styles/_portal_common/template/portal_scripts.html">
-<edit>
-<find><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-1.7.1.min.js"></script>]]></find>
-<action type="after-add"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.hoverIntent.js"></script>
+			</edit>
+		</open>
+		<open src="styles/_portal_common/template/portal_scripts.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-migrate-1.1.1.js"></script>]]></find>
+				<action type="after-add"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.hoverIntent.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}js/jquery/imgbubbles.js"></script>]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[<!-- IF RESIZE -->]]></find>
-<action type="before-add"><![CDATA[<script type="text/javascript">
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- IF RESIZE -->]]></find>
+				<action type="before-add"><![CDATA[<script type="text/javascript">
 // <![CDATA[
 
 	jQuery.noConflict();
@@ -168,15 +161,13 @@
 
 //]]&gt;
 </script>]]></action>
-</edit>
-</open>
-
-
-<php-installer><![CDATA[portal/k2_mods/k2_youtube/index.php]]></php-installer>
-<diy-instructions lang="en">
+			</edit>
+		</open>
+		<php-installer><![CDATA[portal_install/k2_mods/k2_youtube/index.php]]></php-installer>
+		<diy-instructions lang="en">
 If installing via automod, a link is provided to complete the database install section... 
-If installing manually, point your browser to: your_site/portal/k2_mods/k2_youtube/index.php and complete the database installation...
+If installing manually, point your browser to: your_site/portal_install/k2_mods/k2_youtube/index.php and complete the database installation...
 
 Purge the cache...</diy-instructions>
-</action-group>
+	</action-group>
 </mod>
