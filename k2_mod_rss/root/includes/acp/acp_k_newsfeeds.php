@@ -1,12 +1,12 @@
 <?php
 /**
 *
-* @package acp Stargate Portal
-* @version $Id: acp_k_newsfeeds.php 305 2009-01-01 16:03:23Z Michealo $
+* @package acp Kiss Portal
+* @version $Id: acp_k_newsfeeds.php 1022 2013-07-01 05:31:50Z Michealo $
 * @copyright (c) 2008 Martin Larsson - aka NeXur
 * @maintained by phpbbireland.com - Mike & prosk8er
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* Last modified: 06 May 2012 Mike
+*
 */
 
 /**
@@ -20,7 +20,6 @@ if (!defined('IN_PHPBB'))
 /**
 * @package acp
 */
-
 class acp_k_newsfeeds
 {
 	var $u_action;
@@ -70,10 +69,9 @@ class acp_k_newsfeeds
 					$config_feeds_items_limit = request_var('rss_feeds_items_limit', 0);
 					$config_feeds_random_limit = request_var('rss_feeds_random_limit', 0);
 					$config_feeds_rss_enabled = request_var('rss_feeds_enabled', 0);
-
 					$config_feeds_type = request_var('rss_feeds_type', '');
 				}
-					$type = $k_config['rss_feeds_type'];
+				$type = $k_config['rss_feeds_type'];
 
 				$template->assign_vars(array(
 					'S_EDIT_FEED'           => true,
@@ -87,7 +85,7 @@ class acp_k_newsfeeds
 					'FEED_RANDOM_LIMIT'     => $k_config['rss_feeds_random_limit'],
 					'S_RSS_FEEDS_ENABLED'   => $k_config['rss_feeds_enabled'],
 				));
-            break;
+			break;
 
 			case 'savefeeds':
 
@@ -95,7 +93,6 @@ class acp_k_newsfeeds
 				$config_feeds_items_limit = request_var('rss_feeds_items_limit', 0);
 				$config_feeds_random_limit = request_var('rss_feeds_random_limit', 0);
 				$config_feeds_rss_enabled = request_var('rss_feeds_enabled', 0);
-
 				$config_feeds_type = request_var('rss_feeds_type','');
 
  				if ($action == 'savefeeds')
@@ -114,6 +111,7 @@ class acp_k_newsfeeds
 				$db->sql_query($sql);
 
 				$cache->destroy('k_config');
+
 				trigger_error($message . adm_back_link($this->u_action));
 
 				$template->assign_vars(array(
@@ -216,13 +214,13 @@ class acp_k_newsfeeds
 				}
 
 				$template->assign_vars(array(
-					'S_EDIT'		=> true,
-					'U_BACK'		=> $this->u_action,
-					'U_ACTION'		=> $this->u_action . '&amp;id=' . $feed_id,
-					'FEED_TITLE'		=> (isset($feed_title['feed_title'])) ? $feed_title['feed_title'] : '',
-					'FEED_URL'		=> (isset($feed_url['feed_url'])) ? $feed_url['feed_url'] : '',
-					'FEED_POSITION'		=> $feed_position['feed_position'],
-					'FEED_SHOW'		=> $feed_show['feed_show'],
+					'S_EDIT'         => true,
+					'U_BACK'         => $this->u_action,
+					'U_ACTION'       => $this->u_action . '&amp;id=' . $feed_id,
+					'FEED_TITLE'     => (isset($feed_title['feed_title'])) ? $feed_title['feed_title'] : '',
+					'FEED_URL'       => (isset($feed_url['feed_url'])) ? $feed_url['feed_url'] : '',
+					'FEED_POSITION'  => $feed_position['feed_position'],
+					'FEED_SHOW'      => $feed_show['feed_show'],
 					'FEED_DESCRIPTION_SHOW'	=> $feed_description['feed_description'],
 				));
 				return;
@@ -246,7 +244,22 @@ class acp_k_newsfeeds
 		{
 			$active = ($row['feed_show'] == '1') ? $user->lang['YES'] : (($row['feed_show'] == '0') ? $user->lang['NO'] : $user->lang['GUEST']);
 			$description = ($row['feed_description'] == '1') ? $user->lang['YES'] : (($row['feed_description'] == '0') ? $user->lang['NO'] : $user->lang['GUEST']);
-			$position = ($row['feed_position'] == '0') ? $user->lang['LEFT'] : (($row['feed_position'] == '1') ? $user->lang['RIGHT'] : $user->lang['NOT_SET']);
+
+			switch ($row['feed_position'])
+			{
+				case '0':
+					$position = $user->lang['LEFT'];
+				break;
+				case '1':
+					$position = $user->lang['RIGHT'];
+				break;
+				case '2':
+					$position = $user->lang['CENTRED'];
+				break;
+				default:
+					$position = $user->lang['NOT_SET'];
+				break;
+			}
 
 			$template->assign_block_vars('feeds', array(
 				'FEED_ID'               => $row['feed_id'],

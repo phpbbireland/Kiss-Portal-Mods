@@ -6,24 +6,22 @@
 *
 *   Ported and rewritten for PhpBB3 and Stargate Portal by: NeXur
 *
-* @package Stargate Portal
+* @package Kiss Portal
 * @author  Martin Larsson - aka NeXur
 * @begin   Thursday, 5th September, 2008
 * @copyright (c) 2008 Martin Larsson - aka NeXur
 * @home    http://www.phpbbireland.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @note: Do not remove this copyright. Just append yours if you modify this code,
-*        this is part of the Stargate Portal copyright agreement...
+* @note:   Do not remove this copyright. Just append yours if you have modified it,
+*          this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_top_referrals.php 307 2009-01-01 16:05:35Z Michealo $
-* Updated: 07 November 2010
+* @version $Id: block_top_referrals.php 307 2010-11-07 16:05:35Z michealo $
 *
 */
 
 /**
 * @ignore
 */
-
 if (!defined('IN_PHPBB'))
 {
 	exit;

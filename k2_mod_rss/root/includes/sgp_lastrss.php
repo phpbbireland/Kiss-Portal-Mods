@@ -1,28 +1,17 @@
 <?php
-/*************************************************************************************
- *                            sgp_lastrss.php
- *                            -------------------
- *			Simple yet powerfull PHP class to parse RSS files.
- *			copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
- *			(c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
- *
- *   Ported and rewritten for PhpBB3 and Kiss Portal Engine by: NeXur Updates
- *   begin					: March 2008
- *   copyright				: (C) 2008 Martin Larsson - aka NeXur
- *   website				: http://www.phpbbireland.com
- *   email					: martinl@bredband.net
- *   code updated			: 01 December 2011 Mike (michaelo)
- *   maintained				: Mike (michaelo) & Prosk8er (bprsk8r4272)
- *
- *   note: Do not remove this copyright. Just append yours if you have modified it.
- ************************************************************************************/
-/************************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify it under
- *   the terms of the GNU General Public License as published by the Free Software
- *   Foundation; either version 2 of the License, or any later version.
- *
- ************************************************************************************/
+/**
+* Simple yet powerfull PHP class to parse RSS files.
+* copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
+* (c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
+*
+* Ported and rewritten for PhpBB3 and Kiss Portal & Stargate Portal by: NeXur
+*
+* @package Kiss Portal
+* @version $Id: sgp_lastrss.php 1022 2013-07-01 05:32:10Z michealo $
+* @copyright (c) 2008 Martin Larsson - aka NeXur
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* Do not remove copyright from any file.
+*/
 
 //define('IN_PHPBB', true); // mvp?
 
@@ -38,6 +27,8 @@ class lastRSS
 	var $items_limit = 0;
 	var $stripHTML = true;
 	var $date_format = 'U';
+	var $cache_dir = '';
+	var $type = '';
 
 	// -------------------------------------------------------------------
 	// Private variables
@@ -54,11 +45,14 @@ class lastRSS
 	*/
 	function curl_get_rss($url)
 	{
-		global $rss, $user, $k_config;
-
-		$rss_type = $k_config['rss_feeds_type'];
+		global $rss, $user;
 
 		// initiate and set options
+		if (isset($url))
+		{
+			$ch = curl_init($url);
+		}
+
 		if (isset($ch))
 		{
 			@curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
@@ -97,16 +91,6 @@ class lastRSS
 
 	function Get ($rss_url)
 	{
-		global $k_config;
-
-		if (!isset($this->cache_dir))
-		{
-			$this->cache_dir = 'cache';
-		}
-		$this->cache_dir = $rss->cache_dir = './cache';
-		$rss->cache_time = $k_config['rss_feeds_cache_time'];
-		$this->cache_time = $rss->cache_time = $k_config['rss_feeds_cache_time'];
-
 		// If CACHE ENABLED
 		if ($this->cache_dir != '')
 		{
@@ -181,7 +165,7 @@ class lastRSS
 	// -------------------------------------------------------------------
 	// Replace HTML entities &something; by real characters
 	// -------------------------------------------------------------------
-    function unhtmlentities ($string)
+	function unhtmlentities ($string)
 	{
 		// Get HTML entities table
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES, ENT_QUOTES);
@@ -199,17 +183,15 @@ class lastRSS
 	// -------------------------------------------------------------------
 	function parse($rss_url)
 	{
-		global $rss, $user, $k_config;
-
-		$rss_type = $k_config['rss_feeds_type'];
+		global $rss, $user;
 
 		// open and load RSS file
 		// use curl if enabled
-		if (function_exists('curl_init') && $rss_type == 'curl')
+		if (function_exists('curl_init') && $rss->type == 'curl')
 		{
 			$rss_content = $this->curl_get_rss($rss_url);
 		}
-		else if (ini_get('allow_url_fopen') == '1' && $rss_type == 'fopen')
+		else if (ini_get('allow_url_fopen') == '1' && $rss->type == 'fopen')
 		{
 			// else use fopen if possible
 			if ($f = @fopen($rss_url, 'r'))
@@ -290,10 +272,10 @@ class lastRSS
 			preg_match_all("'<item(| .*?)>(.*?)</item>'si", $rss_content, $items);
 
 			//Added to read entry if format changed Ref: http://www.phpbbireland.com/phpBB3/viewtopic.php?p=16993#p16993
-	         if (empty($items[2]))
-		     {
-			    preg_match_all("'<entry(| .*?)>(.*?)</entry>'si", $rss_content, $items);
-	         }
+			if (empty($items[2]))
+			{
+				preg_match_all("'<entry(| .*?)>(.*?)</entry>'si", $rss_content, $items);
+			}
 
 
 			$rss_items = $items[2];
@@ -327,7 +309,7 @@ class lastRSS
 
 					// If pubDate exists
 					if ((isset($result['items'][$i]['pubDate']) && ($result['items'][$i]['pubDate'] != '') ))
-          			{
+					{
 						// ... and is valid
 						if ((($timestamp = strtotime($result['items'][$i]['pubDate'])) !== -1) && (($timestamp = strtotime($result['items'][$i]['pubDate'])) === false))
 						{

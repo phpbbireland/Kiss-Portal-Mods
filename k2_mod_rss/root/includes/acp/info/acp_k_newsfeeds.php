@@ -1,10 +1,8 @@
 <?php
 /**
 *
-* @author Martin Larsson - (NeXur) http://phpbbireland.com
-*
-* @package acp (Stargate Portal)
-* @version $Id: acp_k_newsfeeds.php 305 2009-01-01 16:03:23Z Michealo $
+* @package acp (Kiss Portal)
+* @version $Id: acp_k_newsfeeds.php 1022 2012-10-21 13:15:12Z michealo $
 * @copyright (c) 2008 Martin Larsson - aka NeXur
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -17,7 +15,6 @@ if (!defined('IN_PHPBB'))
 /**
 * @package module_install
 */
-
 class acp_k_newsfeeds_info
 {
 	function module()

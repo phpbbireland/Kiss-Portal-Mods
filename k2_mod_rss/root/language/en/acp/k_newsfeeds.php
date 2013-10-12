@@ -1,15 +1,14 @@
 <?php
 /**
 *
-* @author Original Author Michael O'Toole@www.stargate-portal.com
+* k_newsfeeds [English]
 *
-* @package {k_newsfeeds.php}
-* @version $Id:$ 3.2.0
-* @note: Do not remove this copyright. Just append yours if you have modified it,
-*        this is part of the Stargate Portal copyright agreement...
-* @copyright (c) 2005 phpbireland
+* @package Kiss Portal
+* @version $Id: k_newsfeeds.php 1022 2013-07-01 05:32:26Z michealo $
+* @copyright (c) Michael O'Toole 2005 phpBBireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Kiss Portal copyright agreement...
 */
 
 /**
@@ -42,42 +41,63 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACP_RSS_MANAGE_FEED'      => 'Add or edit feed(s)',
-	'ACP_RSS_RSS_EXPLAIN'      => 'Feed(s) management',
+	'ACP_FEED_MANAGE_FEED'      => 'Add or edit feed(s)',
+	'ACP_FEED_EXPLAIN'          => 'Feed(s) management',
+	'ADD_FEED'                  => 'Add New Feed',
+	'CENTRED'                   => 'Centred',
 
-	'RSS_ADD_FEED'             => 'ADD new feed',
-	'RSS_RSS_SETTINGS'         => 'General feeds settings',
-	'RSS_IN_DB'                => 'Feed’s in database',
-	'RSS_ADDED'                => 'Feed successfully added',
-	'RSS_CACHE_TIME'           => 'How long time to cache data?',
-	'RSS_CACHE_TIME_EXPLAIN'   => 'Maximum age of the cache file for a feed before it is updated, in seconds (default is 1 hour = 60 minutes = 3600 seconds).',
-	'RSS_CURL'                 => 'CURL',
-	'RSS_DESCRIPTION'          => 'Show Feed Description Yes/No?',
-	'RSS_EDIT'                 => 'Edit Feed\'s',
-	'RSS_EDIT_EXPLAIN'         => 'Here you can add or edit an existing Feed entry. The Title and version number are required. You will also be able to enter details of where the Feed can be downloaded from and where the Feed itself can be found.',
-	'RSS_EXPLAIN'              => 'Text of your Feed goes inhere',
-	'RSS_FOPEN'                => 'FOPEN',
-	'RSS_ITEMS_LIMIT'          => 'Items limit',
-	'RSS_ITEMS_LIMIT_EXPLAIN'  => 'Max Number of shown news from one RSS feed',
-	'RSS_POSITIONS'            => 'Position',
-	'RSS_POSITION'             => 'Show this feed on which position?',
-	'RSS_POSITION_EXPLAIN'     => 'Specify on which side of the RSS block this entry will appear.',
-	'RSS_RANDOM_LIMIT'         => 'Random limit',
-	'RSS_RANDOM_LIMIT_EXPLAIN' => 'Maximum feeds to randomize in the block.',
-	'RSS_REMOVED'              => 'Feed successfully removed',
-	'RSS_SHOW_FEED'            => 'Show feed Yes/No?',
-	'RSS_TITLE'                => 'Feed Title',
-	'RSS_TITLE_EXPLAIN'        => 'Short but descriptive title of the Feed.',
-	'RSS_TYPE'                 => 'For downloading RSS use function',
-	'RSS_TYPE_EXPLAIN'         => '(FOPEN or CURL is not enabled on every server)',
-	'RSS_UPDATED'              => 'Feed successfully edited',
-	'RSS_URL'                  => 'URL address of RSS feed',
-	'RSS_URL_EXPLAIN'          => 'Input full URL address, starting with http://...',
-	'RSS_EDIT_HEADER'          => 'Adding or editing a feed',
-	'RSS_ENABLED_EXPLAIN'      => 'Enable/Disable RSS on your site.',
-	'RSS_TITLE'                => 'lastRSS configuration &amp; management',
-	'RSS_TITLE_EXPLAIN'        => 'Here you can configure basic behavior of lastRSS &amp; manage RSS feeds',
-	'RSS_VISIT_FEED'           => 'Subscribe to feed',
+	'FEED_ADDED'                => 'Feed successfully added',
+	'FEED_ADD_FEED'             => 'ADD new feed',
+
+	'FEED_CACHE_TIME'           => 'Cache Time',
+	'FEED_CACHE_TIME_EXPLAIN'   => 'Maximum age of the cache file for a feed before it is updated, in seconds (default is 1 hour = 60 minutes = 3600 seconds).',
+	'FEED_CURL'                 => 'CURL',
+	'FEED_DESCRIPTION'          => 'Feed name/description',
+	'FEED_DESCRIPTION_SHOW'     => 'Show name/description',
+
+	'FEED_EDIT'                 => 'Edit Feed’s',
+	'FEED_EDIT_EXPLAIN'         => 'Here you can add or edit an existing Feed entry. The Title and version number are required. You will also be able to enter details of where the Feed can be downloaded from and where the Feed itself can be found.',
+	'FEED_EDIT_HEADER'          => 'Adding/Editing a feed',
+	'FEED_EDIT_HEADER_EXPLAIN'  => 'Add/Edit this feed details',
+
+	'FEED_ENABLED_EXPLAIN'      => 'Enable/Disable RSS on your site.',
+	'FEED_EXPLAIN'              => 'Text of your Feed goes inhere',
+
+	'FEED_FOPEN'                => 'FOPEN',
+
+	'FEED_IN_DB'                => 'Feed’s in database',
+	'FEED_ITEMS_LIMIT'          => 'Items limit',
+	'FEED_ITEMS_LIMIT_EXPLAIN'  => 'Max Number of shown news from one RSS feed',
+
+	'FEED_MOD_TITLE'            => 'RSS Feed Mod',
+	'FEED_MOD_TITLE_EXPLAIN'    => 'Here you can configure basic behavior of lastRSS &amp; manage RSS feeds',
+
+	'FEED_POSITION'             => 'Show this feed in position',
+	'FEED_POSITION_WIDE'        => 'Leff and Right feeds are displayed in two columns, Centred feeds displayed in one column (can be mixed).',
+	'FEED_POSITIONS'            => 'Position',
+	'FEED_POSITION_EXPLAIN'     => 'Specify the location of this RSS block.',
+
+	'FEED_RANDOM_LIMIT'         => 'Random limit',
+	'FEED_RANDOM_LIMIT_EXPLAIN' => 'Maximum feeds to randomize in the block.',
+	'FEED_REMOVED'              => 'Feed successfully removed',
+
+	'FEED_SETTINGS'             => 'Portal Feeds',
+	'FEED_SETTINGS_EXPLAIN'     => 'Feed State',
+	'FEED_SHOW'                 => 'Show Feed',
+	'FEED_SHOW_DESCRIPTION'     => 'Show Description',
+	'FEED_SHOW_FEED'            => 'Show feed Yes/No?',
+	'FEED_STATE'                => 'State',
+
+	'FEED_TITLE'                => 'Feed Title',
+	'FEED_TITLE_EXPLAIN'        => 'Short but descriptive title of the Feed.',
+	'FEED_TYPE'                 => 'For downloading RSS use function',
+	'FEED_TYPE_EXPLAIN'         => '(FOPEN or CURL is not enabled on every server)',
+
+	'FEED_UPDATED'              => 'Feed successfully edited',
+	'FEED_URL'                  => 'URL address of RSS feed',
+	'FEED_URL_EXPLAIN'          => 'Full URL address, starting with http://...',
+
+	'FEED_VISIT_FEED'           => 'Subscribe to feed',
 ));
 
 ?>

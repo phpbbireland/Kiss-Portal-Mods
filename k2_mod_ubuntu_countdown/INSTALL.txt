@@ -1,0 +1,26 @@
+Just a simple block thats shows the countdown to the next release of ubuntu and a download button for the desktop edition and server edition.
+
+Install:
+extract
+root/blocks/block_ubuntu.php to blocks/block_ubuntu.php
+root/images/block_images/block/ubuntu_logo.png to images/block_images/block/ubuntu_logo.png
+root/images/ubuntu_desktop.png to images/ubuntu_desktop.png
+root/images/ubuntu_server.png to images/ubuntu_server.png
+root/styles/_portal_common/template/blocks/block_ubuntu.html to styles/_portal_common/template/blocks/block_ubuntu.html
+then just add a new block i suggest adding it as a center block cause its a little to big for a left or right block.
+to use the block image thats included: when making the block pick ubuntu_logo.png you may have to purge the cache first.
+in the contrib folder there is 2 images for a dark theme just put them in the images directory and purge the cache.
+
+you can update the countdown for the next release by doing the following.
+open:
+block_ubuntu.php
+find:
+<iframe src="http://djazz.mine.nu/files/ubuntucountdown/" width="180" height="150" scrolling="no" frameborder="0">Ubuntu countdown</iframe>
+replace:
+to whatever the new code is which you will find on http://www.ubuntu.com/community/countdown
+
+future development:
+N/A.
+
+demo:
+you can see it here http://gotskillslounge.com
