@@ -21,15 +21,22 @@
 			</author>
 		</author-group>
 
-		<mod-version>1.0.0C (beta)</mod-version>
+		<mod-version>1.0.1</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>100</time>
-			<target-version>3.0.10</target-version>
+			<target-version>3.0.12</target-version>
 		</installation>
 
 		<history>
+			<entry>
+				<date>2012-04-30</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to phpBB 3.0.12]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2012-04-30</date>
 				<rev-version>1.0.0c</rev-version>
@@ -136,8 +143,9 @@
 
 <open src="styles/_portal_common/template/portal_scripts.html">
 <edit>
-<find><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-1.7.1.min.js"></script>]]></find>
-<action type="after-add"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.hoverIntent.js"></script>
+<find><![CDATA[<link rel="stylesheet" href="{T_STYLESHEET_PORTAL_OVERLOAD}" type="text/css" />]]></find>
+<action type="after-add"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.hoverIntent.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}js/jquery/imgbubbles.js"></script>]]></action>
 </edit>
 
@@ -177,6 +185,11 @@
 If installing via automod, a link is provided to complete the database install section... 
 If installing manually, point your browser to: your_site/portal/k2_mods/k2_youtube/index.php and complete the database installation...
 
-Purge the cache...</diy-instructions>
+Purge the cache...
+
+jQuery version:
+You can change the jQuery version manually after the install should you prefer a different/later version...
+Edit styles/_portal_common/portal_scripts.html and replace jquery-1.7.1.min.js with you choice... 
+Make sure you copy the new file to root/js/jquery/ folder...</diy-instructions>
 </action-group>
 </mod>

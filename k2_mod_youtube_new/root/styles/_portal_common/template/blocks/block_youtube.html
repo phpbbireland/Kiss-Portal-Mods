@@ -1,5 +1,5 @@
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.youtubepopup.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery_ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}js/jquery/youtube/jquery.youtubepopup.js"></script>
 <script type="text/javascript">
 // <![CDATA[
 
@@ -11,7 +11,11 @@
 //]]>
 </script>
 
-<link type="text/css" href="{T_THEME_PATH}/jquery_ui/jquery_ui.css" rel="stylesheet" />
+<!-- IF S_STYLE_SPECIFIC_VERSION -->
+<link type="text/css" href="{T_THEME_PATH}/jquery_ui/jquery-ui.css" rel="stylesheet" />
+<!-- ELSE -->
+<link type="text/css" href="{ROOT_PATH}js/jquery/jquery_ui/jquery-ui.css" rel="stylesheet" />
+<!-- ENDIF -->
 
 <div class="block_data">
 
@@ -40,55 +44,44 @@
 		<!-- ENDIF -->
 
 		<!-- IF video_loop_row.S_ROW_COUNT is even -->
-		<div class="trow">
-			<span class="tleft bg2 youtube2" style="width:33%;"><a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="">{video_loop_row.VIDEO_TITLE}</a></span>
-			<span class="tleft bg2 youtube2" style="width:29%; ">{video_loop_row.VIDEO_WHO} </span>
-			<span class="tleft bg2 youtube2" style="width:18%; ">{video_loop_row.VIDEO_CAT}</span>
-			<span class="tleft bg2 youtube2" style="width:10%; ">{video_loop_row.VIDEO_POSTER}</span>
-			<span class="tleft bg2 ximg" style="width:auto; height: 15px; padding:1px; text-align:right">
-				<a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
-					<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
-				</a>
-			</span>
-		</div>
-
-
-<!-- IF EXX -->
-		</div>
-		<div class="tcontainer">
-			<div class="tleft bg2" style="width:100%; padding:1px;">
-				<span class="tleft youtube1" style="width:99%;"><strong>{video_loop_row.VIDEO_COMMENT}</strong></span>
+			<div class="trow">
+				<span class="tleft bg2 youtube2" style="width:33%;"><a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="">{video_loop_row.VIDEO_TITLE}</a></span>
+				<span class="tleft bg2 youtube2" style="width:29%; ">{video_loop_row.VIDEO_WHO} </span>
+				<span class="tleft bg2 youtube2" style="width:18%; ">{video_loop_row.VIDEO_CAT}</span>
+				<span class="tleft bg2 youtube2" style="width:10%; ">{video_loop_row.VIDEO_POSTER}</span>
+				<span class="tleft bg2 ximg" style="width:auto; height: 15px; padding:1px; text-align:right">
+					<a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
+						<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
+					</a>
+				</span>
 			</div>
-		</div>
-		<div class="tcontainer">
-<!-- ENDIF -->
-
-
-		<!-- ELSE -->
-		<div class="trow">
-			<span class="tleft bg1 youtube2" style="width:33%;"><a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="">{video_loop_row.VIDEO_TITLE}</a></span>
-			<span class="tleft bg1 youtube2" style="width:29%;">{video_loop_row.VIDEO_WHO} </span>
-			<span class="tleft bg1 youtube2" style="width:18%;">{video_loop_row.VIDEO_CAT}</span>
-			<span class="tleft bg1 youtube2" style="width:10%;">{video_loop_row.VIDEO_POSTER}</span>
-			<span class="tleft bg1 ximg"     style="width:auto; height: 15px; padding:1px; text-align:right">
-				<a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
-					<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
-				</a>
-			</span>
-		</div>
-
-
-<!-- IF EXX -->
-		</div>
-		<div class="tcontainer">
-			<div class="tleft bg1" style="width:100%; padding:1px;">
-				<span class="tleft youtube1" style="width:99%;"><strong>{video_loop_row.VIDEO_COMMENT}</strong></span>
 			</div>
-		</div>
-		<div class="tcontainer">
-<!-- ENDIF -->
+			<div class="tcontainer">
+				<div class="tleft bg2" style="width:100%; padding:1px;">
+					<span class="tleft youtube1" style="width:99%;"><strong>{video_loop_row.VIDEO_COMMENT}</strong></span>
+				</div>
+			</div>
+			<div class="tcontainer">
+			<!-- ELSE -->
+			<div class="trow">
+				<span class="tleft bg1 youtube2" style="width:33%;"><a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="">{video_loop_row.VIDEO_TITLE}</a></span>
+				<span class="tleft bg1 youtube2" style="width:29%;">{video_loop_row.VIDEO_WHO} </span>
+				<span class="tleft bg1 youtube2" style="width:18%;">{video_loop_row.VIDEO_CAT}</span>
+				<span class="tleft bg1 youtube2" style="width:10%;">{video_loop_row.VIDEO_POSTER}</span>
+				<span class="tleft bg1 ximg"     style="width:auto; height: 15px; padding:1px; text-align:right">
+					<a class="youtube" href="#" rel="{video_loop_row.VIDEO_LINK}" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
+						<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
+					</a>
+				</span>
+			</div>
 
-
+			</div>
+			<div class="tcontainer">
+				<div class="tleft bg1" style="width:100%; padding:1px;">
+					<span class="tleft youtube1" style="width:99%;"><strong>{video_loop_row.VIDEO_COMMENT}</strong></span>
+				</div>
+			</div>
+			<div class="tcontainer">
 		<!-- ENDIF -->
 	<!-- END video_loop_row -->
 	</div>

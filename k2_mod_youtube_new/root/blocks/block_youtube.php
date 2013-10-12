@@ -1,5 +1,19 @@
 <?php
+/**
+*
+* @package Kiss Portal Engine
+* @version $Id$
+* @author  Michael O'Toole - aka michaelo
+* @begin   Saturday, Jan 22, 2005
+* @copyright (c) 2005-2013 phpbbireland
+* @home    http://www.phpbbireland.com
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
 
+/**
+* @ignore
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -20,6 +34,7 @@ foreach ($k_blocks as $blk)
 	if ($blk['html_file_name'] == 'block_youtube.html')
 	{
 		$block_cache_time = $blk['block_cache_time'];
+		break;
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['k_block_cache_time_default']);
@@ -90,6 +105,8 @@ while ($row = $db->sql_fetchrow($result))
 		'VIDEO_PATH'	=> $k_config['k_yourtube_link'],
 		'S_AUTOPLAY'	=> ($k_config['k_yourtube_auto']) ? '&amp;autoplay=1' : '',
 		'S_SLIM'		=> true,
+		'YOUTUBR_MOD'	=> true,
+		'S_STYLE_SPECIFIC_VERSION'	=> true,
 	));
 
 	if ($row['video_category'] != $emp)
