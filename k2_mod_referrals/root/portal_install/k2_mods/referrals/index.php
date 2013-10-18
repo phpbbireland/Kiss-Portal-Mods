@@ -37,7 +37,7 @@ $mod_name = 'Referrals for Kiss Portal';
 
 $version_config_name = 'kiss_referrals_version';
 $language_file = 'portal_install_umil';
-$logo_img = $phpbb_root_path . 'portal_install/k2_mods/referrals/portal_install.png';
+$logo_img = 'portal_install/k2_mods/referrals/portal_install.png';
 
 include($phpbb_root_path . 'portal_install/k2_mods/referrals/sql_data.' . $phpEx);
 
