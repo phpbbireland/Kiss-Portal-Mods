@@ -13,7 +13,7 @@
 			<author>
 				<realname><![CDATA[Michael O'Toole]]></realname>
 				<username><![CDATA[michaelo]]></username>
-				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
+				<homepage><![CDATA[http://www.phpbbireland.com/]]></homepage>
 				<email><![CDATA[o2l@eircom.net]]></email>
 			</author>
 			<author>
@@ -27,7 +27,7 @@
 		<installation>
 			<level>easy</level>
 			<time>120</time>
-			<target-version>3.0.11</target-version>
+			<target-version>3.0.12</target-version>
 		</installation>
 		<history>
 			<entry>
@@ -51,6 +51,16 @@
 			<file from="root/styles/prosilver/imageset/*.*" to="styles/prosilver/imageset/*.*"/>
 			<file from="root/umil/*.*" to="umil/*.*"/>
 		</copy>
+		<open src="styles/prosilver/imageset/imageset.cfg">
+			<edit>
+				<find><![CDATA[img_poll_left =
+img_poll_center =
+img_poll_right =]]></find>
+				<action type="replace-with"><![CDATA[img_poll_left = poll_left.gif*12*4
+img_poll_center = poll_center.gif*12*
+img_poll_right = poll_right.gif*12*4]]></action>
+			</edit>
+		</open>
 		<php-installer><![CDATA[portal_install/k2_mods/poll/index.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Purge the Cache...
 

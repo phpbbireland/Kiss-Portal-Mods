@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* @package acp (Kiss Portal)
-* @version $Id: acp_k_newsfeeds.php 1022 2012-10-21 13:15:12Z michealo $
-* @copyright (c) 2008 Martin Larsson - aka NeXur
+* @package acp (Kiss Portal Engine)
+* @version $Id$
+* @copyright (c) 2005-2013 phpbbireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */

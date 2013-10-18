@@ -18,7 +18,7 @@
 			<author>
 				<realname><![CDATA[Michael O'Toole]]></realname>
 				<username><![CDATA[michaelo]]></username>
-				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
+				<homepage><![CDATA[http://www.phpbbireland.com/]]></homepage>
 				<email><![CDATA[o2l@eircom.net]]></email>
 			</author>
 			<author>
@@ -32,7 +32,7 @@
 		<installation>
 			<level>easy</level>
 			<time>120</time>
-			<target-version>3.0.11</target-version>
+			<target-version>3.0.12</target-version>
 		</installation>
 		<history>
 			<entry>

@@ -3,12 +3,11 @@
 *
 * k_newsfeeds [English]
 *
-* @package Kiss Portal
-* @version $Id: k_newsfeeds.php 1022 2013-07-01 05:32:26Z michealo $
-* @copyright (c) Michael O'Toole 2005 phpBBireland
+* @package language (Kiss Portal Engine / Stargate Portal)
+* @version $Id$
+* @copyright (c) 2005-2013 phpbbireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @note: Do not remove this copyright. Just append yours if you have modified it,
-*        this is part of the Kiss Portal copyright agreement...
+*
 */
 
 /**

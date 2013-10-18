@@ -1,22 +1,19 @@
 <?php
 /**
-* Simple yet powerfull PHP class to parse RSS files.
-* copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
-* (c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
 *
-* Ported and rewritten for PhpBB3 and Kiss Portal & Stargate Portal by: NeXur
-*
-* @package Kiss Portal
+* @package Kiss Portal Engine
+* @version $Id$
 * @author  Martin Larsson - aka NeXur
 * @begin   Mars 2008
 * @copyright (c) 2008 Martin Larsson - aka NeXur
 * @home    http://www.phpbbireland.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @note:   Do not remove this copyright. Just append yours if you have modified it,
-*          this is part of the Kiss Portal copyright agreement...
 *
-* @version $Id: block_rss_feeds.php 1022 2013-07-01 05:31:22Z michealo $
+* Simple yet powerfull PHP class to parse RSS files.
+* copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
+* (c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
 *
+* Ported and rewritten for PhpBB3 and Kiss Portal Engine & Stargate Portal by: NeXur
 */
 
 /**

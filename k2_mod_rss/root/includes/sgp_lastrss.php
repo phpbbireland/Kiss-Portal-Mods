@@ -6,11 +6,12 @@
 *
 * Ported and rewritten for PhpBB3 and Kiss Portal & Stargate Portal by: NeXur
 *
-* @package Kiss Portal
-* @version $Id: sgp_lastrss.php 1022 2013-07-01 05:32:10Z michealo $
+* @package Kiss Portal Engine / Stargate Portal
+* @version $Id$
 * @copyright (c) 2008 Martin Larsson - aka NeXur
+* @copyright (c) 2005-2013 phpbbireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* Do not remove copyright from any file.
+*
 */
 
 //define('IN_PHPBB', true); // mvp?
