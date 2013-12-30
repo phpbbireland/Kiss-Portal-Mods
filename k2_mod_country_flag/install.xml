@@ -226,8 +226,10 @@
 ]]></action>
 </edit>
 <edit>
-<find><![CDATA[						'S_BIRTHDAYS_ENABLED'		=> true,
-					));]]></find>
+<find>
+  <![CDATA[						'OCCUPATION'=> $data['occupation'],
+					'INTERESTS'	=> $data['interests'],
+				));]]></find>
 <action type="after-add"><![CDATA[					if (STARGATE)
 					{
 						$template->assign_vars(array(
