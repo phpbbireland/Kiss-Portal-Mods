@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl"?>
+<!-- UMIL by the phpBB.com MOD Team. Copyright 2008 the phpBB Group.
+Please check: http://www.phpbb.com/mods/umil for the latest version of the UMI Library or for any support needed for UMIL.
+ $Id$ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+<header>
+	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+	<title lang="en">UMIL - Unified Mod Install Library</title>
+	<description lang="en">See http://www.phpbb.com/mods/umil/</description>
+
+	<author-notes lang="en"></author-notes>
+
+	<author-group>
+		<author>
+			<username>EXreaction</username>
+			<realname>Nathan Guse</realname>
+			<homepage>http://www.lithiumstudios.org/</homepage>
+			<email>exreaction@lithiumstudios.org</email>
+		</author>
+		<author>
+			<username>Highway of Life</username>
+			<realname>David Lewis</realname>
+			<homepage>http://www.startrekguide.com/</homepage>
+			<email>highwayoflife@gmail.com</email>
+		</author>
+		<author>
+			<username>Marc</username>
+			<realname>Marc Alexander</realname>
+			<homepage>http://www.m-a-styles.de</homepage>
+			<email>admin@m-a-styles.de</email>
+		</author>
+		<author>
+			<username>Sam</username>
+			<realname>Sam Thompson</realname>
+			<homepage>http://www.websyntax.net/</homepage>
+			<email>sam@websyntax.net</email>
+		</author>
+	</author-group>
+
+	<mod-version>1.0.5</mod-version>
+
+	<installation>
+		<level>easy</level>
+		<time>60</time>
+		<target-version>3.0.11</target-version>
+	</installation>
+
+	<history>
+		<entry>
+			<date>2012-11-23</date>
+			<rev-version>1.0.5</rev-version>
+			<changelog lang="en">
+				<change>[Fix] UMIL replaces table_prefix too often on some functions #62646</change>
+				<change>[Fix] Correctly detect mssql native driver #62580</change>
+				<change>[Fix] Make UMIL languages xHTML valid</change>
+				<change>[Fix] Fix incorrect file extension for phpBB logo #63203</change>
+				<change>[Fix] Default to local when global flag is set for f_ permission #63187</change>
+				<change>[Fix] Only pass strings to switch() in umil::cache_purge()</change>
+				<change>[Change] State license version in file header #63246</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2010-12-06</date>
+			<rev-version>1.0.4</rev-version>
+			<changelog lang="en">
+				<change>[Feature] Ability to specify an index length for MySQL4 (as supported by phpBB 3.0.8) #62343</change>
+				<change>[Change] Removed support for including common.php when IN_PHPBB is not defined</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2010-08-09</date>
+			<rev-version>1.0.3</rev-version>
+			<changelog lang="en">
+				<change>[Fix] Correct table prefix #62118</change>
+				<change>[Fix] Fix the create_table_sql for postgresql properly #61365</change>
+				<change>[Feature] Ability to specify a custom table prefix to be used (not recommended for use)</change>
+				<change>[Change] Remove the update check in stand-alone mode, it causes problems in some situations</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2010-04-02</date>
+			<rev-version>1.0.2</rev-version>
+			<changelog lang="en">
+				<change>[Fix] Uncomment the CREATE SEQUENCE line in create_table_sql for postgresql. #57235</change>
+				<change>[Fix] Get the proper table name with the proper table prefix (issues with partials of phpbb_ like bb_). #59045</change>
+				<change>[Feature] Ability to create Permission roles.</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2009-11-08</date>
+			<rev-version>1.0.1-pl1</rev-version>
+			<changelog lang="en">
+				<change>[Fix] Parent ID of 0 when adding modules would cause an error. #53355</change>
+				<change>[Change] Cleaned up the _call_custom_function function and set it to to be able to display something even if nothing is returned (to display any errors).</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2009-10-30</date>
+			<rev-version>1.0.1</rev-version>
+			<changelog lang="en">
+				<change>[Fix] Ignore missing @import files for themes. #48415</change>
+				<change>[Fix] Error when uninstalling with table_row_ actions (was re-running the function). #48515</change>
+				<change>[Fix] In some cases call_user_func_array errors when the second parameter is not an array.  Setting up a new function to handle the multicall. #48825</change>
+				<change>[Fix] Sending false for the second variable for the module_exists and module_remove function isn't possible (it should be for a feature it has). #51475, #51495</change>
+				<change>[Fix] module_exists should accept a module_id to check for, as it is needed in some circumstances when adding or removing modules. #51485</change>
+				<change>[Change] No longer using the sql_create_table function in db_tools if present, it still has bugs.  May reconsider if phpBB starts using it.</change>
+				<change>[Change] Cleaned up the table_row_ functions</change>
+				<change>[Change] Setup get_output_text() to remove some duplicated code (also removed the result() function and replaced the calls with this)</change>
+				<change>[Feature] Ability to specify before|after when adding a module (with the module_langname of the module you would like to have it placed before|after) #48425</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2009-07-24</date>
+			<rev-version>1.0.0</rev-version>
+			<changelog lang="en">
+				<change>[Fix] When returning an array in a custom function for the result, the value of 'command' was required to be an array (should accept a string as well).  Reported by Sajaki</change>
+				<change>[Fix] Make sure $user->setup has been called when trying to display the error about an outdated version of UMIL.</change>
+				<change>[Fix] When uninstalling a mod that removed a table, table column, or table index an error was caused if the data argument was missing (because it tried re-adding the item without the required data).</change>
+				<change>[Change] Use sql_table_exists if available (phpBB 3.0.5+)</change>
+				<change>[Change] Renamed table_insert to table_row_insert for consistancey (table_insert function still exists and calls table_row_insert for compatibility)</change>
+				<change>[Change] version_check now returns (string) Error Message if any error occured #45885</change>
+				<change>[Change] Log Adding/Removing Modules to the admin log #41215</change>
+				<change>[Feature] Two new functions table_row_update and and table_row_remove</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2009-05-01</date>
+			<rev-version>1.0.0-RC3</rev-version>
+			<changelog lang="en">
+				<change>[Fix] Partially include the stylesheet so we can get the correct image paths for the style.</change>
+				<change>[Fix] Incorrect way to compare revisions in UMIL Auto.</change>
+				<change>[Change] Changed the error message informing the user when UMIL is out of date.</change>
+				<change>[Change] Give the option to specify your own $db object to use when intializing UMIL.</change>
+				<change>[Change] Put phpbb_db_tools object in the $umil->db_tools variable instead of initializing it whenever we need it.</change>
+				<change>[Change] Changed the way the custom function call is handled so it should now handle SQL errors automatically.  Also put the code for calling custom functions in its own function.</change>
+				<change>[Feature] New function added to make inserting a few rows into a database table easier (instead of requiring a custom function to be used).  Suggested by michaelo</change>
+				<change>[Feature] Give mod authors the option to specify their own image in UMIL auto or if using the UMIL frontend.  Suggested by michaelo</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2009-03-22</date>
+			<rev-version>1.0.0-RC2</rev-version>
+			<changelog lang="en">
+				<change>[Fix] Including the phpbb_chmod function &amp; constants if the version of phpBB used does not have them (older than 3.0.3)</change>
+				<change>[Fix] Incorrect language for UPDATE_MOD #40385</change>
+				<change>[Fix] set_custom_template broken when original template stored in DB #40615</change>
+				<change>[Fix] incorrect handling of table_prefix when the table prefix was not phpbb_ but had phpbb_ in it #40725</change>
+				<change>[Fix] When making error files, the directory is not checked first for permissions #41065</change>
+				<change>[Fix] When using the automatic module add method it would not recognize the 'display' option available in the info_ files #42275</change>
+				<change>[Fix] Prevent errors in UMIL Auto of the language key for $mod_name does not exist.</change>
+				<change>[Change] Adding support for calling multiple functions when using the custom method #42045</change>
+				<change>[Change] Adding support for the new table creation and removal functions in db_tools #42335</change>
+				<change>[Change] If errors occur, record the PHP version, phpBB3 version, and database information in the error file.</change>
+				<change>[Change] Prevent non-founders from accessing the error files.</change>
+				<change>[Change] Prevent duplicate modules from being placed under the same parent #42945</change>
+				<change>[Change] Prevent stupid things like trying to add a module with no name or any data on it #41285</change>
+				<change>[Change] Give more specific errors in some cases #42965</change>
+				<change>[Change] Add support for Select Multiple in UMIL Frontend</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2009-01-01</date>
+			<rev-version>1.0.0-RC1</rev-version>
+			<changelog lang="en">
+				<change>Initial Public Preview Release</change>
+			</changelog>
+		</entry>
+	</history>
+</header>
+
+<action-group>
+	<copy>
+		<file from="root/*.*" to="*.*" />
+	</copy>
+</action-group>
+</mod>

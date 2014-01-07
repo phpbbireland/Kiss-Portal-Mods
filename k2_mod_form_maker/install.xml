@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+<header>
+	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+	<title lang="en">Kiss phpBB3 Form Mod (Kiss Portal Engine must be installed!)</title>
+
+	<description lang="en">Create forms to collect data from you members in any forum (one form per forum)</description>
+
+	<author-notes lang="en"><![CDATA[Special thanks to Sajaki and his Appform Mod... 
+
+	This is a rework of the Form Creator Mod (http://www.phpbbireland.com/kiss2/viewtopic.php?f=69&t=217) with additional code from Sajaki Appform Mod... 
+	
+	The mod allows you to quickly create forms which can then be use by your members to post using a form instead of the usual text method. The mod is ideal for forums dealing with reviews, bug reports, requests etc...
+
+	When posting a new post in a forum where a form has been created, the poster will have access to a "Form Mode" button. Clicking on this button change from the normal text method of posting, to the form method...
+
+	Validation of form data relies on HTML5 (client side validation) and is supported in Firefox, Opera, Chrome, IE 10 and other browsers. At the time of writing, Safari does not yet support HTML5 form validation however, the mod can still be used provided the poster check their entries manually. If the forms are used to collect crucial data, you may wish to add your own javascript validation code to styles/prosilver/template/forms/form_maker.html. The mod supports all HTML5 form types...
+
+	Please note we do not use conformation for every action in the ACP, this has the effect of speeding up the process substantially... (feels and looks like Ajax ;)
+
+	In the next development stage I may add the option to edit a post created by the form mod in form mode....
+
+	-----------------------------------------------------------------------
+     THIS IS THE KISS PORTAL ENGINE VERSION, KISS MUST BE INSTALLED!!!
+	-----------------------------------------------------------------------
+
+	]]></author-notes>
+
+	<author-group>
+		<author>
+			<username>michaelo</username>
+			<realname>Michael O'Toole</realname>
+			<homepage>http://www.phpbbreland.com/</homepage>
+			<email>o2l@eircom.net</email>
+		</author>
+	</author-group>
+
+	<mod-version lang="en"><![CDATA[0.0.1]]></mod-version>
+
+	<installation>
+		<level>intermediate</level>
+		<time>500</time>
+		<target-version>3.0.12</target-version>
+	</installation>
+
+	<history>
+		<entry>
+			<date>2013-07-07</date>
+			<rev-version>0.0.1</rev-version>
+			<changelog lang="en">
+				<change>First KPE Version</change>
+			</changelog>
+		</entry>
+	</history>
+
+	<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+</header>
+	<author-group>
+		<author>
+			<username>michaelo</username>
+			<realname>Michael O'Toole</realname>
+			<homepage>http://www.phpbbreland.com/</homepage>
+			<email>o2l@eircom.net</email>
+		</author>
+	</author-group>
+
+	<action-group>
+		<copy>
+			<file from="root/adm/images/more_info.gif" to="adm/images/more_info.gif"/>
+			<file from="root/adm/images/loading-page.gif" to="adm/images/loading-page.gif"/>
+			<file from="root/adm/style/acp_form_maker.html" to="adm/style/acp_form_maker.html"/>
+			<file from="root/adm/style/portal.js" to="adm/style/portal.js"/>
+			<file from="root/adm/style/jquery-2.0.3.min.js" to="adm/style/jquery-2.0.3.min.js"/>
+			<file from="root/adm/style/forms/form_maker.html" to="adm/style/forms/form_maker.html"/>
+			<file from="root/includes/functions_form_maker.php" to="includes/functions_form_maker.php"/>
+			<file from="root/includes/acp/acp_form_maker.php" to="includes/acp/acp_form_maker.php"/>
+			<file from="root/includes/acp/info/acp_form_maker.php" to="includes/acp/info/acp_form_maker.php"/>
+			<file from="root/language/en/form_maker_install_umil.php" to="language/en/form_maker_install_umil.php"/>
+			<file from="root/language/en/mods/form_maker.php" to="language/en/mods/form_maker.php"/>
+			<file from="root/language/en/mods/info_acp_form_maker.php" to="language/en/mods/info_acp_form_maker.php"/>
+			<file from="root/styles/prosilver/template/forms/form_maker.html" to="styles/prosilver/template/forms/form_maker.html"/>
+			<file from="root/styles/prosilver/theme/form_mod.css" to="styles/prosilver/theme/form_mod.css"/>
+			<file from="root/umil/*.*" to="umil/*.*" />
+			<file from="root/portal_install/k2_mods/phpbb_form_mod/*.*" to="portal_install/k2_mods/phpbb_form_mod/*.*"/>
+		</copy>
+		<open src="posting.php">
+			<edit>
+				<find><![CDATA[include($phpbb_root_path . 'includes/message_parser.' . $phpEx);]]></find>
+				<action type="after-add"><![CDATA[include($phpbb_root_path . 'includes/functions_form_maker.' . $phpEx);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$auth->acl($user->data);]]></find>
+				<action type="after-add"><![CDATA[$user->add_lang('mods/form_maker');]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[if ($submit || $preview || $refresh)
+{]]></find>
+				<action type="after-add"><![CDATA[
+	$message = utf8_normalize_nfc(request_var('message', '', true));
+	if ($message === '')
+	{
+		$message = grab_form_data($forum_id);
+	}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	$message_parser->message		= utf8_normalize_nfc(request_var('message', '', true));]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[	$message_parser->message		= ]]></inline-find>
+					<inline-action type="after-add"><![CDATA[$message; //]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[page_footer();]]></find>
+				<action type="before-add"><![CDATA[
+build_form($forum_id);
+]]></action>
+			</edit>
+		</open>
+		<open src="adm/style/admin.css">
+			<edit>
+				<find><![CDATA[	font-size: x-small;]]></find>
+				<action type="after-add"><![CDATA[/*]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	voice-family: inherit;]]></find>
+				<action type="after-add"><![CDATA[*/]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[.phpinfo td, .phpinfo th, .phpinfo h2, .phpinfo h1 {
+	text-align: left;]]></find>
+				<action type="after-add"><![CDATA[}
+
+
+/* Form Maker Mod */
+.checkbox {cursor:pointer}
+#dvLoading
+{
+   background: transparent url("../images/loading-page.gif") no-repeat center center;
+   height: 100px;
+   width: 100px;
+   position: fixed;
+   z-index: 1000;
+   left: 50%;
+   top:13%;]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[// Additional tables]]></find>
+				<action type="after-add"><![CDATA[define('FORM_MAKER_TABLE',          $table_prefix . 'form_maker');]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/posting_buttons.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>]]></find>
+				<action type="after-add"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/portal.js"></script>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<div id="format-buttons">]]></find>
+				<action type="after-add"><![CDATA[	<!-- IF MODE == 'post' -->
+	<input type="button" class="button2" accesskey="f" name="useform" value="{L_OPEN_FORM}" style="font-weight:normal; width: 50px" onclick="toggle_validation();ShowHide('thisform','message-box');ShowHide('smiley-box','format-buttons');ShowHide('form_hide');" title="{L_OPEN_FORM_EXPLAIN}" />
+	<!-- ELSEIF MODE == 'edit' -->
+	<!-- may add edit in form option later -->
+	<!-- ENDIF -->
+
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[</div>]]></find>
+				<action type="after-add"><![CDATA[<!-- IF MODE == 'edit' --><div class="form_help">{L_FORM_HELP_1}</div><!-- ENDIF -->
+]]></action>
+			</edit>
+		</open>
+
+		<open src="styles/prosilver/template/posting_editor.html">
+			<edit>
+				<find><![CDATA[			</fieldset>
+
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+	<!-- ENDIF -->]]></find>
+				<action type="after-add"><![CDATA[
+	<!-- INCLUDE forms/form_maker.html -->
+	<div id="form_hide">]]></action>
+			</edit>
+
+			<edit>
+			<find><![CDATA[		</fieldset>
+		<!-- ENDIF -->
+
+<!-- ENDIF -->]]></find>
+			<action type="after-add"><![CDATA[</div>]]></action>
+			</edit>
+		</open>
+
+		<open src="styles/prosilver/template/posting_layout.html">
+			<edit>
+			<find><![CDATA[<form id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>]]></find>
+			<inline-edit>
+				<inline-find><![CDATA[method="post"]]></inline-find>
+				<inline-action type="after-add"><![CDATA[ novalidate]]></inline-action>
+			</inline-edit>
+			</edit>
+		</open>
+
+		<open src="styles/prosilver/theme/stylesheet.css">
+			<edit>
+			<find><![CDATA[@import url("colours.css");]]></find>
+			<action type="after-add"><![CDATA[@import url("form_mod.css");]]></action>
+			</edit>
+		</open>
+
+		<php-installer><![CDATA[portal_install/k2_mods/phpbb_form_mod/index.php]]></php-installer>
+		<diy-instructions lang="en-gb"><![CDATA[
+		Add the following bbcode in: ACP > POSTING:
+
+		BBCode usage >      [tab]{TEXT}[/tab]
+		HTML replacement >  <pre>{TEXT}</pre>
+		Help line >         [tab]{TEXT}[/tab]
+		
+		Purge cache...]]></diy-instructions>
+	</action-group>
+</mod>

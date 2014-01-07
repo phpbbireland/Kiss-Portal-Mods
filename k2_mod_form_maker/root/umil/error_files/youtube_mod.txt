@@ -1,0 +1,8 @@
+Kiss II Youtube
+PHP Version: 5.4.3
+DBMS: MySQL 5.5.24-log
+phpBB3 Version: 3.0.11
+
+Adding a new database table: phpbb_k_youtube
+ERROR: Database table phpbb_k_youtube already exists.
+
