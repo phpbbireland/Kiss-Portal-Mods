@@ -50,15 +50,15 @@ $versions = array(
 	),
 	// Version 1.0.1
 	'1.0.1' => array(
-		'config_update' => array(
-			array('k2_country_flag_version', '1.0.1'),
-		),
+		//'config_update' => array(
+		//	array('k2_country_flag_version', '1.0.1'),
+		//),
 	),
 	// Version 1.0.2
 	'1.0.2' => array(
-		'config_update' => array(
-			array('k2_country_flag_version', '1.0.2'),
-		),
+		//'config_update' => array(
+		//	array('k2_country_flag_version', '1.0.2'),
+		//),
 	),
 
 
