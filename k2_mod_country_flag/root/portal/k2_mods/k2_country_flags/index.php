@@ -4,8 +4,8 @@
 * @author michaelo phpbbireland@gmail.com - http://www.phpbbireland.com
 *
 * @package sgp
-* @version 3.2.0
-* @copyright (c) 2005-2011 Michael O'Toole (phpbbireland.com)
+* @version 1.0.2
+* @copyright (c) 2005-2014 Michael O'Toole (phpbbireland.com)
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -48,6 +48,19 @@ $versions = array(
 			array('phpbb_users', 'user_country_flag', array('VCHAR', '100')),
 		),
 	),
+	// Version 1.0.1
+	'1.0.1' => array(
+		'config_update' => array(
+			array('k2_country_flag_version', '1.0.1'),
+		),
+	),
+	// Version 1.0.2
+	'1.0.2' => array(
+		'config_update' => array(
+			array('k2_country_flag_version', '1.0.2'),
+		),
+	),
+
 
 );//version
 
