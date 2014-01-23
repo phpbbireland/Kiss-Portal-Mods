@@ -82,6 +82,8 @@
 			<file from="root/language/en/form_maker_install_umil.php" to="language/en/form_maker_install_umil.php"/>
 			<file from="root/language/en/mods/form_maker.php" to="language/en/mods/form_maker.php"/>
 			<file from="root/language/en/mods/info_acp_form_maker.php" to="language/en/mods/info_acp_form_maker.php"/>
+			<file from="root/styles/_portal_common/template/forms/form_maker.html" to="styles/_portal_common/template/forms/form_maker.html"/>
+			<file from="root/styles/_portal_common/theme/form_mod.css" to="styles/_portal_common/theme/form_mod.css"/>
 			<file from="root/styles/prosilver/template/forms/form_maker.html" to="styles/prosilver/template/forms/form_maker.html"/>
 			<file from="root/styles/prosilver/theme/form_mod.css" to="styles/prosilver/theme/form_mod.css"/>
 			<file from="root/umil/*.*" to="umil/*.*" />
@@ -99,12 +101,17 @@
 			<edit>
 				<find><![CDATA[if ($submit || $preview || $refresh)
 {]]></find>
-				<action type="after-add"><![CDATA[
-	$message = utf8_normalize_nfc(request_var('message', '', true));
+				<action type="after-add"><![CDATA[	$message = utf8_normalize_nfc(request_var('message', '', true));
+
 	if ($message === '')
 	{
 		$message = grab_form_data($forum_id);
-	}]]></action>
+		foreach($_FILES as $key => $name)
+		{
+			$message_parser->parse_attachments($key, $mode, $forum_id, $submit, $preview, $refresh);
+		}
+	}
+]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[	$message_parser->message		= utf8_normalize_nfc(request_var('message', '', true));]]></find>

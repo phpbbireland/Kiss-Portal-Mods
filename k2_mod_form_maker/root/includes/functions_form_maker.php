@@ -247,9 +247,11 @@ if (!function_exists('grab_form_data'))
 					break;
 
 					case 'file':
-						$fieldcontents = '[attachment=' . $file_count . ']' . $names[$file_count] . '[/attachment]';
+						//$fieldcontents = '[attachment=' . $file_count . ']' . $names[$file_count] . '[/attachment]';
+						$fieldcontents = '[attachment=' . $file_count . ']' . $_FILES[$names[$file_count]]['name'] . '[/attachment]';
 						$file_count++;
-						$appform_post .= '[/tab][b]' . $row['name'] . ':' . $spaces . '[/b]';
+						//$appform_post .= '[/tab][b]' . $row['name'] . ' ' . $spaces . '[/b]';
+						$appform_post .= '[/tab]<br />';
 						$appform_post .= $fieldcontents .= '[tab]';
 					break;
 

@@ -98,7 +98,7 @@ How do I delete a form?<br /> &nbsp; &bull; Simply delete all form elements...<b
 'HOW_TO_HIDE'              => '<strong>Hide</strong>',
 'FORM_IMAGE_HERE'          => ' (replace this text with inline image) ',
 'MANDATORY'                => 'Items marked with the asterisk are mandatory.',
-'MOREINFO_MSG'             => 'To add an attachment, complete this form then select the <strong>Preview</strong> button, add the attachment, then post normally.',
+'MOREINFO_MSG'             => 'To add an attachment, simply click on the Browse button(s) and select the image.',
 'NDX'                      => 'NDX',
 'NDX_ORDER'                => 'Index order (the order in which items appear on the form)',
 'NO_FOURM'                 => 'No forum associated with this form',
