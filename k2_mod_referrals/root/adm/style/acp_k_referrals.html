@@ -9,31 +9,48 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	function switchMarks(status)
+
+
+function switchMarks(status)
+{
+	var elem = document.getElementById('acp_k_referrals2').elements;
+	for (var i = 0; i < elem.length; i++)
 	{
-		for (var i=0; i < document.acp_k_referrals.length; i++)
-			if (document.acp_k_referrals.elements[i].type == 'checkbox' ) document.acp_k_referrals.elements[i].checked = status;
+		if (elem[i].type == 'checkbox')
+		{
+			elem[i].checked = status;
+		}
 	}
-	function IsMarked()
+}
+function IsMarked()
+{
+	for (var i=0; i < document.acp_k_referrals2.length; i++)
 	{
-		for (var i=0; i < document.acp_k_referrals.length; i++)
-			if ( document.acp_k_referrals.elements[i].type == 'checkbox' && document.acp_k_referrals.elements[i].checked )
-				return true;
-		alert("{L_NO_ITEMS_MARKED}");
-		return false;
+		if (document.acp_k_referrals.elements[i].type == 'checkbox' && document.acp_k_referrals2.elements[i].checked)
+		{
+			return true;
+		}
 	}
-	function confirmOperation()
-	{
-		return (IsMarked() && confirm("{L_PLEASE_CONFIRM}"));
-	}
-	function confirmDeleteAll()
-	{
-		return (confirm("{L_PLEASE_CONFIRM}"));
-	}
+
+	alert("{LA_NO_ITEMS_MARKED}");
+	return false;
+}
+function confirmOperation()
+{
+	return(IsMarked() && confirm("{LA_PLEASE_CONFIRM_DELETE}"));
+}
+function confirmAdd()
+{
+	return(confirm("{LA_PLEASE_CONFIRM_ADD}"));
+}
+function confirmUpdate()
+{
+	return( confirm("{LA_PLEASE_CONFIRM_UPDATE}"));
+}
 // ]]>
 </script>
 
-<form action="{S_ACTION}" method="post">
+<form id="acp_k_referrals1" action="{S_ACTION_COLUMN}" method="post">
 <table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
 	<tr>
 		<td class="row2" valign="middle"><p><strong>{L_REFERRALS_COUNT}:</strong><br /><span class="gensmall">{L_REFERRALS_COUNT_EXPLAIN}</span></p></td>
@@ -46,12 +63,13 @@
 		  		<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
 		  		&nbsp;&nbsp;
 		  		<input type="reset" value="{L_RESET}" class="button2" />
-			</span>
+			</span>{S_FORM_TOKEN}
    		</td>
    	</tr>
 </table>
 </form>
-<form id="acp_k_referrals" method="post" action="{U_ACTION_COLUMN}">
+
+<form id="acp_k_referrals2" method="post" action="{U_ACTION_COLUMN}" >
 <!-- BEGIN ok_referrals_sw -->
 <table width="100%" cellpadding="4" cellspacing="1" border="0">
 	<tr>
@@ -91,15 +109,16 @@
 	<tr>
 		<td class="row3" align="left" valign="middle">
 			<span class="gensmall"><b>{L_SELECT_FILTER}:</b>
-				<input type="radio" name="filter" value="enabled" id="enabled" {ENABLED_SELECTED} /><label for="enabled">{L_ENABLED}</label>
-				<input type="radio" name="filter" value="disabled" id="disabled" {DISABLED_SELECTED} /><label for="disabled">{L_DISABLED}</label>
-				&nbsp;<input type="submit" value="{L_GO}" class="button1" />
+				<input type="radio" name="filter" value="enabled" id="enabled" {ENABLED_SELECTED} />
+				<label for="enabled">{L_ENABLED}</label>
+				<input type="radio" name="filter" value="disabled" id="disabled" {DISABLED_SELECTED} />
+				<label for="disabled">{L_DISABLED}</label>&nbsp;
+				<input type="submit" value="{L_GO}" class="button1" />
 			</span>
 		</td>
 		<td class="row4" align="right" valign="middle">
 			<span class="gensmall"><b>{L_SELECT_SORT_METHOD}:</b>
-				<select name="sort">{S_SORT_METHOD}</select>
-				&nbsp;<b>{L_ORDER}:</b>
+				<select name="sort">{S_SORT_METHOD}</select>&nbsp;<b>{L_ORDER}:</b>
 				<select name="order">
 					<option value="" {ASC_SELECTED} >{L_SORT_ASCENDING}</option>
 					<option value="DESC" {DESC_SELECTED} >{L_SORT_DESCENDING}</option>
@@ -119,6 +138,7 @@
 			<input type="submit" name="enable" value="{L_ENABLE_MARKED}" class="button2" onClick="return confirmOperation();" />&nbsp;
 			<input type="submit" name="delete" value="{L_DELETE_MARKED}" class="button2" onClick="return confirmOperation();" />&nbsp;
 			<input type="submit" name="deleteall" value="{L_DELETE_ALL}" class="button2" onClick="return confirmDeleteAll();" />
+			{S_FORM_TOKEN}
 		</td>
 	</tr>
 </table>
