@@ -46,6 +46,9 @@ class acp_k_referrals
 		$action = (isset($_POST['edit'])) ? 'edit' : $action;
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
+		$action = (isset($_POST['enable'])) ? 'enable' : $action;
+		$action = (isset($_POST['delete'])) ? 'delete' : $action;
+		$action = (isset($_POST['deleteall'])) ? 'deleteall' : $action;
 
 		$sql = 'SELECT config_name, config_value
 			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '';
@@ -68,15 +71,16 @@ class acp_k_referrals
 		$start = intval( (isset($_POST['start'])) ? request_var('start', 0) : ( (isset($_GET['start'])) ? request_var('start', 0) : 0 ) );
 		$sort_method = ( (isset($_POST['sort'])) ? request_var('sort', '') : ( (isset($_GET['sort'])) ? request_var('sort', '') : 'hits' ) );
 		$sort_order  = ( (isset($_POST['order'])) ? request_var('order', '') : ( (isset($_GET['order'])) ? request_var('order', '') : 'DESC' ) );
-		$filter_flag = ( (isset($_POST['filter'])) ? request_var('filter', '') : ( (isset($_GET['filter'])) ? request_var('filter', '') : 'disabled' ) );
+		//$filter_flag = ( (isset($_POST['filter'])) ? request_var('filter', '') : ( (isset($_GET['filter'])) ? request_var('filter', '') : 'disabled' ) );
+		$filter_flag = ( (isset($_POST['filter'])) ? request_var('filter', '') : ( (isset($_GET['filter'])) ? request_var('filter', '') : 'enabled' ) );
 
+		/*
 		$enable	= request_var('enable', 0);
 		$delete	= request_var('delete', 0);
 		$delete_all  = request_var('deleteall', 0);
+		*/
 
-
-		//$id_list	= ( ( isset($_POST['id_list']) ) ? $_POST['id_list'] : ( (isset($_GET['id_list'])) ? $_GET['id_list'] : array()));
-		$id_list = request_var('id_list', array(0));
+		$id_list = ((isset($_POST['id_list']) ) ? request_var('id_list', array(0)) : ( (isset($_GET['id_list'])) ? request_var('id_list', array(0)) : array()));
 
 		//Rows to show from blocksetting * 2
 		$rows_per_page = $k_config['k_referrals_to_display'];
@@ -103,57 +107,52 @@ class acp_k_referrals
 				trigger_error($message . adm_back_link($this->u_action));
 			break;
 
-			default:
-			break;
-		}
-
-		//
-		// Check which mode we should operate in...
-		//
-		if ($enable)
-		{
-			for ($i = 0; $i < count($id_list); $i++)
-			{
-				$sql = 'UPDATE ' . K_REFERRALS_TABLE .
-					" SET enabled = " . (($filter_flag == 'enabled') ? 0 : 1 ) .
-					" WHERE id = " . (int)$id_list[$i];
-
-				if (!$result = $db->sql_query($sql))
+			case 'delete':
+				for ($i = 0; $i < count($id_list); $i++)
 				{
-					trigger_error(GENERAL_ERROR, $user->lang['NO_UPDATE_HTTP_REFERRALS'] . " (id=" . $id_list[$i] . ")", '', __LINE__, __FILE__, $sql);
+					$sql = 'DELETE FROM '.K_REFERRALS_TABLE." WHERE id = " . $id_list[$i];
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error($user->lang['ERROR_PORTAL_HTTP_DELETE'] , '', __LINE__, __FILE__, $sql);
+					}
 				}
-			}
-		}
-		else if ($delete)
-		{
-			for ($i = 0; $i < count($id_list); $i++)
-			{
-				$sql = 'DELETE FROM '.K_REFERRALS_TABLE." WHERE id = ".$id_list[$i];
+			break;
+			case 'deleteall':
+				$sql = 'DELETE FROM '.K_REFERRALS_TABLE. '
+					WHERE enabled = '.(($filter_flag == 'enabled') ? 1 : 0);
+
 				if (!$result = $db->sql_query($sql))
 				{
 					trigger_error($user->lang['ERROR_PORTAL_HTTP_DELETE'] , '', __LINE__, __FILE__, $sql);
 				}
-			}
-		}
-		else if ($delete_all)
-		{
-			$sql = 'DELETE FROM '.K_REFERRALS_TABLE. '
-				WHERE enabled = '.( ($filter_flag == 'enabled') ? 1 : 0 );
+			break;
 
-			if (!$result = $db->sql_query($sql))
-			{
-				trigger_error($user->lang['ERROR_PORTAL_HTTP_DELETE'] , '', __LINE__, __FILE__, $sql);
-			}
+			case 'enable':
+				for ($i = 0; $i < count($id_list); $i++)
+				{
+					$sql = 'UPDATE ' . K_REFERRALS_TABLE .
+						" SET enabled = " . (($filter_flag == 'enabled') ? 0 : 1) .
+						" WHERE id = " . (int)$id_list[$i];
+
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error(GENERAL_ERROR, $user->lang['NO_UPDATE_HTTP_REFERRALS'] . " (id=" . $id_list[$i] . ")", '', __LINE__, __FILE__, $sql);
+					}
+				}
+			break;
+
+			default:
+			break;
 		}
 
 		//
 		// Setup report variables...
 		//
 		$a_sort_method = array(
-			'host'	 => $user->lang['HOST'],
-			'hits'	 => $user->lang['HITS'],
-			'firstvisit' => $user->lang['FIRST_VISIT'],
-			'lastvisit'  => $user->lang['LAST_VISIT'],
+			'host'			=> $user->lang['HOST'],
+			'hits'			=> $user->lang['HITS'],
+			'firstvisit'		=> $user->lang['FIRST_VISIT'],
+			'lastvisit'		=> $user->lang['LAST_VISIT'],
 		);
 		$s_sort_method = '';
 
@@ -192,22 +191,22 @@ class acp_k_referrals
 		switch ($sort_method)
 		{
 			case 'host':
-			$order_by = 'host '.$sort_order;
+				$order_by = 'host '.$sort_order;
 			break;
 			case 'firstvisit':
-			$order_by = 'firstvisit '.$sort_order;
+				$order_by = 'firstvisit '.$sort_order;
 			break;
 			case 'lastvisit':
-			$order_by = 'lastvisit '.$sort_order;
+				$order_by = 'lastvisit '.$sort_order;
 			break;
 			default:
 			case 'hits':
-			$order_by = 'hits '.$sort_order.', lastvisit DESC';
+				$order_by = 'hits '.$sort_order.', lastvisit DESC';
 			break;
 		}
-		$sql = 'SELECT * FROM '.K_REFERRALS_TABLE. '
-			WHERE enabled = '.( ($filter_flag == 'enabled') ? 1 : 0 ). '
-			ORDER BY '.$order_by.' LIMIT '.$start.', '.$rows_per_page;
+		$sql = 'SELECT * FROM ' . K_REFERRALS_TABLE . '
+			WHERE enabled = ' . (($filter_flag == 'enabled') ? 1 : 0) . '
+			ORDER BY ' . $order_by . ' LIMIT ' . $start . ', ' . $rows_per_page;
 
 		if (!$result = $db->sql_query($sql))
 		{
@@ -229,10 +228,11 @@ class acp_k_referrals
 			{
 				$template->assign_block_vars('datarow', array(
 					'ID'		=> $rowset[$i]['id'],
-					'HOST'	    => $rowset[$i]['host'],
-					'HITS'	    => $rowset[$i]['hits'],
-					'FIRST_VISIT'   => create_date('Y-m-d H:i:s', $rowset[$i]['firstvisit'], $config['board_timezone']),
-					'LAST_VISIT'    => create_date('Y-m-d H:i:s', $rowset[$i]['lastvisit'], $config['board_timezone'])
+					'HOST'		=> $rowset[$i]['host'],
+					'HITS'		=> $rowset[$i]['hits'],
+					'FIRST_VISIT'	=> create_date('Y-m-d H:i:s', $rowset[$i]['firstvisit'], $config['board_timezone']),
+					'LAST_VISIT'	=> create_date('Y-m-d H:i:s', $rowset[$i]['lastvisit'], $config['board_timezone']),
+					'S_ACTION'	=> $this->u_action . '&amp;action=k_referrals_to_display',
 				));
 			}
 			$template->assign_block_vars('ok_referrals_sw', array());
@@ -270,14 +270,14 @@ class acp_k_referrals
 			'L_ENABLE_MARKED'	=> ($filter_flag == 'enabled') ? $user->lang['DISABLE_MARKED'] : $user->lang['ENABLE_MARKED'],
 			'L_DELETE_MARKED'	=> $user->lang['DELETE_MARKED'],
 			'L_DELETE_ALL'	    	=> $user->lang['DELETE_ALL'],
-			'L_NO_ITEMS_MARKED'     => $user->lang['NO_ITEMS_MARKED'],
+			'L_NO_ITEMS_MARKED'	=> $user->lang['NO_ITEMS_MARKED'],
 			'L_PLEASE_CONFIRM'	=> $user->lang['PLEASE_CONFIRM'],
 
 			'PAGINATION'		=> generate_pagination(append_sid($phpbb_admin_path."index.php?filter=$filter_flag&amp;sort=$sort_method&amp;order=$sort_order&amp;i=k_referrals"), $total_rows[$total_now], $rows_per_page, $start),
 			'PAGE_NUMBER'		=> sprintf($user->lang['PAGE_OF'], ( floor( $start / $rows_per_page ) + 1 ), ceil( $total_rows[$total_now] / $rows_per_page )),
 			'REFERRALS_COUNT'	=> $k_config['k_referrals_to_display'],
 			'S_SORT_METHOD'		=> $s_sort_method,
-			'S_ACTION'		=> $this->u_action . '&amp;action=k_referrals_to_display',
+			//'S_ACTION'			=> $this->u_action . '&amp;action=k_referrals_to_display',
 		));
 	}
 }
